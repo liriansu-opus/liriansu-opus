@@ -6,7 +6,7 @@
 时常也会在 \*nix 系统上游荡，
 本 repo 存了一些我常用的配置。
 
-# 安装
+# Dev Environment 配置
 
 * Unix 系统可以用 curl 命令一键安装：
 
