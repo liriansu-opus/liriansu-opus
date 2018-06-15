@@ -16,8 +16,25 @@
 
 * Windows 系统
 
+> TODO
+
+# Server 配置
+
+在 Server 上我不习惯引入过多配置，一般来说只会包括这么几个配置：
+
+* git aliases
+* tmux conf
+* [vim-sensible][vim-sensible]
+
+可以用以下命令一键安装：
+
+```sh
+    bash -c "$(curl -fsSL https://raw.githubusercontent.com/LKI/myconf/master/setup-lite.sh)"
+```
+
 [svg]: https://travis-ci.org/LKI/myconf.svg?branch=master
 [travis]: https://travis-ci.org/LKI/myconf
 [me]: http://www.liriansu.com/about
 [win-env]: http://www.liriansu.com/windows-dev-env
+[vim-sensible]: https://github.com/tpope/vim-sensible/
 
