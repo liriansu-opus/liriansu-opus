@@ -57,12 +57,13 @@ alias drmf='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
 export PATH=~/.virtualenvs/py35/Scripts:~/.myconf/scripts:${PATH}
 
 # my aliases
-alias gsh='ssh -tt gate ssh -l zaihui -tt'
-alias gush='ssh -tt gate ssh -l ubuntu -tt'
-alias ush='ssh -tt ga ssh -l ubuntu -tt'
-alias ish='ssh -tt igate ssh -tt'
+alias gsh='ssh -t gate ssh -l zaihui -t'
+alias gush='ssh -t gate ssh -l ubuntu -t'
+alias ush='ssh -t ga ssh -l ubuntu -t'
+alias ish='ssh -t igate ssh -t'
 alias pt="cd ${REPO} && flake8 ygg && cd ygg && python manage.py test"
 alias ygg="cd ${REPO}/ygg"
+alias fsh="ssh -t forseti docker exec -e ENV_TEST=1 -it forseti_celery /venv/bin/python /home/zaihui/forseti/manage.py shell"
 
 alias sva="cd /c/code/danmaboy"
 alias svb="cd /c/zaihui/beloved"
