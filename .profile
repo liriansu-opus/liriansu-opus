@@ -34,6 +34,7 @@ alias vu="vagrant up"
 
 # docker aliases from tcnksm/docker-alias
 
+alias dc='docker-compose'
 alias dl="docker ps -l -q"
 alias dps="docker ps"
 alias dpa="docker ps -a"
@@ -45,11 +46,11 @@ alias dex="docker exec -i -t"
 
 dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort; }
 dstop() { docker stop $(docker ps -a -q); }
-drm() { docker rm $(docker ps -a -q); }
+drm() { docker rm $1; }
+drmf() { docker stop $1; docker rm $1; }
 dri() { docker rmi $(docker images -q); }
 dbu() { docker build -t=$1 .; }
 dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
-alias drmf='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
 
 # --- --- --- #
 
