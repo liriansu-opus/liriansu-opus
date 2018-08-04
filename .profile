@@ -58,7 +58,7 @@ dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
 export PATH=~/.virtualenvs/py35/Scripts:~/.myconf/scripts:${PATH}
 
 # my aliases
-alias gsh='ssh -t gate ssh -l zaihui -t'
+alias gsh='ssh -t gate ssh -t'
 alias gush='ssh -t gate ssh -l ubuntu -t'
 alias ush='ssh -t ga ssh -l ubuntu -t'
 alias ish='ssh -t igate ssh -t'
