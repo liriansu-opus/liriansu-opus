@@ -69,7 +69,7 @@ alias fsh="ssh -t gate ssh -l zaihui -t forseti-test docker exec -e ENV_TEST=1 -
 alias sva="cd /c/code/danmaboy"
 alias svb="cd /c/zaihui/beloved"
 alias svc="cd /c/zaihui/compose"
-alias svd="cd /c/zaihui/dudu"
+alias svd="cd /c/zaihui/deploy"
 alias sve="cd /c/Code/Twenty-four"
 alias svf="cd /c/zaihui/forseti"
 alias svh="cd /c/zaihui/holygrail"
