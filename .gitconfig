@@ -28,6 +28,7 @@
     rb = rebase
     rbc = rebase --continue
     rbi = rebase -i
+    rd = rebase o/master
     regret = reset HEAD^
     rh = reset --hard
     rhd = reset --hard z/dev
