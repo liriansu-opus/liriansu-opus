@@ -76,7 +76,7 @@ fsh() {
   ssh -t gate ssh -l zaihui -t forseti-test docker exec -e ENV_TEST=1 -it ${IMAGE:="forseti_uwsgi"} pipenv run python manage.py shell
 }
 
-alias sva="cd /c/code/danmaboy"
+alias sva="cd /c/zaihui/adam"
 alias svb="cd /c/zaihui/beloved"
 alias svc="cd /c/zaihui/compose"
 alias svd="cd /c/zaihui/deploy"
