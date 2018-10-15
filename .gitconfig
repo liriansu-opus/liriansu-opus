@@ -43,7 +43,7 @@
     wip = commit --all --message "WIP" --allow-empty
     yes = log --oneline --since yesterday --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 [core]
-    autocrlf = true
+    autocrlf = false
     editor = vim
     eol = lf
     ignorecase = false

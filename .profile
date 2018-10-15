@@ -68,12 +68,12 @@ alias gsh='ssh -t gate ssh -t'
 alias gush='ssh -t gate ssh -l ubuntu -t'
 alias ush='ssh -t ga ssh -l ubuntu -t'
 alias ish='ssh -t igate ssh -t'
-alias pt="cd ${REPO} && flake8 ygg && cd ygg && python manage.py test"
-alias ygg="cd ${REPO}/ygg"
+alias ftest='gsh forseti-test-1'
+alias fprod='gsh forseti-prod-1'
 
 fsh() {
   IMAGE=${1}
-  ssh -t gate ssh -l zaihui -t forseti-test docker exec -e ENV_TEST=1 -it ${IMAGE:="forseti_uwsgi"} pipenv run python manage.py shell
+  ssh -t gate ssh -l zaihui -t f1 docker exec -e ENV_TEST=1 -it ${IMAGE:="forseti_uwsgi"} pipenv run python manage.py shell
 }
 
 alias sva="cd /c/zaihui/adam"
