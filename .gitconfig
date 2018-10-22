@@ -40,7 +40,7 @@
     st = status
     unchanged = update-index --assume-unchanged
     unhide = update-index --no-assume-unchanged
-    wip = commit --all --message "WIP" --allow-empty
+    wip = commit --all --message "WIP" --allow-empty --no-verify
     yes = log --oneline --since yesterday --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 [core]
     autocrlf = false
