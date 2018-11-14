@@ -1,6 +1,12 @@
-*.swp
+*.DS_Store
 *.bak
+*.egg-info*
+*.pyc
+*.swp
 *~
 
-/.idea/
+.idea/
+.vscode/
+build/
+dist/
 
