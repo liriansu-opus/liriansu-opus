@@ -76,23 +76,6 @@ fsh() {
   ssh -t gate ssh -l zaihui -t f1 docker exec -e ENV_TEST=1 -it ${IMAGE:="forseti_uwsgi"} pipenv run python manage.py shell
 }
 
-alias sva="cd /c/zaihui/adam"
-alias svb="cd /c/zaihui/beloved"
-alias svc="cd /c/zaihui/compose"
-alias svd="cd /c/zaihui/deploy"
-alias sve="cd /c/Code/Twenty-four"
-alias svf="cd /c/zaihui/forseti"
-alias svh="cd /c/zaihui/holygrail"
-alias svk="cd /c/zaihui/kevin"
-alias svl="cd /c/Code/lki.github.io"
-alias svm="cd /c/Code/meican"
-alias svn="cd /c/zaihui/tavern"
-alias svq="cd /c/zaihui/squirrel"
-alias svr="cd /c/zaihui/server"
-alias svs="cd /c/Code/scripts"
-alias svt="cd /c/zaihui/servant"
-alias svu="cd /c/zaihui/ubuntu"
-alias svv="cd /c/zaihui/valhalla"
-alias svw="cd /c/zaihui/wechatpy"
-alias svz="cd /c/zaihui/zeus"
+alias sv="cd /c/code/aria2"
+alias svf="cd /c/code/aria2/stdev-forseti-be"
 

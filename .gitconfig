@@ -49,6 +49,7 @@
     editor = vim
     eol = lf
     ignorecase = false
+	excludesfile = ~/.gitignore
 [color]
     ui = true
 [merge]
