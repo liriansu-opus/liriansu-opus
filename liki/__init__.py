@@ -31,9 +31,9 @@ class Liki:
         """ liki will clone a repo at a proper place.
 
         Examples:
-            liki clone git@github.com:LKI/myconf
+            liki clone git@github.com:zaihui/hutils.git
         Equals to:
-            git clone -o o git@github.com:LKI/myconf {WS}/github/LKI-myconf
+            git clone -o o git@github.com:zaihui/hutils.git {workspace}/github/zaihui-hutils
 
         """
         if not url.startswith('git@') and not url.startswith('http'):
@@ -49,7 +49,6 @@ class Liki:
         os.system(f'git clone -o o {url} {path}')
 
     def set_workspace(self, path: str):
-        print(self._config.get('workspace', None))
         if not os.path.isdir(path):
             raise LikiComplain(f'liki thinks this is not a directory: {path}')
         self._config['workspace'] = path
