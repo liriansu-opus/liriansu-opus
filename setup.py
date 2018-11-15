@@ -1,10 +1,10 @@
 import setuptools
 
-import liki
+import lki
 
 setuptools.setup(
-    name='liki',
-    version=liki.__version__,
+    name='lki',
+    version=lki.__version__,
     description='connect Lirian\'s useful commands',
     author='Lirian Su',
     author_email='liriansu@gmail.com',
@@ -12,7 +12,7 @@ setuptools.setup(
     license='MIT License',
     install_requires=['fire'],
     packages=setuptools.find_packages(),
-    entry_points={'console_scripts': 'liki = liki:entry'},
+    entry_points={'console_scripts': 'lki = lki:entry'},
     classifiers=[
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3',

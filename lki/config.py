@@ -3,15 +3,15 @@ import logging
 import os
 
 
-class LikiConfig(dict):
-    path = os.path.expanduser('~/.liki.json')
+class LKIConfig(dict):
+    path = os.path.expanduser('~/.lki.json')
 
     def __init__(self, seq=None, **kwargs):
-        super(LikiConfig, self).__init__(seq=seq, **kwargs)
+        super(LKIConfig, self).__init__(seq=seq, **kwargs)
         self._load_config()
 
     def __setitem__(self, key, value):
-        super(LikiConfig, self).__setitem__(key, value)
+        super(LKIConfig, self).__setitem__(key, value)
         self._save_config()
 
     def _load_config(self):

@@ -3,12 +3,12 @@ import re
 
 import fire
 
-from liki.config import LikiConfig
+from lki.config import LKIConfig
 
 __version__ = '0.0.2'
 __all__ = [
-    'Liki',
-    'LikiComplain',
+    'LKI',
+    'LKIComplain',
 ]
 
 REGEX_GIT_URLS = (
@@ -17,21 +17,21 @@ REGEX_GIT_URLS = (
 )
 
 
-class LikiComplain(Exception):
-    """ liki is complaining about something """
+class LKIComplain(Exception):
+    """ lki is complaining about something """
 
 
-class Liki:
-    """ liki is omnipotent! """
+class LKI:
+    """ lki is omnipotent! """
 
     def __init__(self):
-        self._config = LikiConfig()
+        self._config = LKIConfig()
 
     def clone(self, url: str):
-        """ liki will clone a repo at a proper place.
+        """ lki will clone a repo at a proper place.
 
         Examples:
-            liki clone git@github.com:zaihui/hutils.git
+            lki clone git@github.com:zaihui/hutils.git
         Equals to:
             git clone -o o git@github.com:zaihui/hutils.git {workspace}/github/zaihui-hutils
 
@@ -40,7 +40,7 @@ class Liki:
             url = f'https://{url}'
         match = next((m for m in (e.search(url) for e in REGEX_GIT_URLS) if m), None)
         if not match:
-            raise LikiComplain(f'liki can not understand git url: {url}')
+            raise LKIComplain(f'lki can not understand git url: {url}')
         domain, project, _ = match.groups()  # type: str
         slug_domain = domain.split('.', 1)[0]
         slug_project = project.replace('/', '-')
@@ -50,9 +50,9 @@ class Liki:
 
     def set_workspace(self, path: str):
         if not os.path.isdir(path):
-            raise LikiComplain(f'liki thinks this is not a directory: {path}')
+            raise LKIComplain(f'lki thinks this is not a directory: {path}')
         self._config['workspace'] = path
 
 
 def entry():
-    fire.Fire(Liki)
+    fire.Fire(LKI)

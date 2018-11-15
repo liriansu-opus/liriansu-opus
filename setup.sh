@@ -9,7 +9,7 @@ usage () {
 }
 
 home="`echo ~`"
-confDir="${home}/.liki"
+confDir="${home}/.lki"
 
 install () {
     if [[ -z "`command -v git`" ]];
