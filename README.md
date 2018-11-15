@@ -1,4 +1,4 @@
-# MyConf - 我的配置文件
+# LKI's Conf - 我的配置脚本
 
 [![Build Status][svg]][travis]
 
@@ -11,12 +11,12 @@
 * Unix 系统可以用 curl 命令一键安装：
 
 ```sh
-    bash -c "$(curl -fsSL https://raw.githubusercontent.com/LKI/myconf/master/setup.sh)"
+    bash -c "$(curl -fsSL https://raw.githubusercontent.com/LKI/LKI/master/setup.sh)"
 ```
 
 * Windows 系统
 
-> TODO
+> Working on it...
 
 # Server 配置
 
@@ -29,11 +29,11 @@
 可以用以下命令一键安装：
 
 ```sh
-    bash -c "$(curl -fsSL https://raw.githubusercontent.com/LKI/myconf/master/setup-lite.sh)"
+    bash -c "$(curl -fsSL https://raw.githubusercontent.com/LKI/LKI/master/setup-lite.sh)"
 ```
 
-[svg]: https://travis-ci.org/LKI/myconf.svg?branch=master
-[travis]: https://travis-ci.org/LKI/myconf
+[svg]: https://travis-ci.org/LKI/LKI.svg?branch=master
+[travis]: https://travis-ci.org/LKI/LKI
 [me]: http://www.liriansu.com/about
 [win-env]: http://www.liriansu.com/windows-dev-env
 [vim-sensible]: https://github.com/tpope/vim-sensible/

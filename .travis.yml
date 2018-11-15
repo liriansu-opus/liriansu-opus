@@ -2,7 +2,7 @@ language:
     bash
 
 script:
-    bash -c "$(curl -fsSL https://raw.githubusercontent.com/LKI/myconf/master/setup.sh)"
+    bash -c "$(curl -fsSL https://raw.githubusercontent.com/LKI/LKI/master/setup.sh)"
 
 notifications:
     email: false

@@ -9,7 +9,7 @@ usage () {
 }
 
 home="`echo ~`"
-confDir="${home}/.myconf"
+confDir="${home}/.liki"
 
 install () {
     if [[ -z "`command -v git`" ]];
@@ -22,7 +22,7 @@ install () {
         echo "${confDir} already exists. please uninstall first"
     fi
 
-    git clone --recurse-submodules https://github.com/LKI/myconf.git ${confDir}
+    git clone --recurse-submodules https://github.com/LKI/LKI.git ${confDir}
 
     # install oh-my-zsh
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
