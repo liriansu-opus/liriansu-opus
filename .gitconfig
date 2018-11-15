@@ -49,7 +49,8 @@
     editor = vim
     eol = lf
     ignorecase = false
-	excludesfile = ~/.gitignore
+    excludesfile = ~/.gitignore
+    pager = less --raw-control-chars
 [color]
     ui = true
 [merge]
