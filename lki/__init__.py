@@ -47,12 +47,25 @@ class LKI:
         workspace = self._config.get('workspace', '.')
         path = os.path.join(workspace, slug_domain, slug_project)
         os.system(f'git clone -o o {url} {path}')
+        for key, value in self._config.get(domain, {}).items():
+            os.system(f'cd {path} && git config {key} {value}')
 
     def set_workspace(self, path: str):
+        """ set your workspace, where lki clones repositories into """
         if not os.path.isdir(path):
             raise LKIComplain(f'lki thinks this is not a directory: {path}')
         self._config['workspace'] = path
 
+    def set_git_config(self, domain: str, **kwargs: str):
+        """ set your domain specific configurations. user.name/user.email for example """
+        domain_config = self._config.get(domain, {})
+        domain_config.update(**kwargs)
+        self._config[domain] = domain_config
+
 
 def entry():
     fire.Fire(LKI)
+
+
+if __name__ == '__main__':
+    entry()
