@@ -5,7 +5,7 @@ import fire
 
 from lki.config import LKIConfig
 
-__version__ = '0.0.2'
+__version__ = '0.0.3'
 __all__ = [
     'LKI',
     'LKIComplain',
