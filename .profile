@@ -72,6 +72,7 @@ alias ftest='gsh forseti-test-1'
 alias ftest2='gsh forseti-test-2'
 alias fprod='gsh forseti-prod-1'
 alias fprod2='gsh forseti-prod-2'
+alias fst='gsh stdev-tools'
 
 fsh() {
   IMAGE=${1}
