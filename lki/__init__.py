@@ -1,5 +1,8 @@
+import datetime
+import distutils.spawn as spawn
 import os
 import re
+import shutil
 
 import fire
 
@@ -21,11 +24,35 @@ class LKIComplain(Exception):
     """ lki is complaining about something """
 
 
+class Source:
+    """ change source to china region """
+
+    def apt(self):
+        """ change apt's source
+
+        translate from https://raw.githubusercontent.com/ldsink/toolbox/master/ubuntu-set-aliyun-mirror.sh
+        """
+        if not spawn.find_executable('apt'):
+            raise LKIComplain('there is no apt executable')
+        if not os.path.exists('/etc/apt/sources.list'):
+            raise LKIComplain('there is no sources.list')
+        backup_file = datetime.datetime.now().strftime('/etc/apt/sources.list.%Y%m%d%H%M%S.bak')
+        print(f'Backing up at {backup_file}')
+        shutil.copyfile('/etc/apt/sources.list', backup_file)
+        os.system(
+            r'sed -i -E "s/deb (ht|f)tp(s?)\:\/\/[0-9a-zA-Z]'
+            r'([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)'
+            r'([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?\/ubuntu/deb'
+            r'http\:\/\/mirrors\.aliyun\.com\/ubuntu/g" /etc/apt/sources.list'
+        )
+
+
 class LKI:
     """ lki is omnipotent! """
 
     def __init__(self):
         self._config = LKIConfig()
+        self.source = Source()
 
     def clone(self, url: str):
         """ lki will clone a repo at a proper place.
