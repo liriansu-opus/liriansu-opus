@@ -43,7 +43,7 @@ class Source:
             r'sed -i -E "s/deb (ht|f)tp(s?)\:\/\/[0-9a-zA-Z]'
             r'([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)'
             r'([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?\/ubuntu/deb'
-            r'http\:\/\/mirrors\.aliyun\.com\/ubuntu/g" /etc/apt/sources.list'
+            r' http\:\/\/mirrors\.aliyun\.com\/ubuntu/g" /etc/apt/sources.list'
         )
 
 
