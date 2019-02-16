@@ -3,7 +3,7 @@ import fire
 from lki.exceptions import LKIComplain
 from lki.fires import LKI
 
-__version__ = '0.0.5'
+__version__ = '0.0.6'
 __all__ = [
     'LKI',
     'LKIComplain',
