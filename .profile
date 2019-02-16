@@ -81,4 +81,5 @@ fsh() {
 
 alias sv="cd /c/code/aria2"
 alias svf="cd /c/code/aria2/stdev-forseti-be"
+alias svl="cd /c/code/github/LKI-lki.github.io"
 
