@@ -62,6 +62,9 @@ class LKI:
         domain_config.update(**kwargs)
         self._config[domain] = domain_config
 
+    def __str__(self):
+        return self.__class__.__doc__.strip()
+
 
 def entry():
     fire.Fire(LKI)
