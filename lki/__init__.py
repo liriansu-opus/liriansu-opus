@@ -7,6 +7,7 @@ import shutil
 import fire
 
 from lki.config import LKIConfig
+from lki.exceptions import LKIComplain
 
 __version__ = '0.0.5'
 __all__ = [
@@ -18,10 +19,6 @@ REGEX_GIT_URLS = (
     re.compile(r'^git@([^:]+):(.*?)(.git)?$'),
     re.compile(r'^http[s]?://([^/]+)/(.*?)(.git)?$'),
 )
-
-
-class LKIComplain(Exception):
-    """ lki is complaining about something """
 
 
 class Source:
