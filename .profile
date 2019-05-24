@@ -41,6 +41,7 @@ alias vu="vagrant up"
 # docker aliases from tcnksm/docker-alias
 
 alias dc='docker-compose'
+alias dm='docker-machine'
 alias dl="docker ps -l -q"
 alias dps="docker ps"
 alias dpa="docker ps -a"
@@ -62,6 +63,7 @@ dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
 
 # set path
 export PATH=~/.virtualenvs/py35/Scripts:~/.lki/scripts:${PATH}
+export TERM=xterm-256color
 
 # my aliases
 alias gsh='ssh -t gate ssh -t'
