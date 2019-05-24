@@ -29,7 +29,7 @@
     puod = push -u o -o merge_request.create -o merge_request.target=dev
     puom = push -u o -o merge_request.create -o merge_request.target=master
     puz = push -u z
-    puzo = push -u z -o merge_request.create -o merge_request.target=dev
+    puzd = push -u z -o merge_request.create -o merge_request.target=dev
     puzm = push -u z -o merge_request.create -o merge_request.target=master
     pull = pull --rebase
     rb = rebase
