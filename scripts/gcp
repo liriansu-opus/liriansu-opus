@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -e
+
+echo "> scp ${1} gate:/tmp/lirian.gcp.tempfile"
+scp ${1} gate:/tmp/lirian.gcp.tempfile
+
+echo "> ssh -t gate scp /tmp/lirian.gcp.tempfile ${2}"
+ssh -t gate "scp /tmp/lirian.gcp.tempfile ${2}" 2> /dev/null
+
+echo "> ssh -t gate rm /tmp/lirian.gcp.tempfile"
+ssh -t gate "rm /tmp/lirian.gcp.tempfile" 2> /dev/null
+

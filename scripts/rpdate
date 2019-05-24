@@ -10,5 +10,5 @@ fi
 
 for i in `seq 1 4`;
 do
-    gsh gitlab-runner-$i docker pull $1;
+    ssh -t gate ssh -t gitlab-runner-$i docker pull $1;
 done
