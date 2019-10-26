@@ -17,12 +17,19 @@ then
 fi
 
 # get changed (modified + staged) python files
-PYTHON_FILES="`git diff --name-only --diff-filter=AM HEAD | grep --color=never '.py$' || true`"
+PYTHON_FILES="`git diff --name-only --diff-filter=AMR HEAD | grep --color=never '.py$' || true`"
 
 # do nothing if no python file
 if [[ ! "${PYTHON_FILES}" ]];
 then
   exit 0
+fi
+
+if [[ ! -z "`pipenv run pip list | grep '^isort '`" ]];
+then
+  echo 'Running isort...'
+  pipenv run isort ${PYTHON_FILES}
+  git add ${PYTHON_FILES}
 fi
 
 if [[ ! -z "`pipenv run pip list | grep '^yapf '`" ]];
@@ -35,7 +42,7 @@ fi
 if [[ ! -z "`pipenv run pip list | grep '^black '`" ]];
 then
   echo 'Running black...'
-  pipenv run black ${PYTHON_FILES}
+  pipenv run black -l 120 ${PYTHON_FILES}
   git add ${PYTHON_FILES}
 fi
 
@@ -45,7 +52,7 @@ then
   pipenv run flake8 ${PYTHON_FILES}
 fi
 
-PYLINT_FILES="`git diff --name-only --diff-filter=AM HEAD | grep --color=never '.py$' | grep -v migrations || true`"
+PYLINT_FILES="`git diff --name-only --diff-filter=AMR HEAD | grep --color=never '.py$' | grep -v migrations || true`"
 
 # do nothing if no pylint file
 if [ ! "${PYLINT_FILES}" ]; then
@@ -55,7 +62,7 @@ fi
 if [[ ! -z "`pipenv run pip list | grep '^pylint '`" ]];
 then
   echo 'Running pylint...'
-  pipenv run pylint ${PYTHON_FILES}
+  pipenv run pylint ${PYLINT_FILES}
 fi
 
 exit 0
