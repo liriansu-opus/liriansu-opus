@@ -5,6 +5,7 @@
 *.pyc
 *.swp
 *~
+~*
 
 .idea/
 .vscode/
