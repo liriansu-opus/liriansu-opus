@@ -27,6 +27,7 @@
     pf = push -f
     puo = push -u o
     puod = push -u o -o merge_request.create -o merge_request.target=dev
+    puof = push -u o -o merge_request.create -o merge_request.target=freeze
     puom = push -u o -o merge_request.create -o merge_request.target=master
     puz = push -u z
     puzd = push -u z -o merge_request.create -o merge_request.target=dev
