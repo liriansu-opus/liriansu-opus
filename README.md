@@ -1,6 +1,6 @@
 # Lirian Su's Configuration, 我的配置
 
-[![Build Status][svg]][travis]
+[![Build Status][badge-travis]][travis] [![PyPI][badge-pypi]][pypi]
 
 [我][me]的[开发环境是 Windows 系统][win-env]，
 时常也会在 Unix 系统上游荡。
@@ -38,9 +38,11 @@ pip install lki && lki install
 都欢迎[来项目里直接提 Issue。][issue]
 
 
+[badge-pypi]: https://img.shields.io/pypi/v/meican.svg
+[badge-travis]: https://travis-ci.org/LKI/LKI.svg?branch=master
 [issue]: https://github.com/LKI/LKI/issues/new
 [license]: https://github.com/LKI/LKI/blob/master/LICENSE
-[me]: http://www.liriansu.com/about
-[svg]: https://travis-ci.org/LKI/LKI.svg?branch=master
+[me]: https://www.liriansu.com/about
+[pypi]: [![PyPI](https://img.shields.io/pypi/v/meican.svg)](https://pypi.python.org/pypi/meican)
 [travis]: https://travis-ci.org/LKI/LKI
-[win-env]: http://www.liriansu.com/windows-dev-env
+[win-env]: https://www.liriansu.com/windows-dev-env
