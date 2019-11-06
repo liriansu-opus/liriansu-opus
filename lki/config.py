@@ -4,7 +4,7 @@ import os
 
 
 class LKIConfig(dict):
-    path = os.path.expanduser('~/.lki.json')
+    path = os.path.expanduser("~/.lki.json")
 
     def __init__(self, seq=None, **kwargs):
         super(LKIConfig, self).__init__(seq=seq, **kwargs)
@@ -18,14 +18,14 @@ class LKIConfig(dict):
         if not os.path.isfile(self.path):
             return
         try:
-            with open(self.path, 'r', encoding='utf-8') as f:
+            with open(self.path, "r", encoding="utf-8") as f:
                 self.update(json.loads(f.read()))
         except Exception as ex:
             logging.warning(ex)
 
     def _save_config(self):
         try:
-            with open(os.path.expanduser(self.path), 'w', encoding='utf-8') as f:
+            with open(os.path.expanduser(self.path), "w", encoding="utf-8") as f:
                 f.write(json.dumps(self, ensure_ascii=False, indent=2))
         except Exception as ex:
             logging.warning(ex)
