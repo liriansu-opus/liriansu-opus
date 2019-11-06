@@ -20,7 +20,7 @@
             "hashes": [
                 "sha256:6865fefc6981a713d2ce56a2a2c92c56c729269f74a6cddd6f4b94d16ae084c9"
             ],
-            "index": "douban",
+            "index": "aliyun",
             "version": "==0.2.1"
         },
         "six": {
@@ -57,7 +57,7 @@
                 "sha256:1b30e59be925fafc1ee4565e5e08abef6b03fe455102883820fe5ee2e4734e0b",
                 "sha256:c2edb73a08e9e0e6f65a0e6af18b059b8b1cdd5bef997d7a0b181df93dc81539"
             ],
-            "index": "douban",
+            "index": "aliyun",
             "markers": "python_version == '3.7'",
             "version": "==19.10b0"
         },
@@ -116,7 +116,7 @@
                 "sha256:7df8e33a2387de6f537836f48ac6fcd94eda6ed9ba3d5e3fd52e35b5bc7ff49e",
                 "sha256:a673e606e8452185e9817a987572b55360f4d28b50831ef3b42ac3cab3fee846"
             ],
-            "index": "douban",
+            "index": "aliyun",
             "markers": "python_version == '3.7'",
             "version": "==2018.11.26"
         },
@@ -199,7 +199,7 @@
                 "sha256:5319dd3e02ac73fcddcd94f035b9631589ab5d23e1f4699d57365199d85261e1",
                 "sha256:9fe7091715c7576df166df8ef6654e61bada39571783f2fd415bdcba867c6993"
             ],
-            "index": "douban",
+            "index": "aliyun",
             "markers": "python_version == '3.7'",
             "version": "==2.0.0"
         },
@@ -261,7 +261,7 @@
                 "sha256:10c9da68765315ed98850f8e048347c3eb06dd81822dc2ab1d4fde9dc9702646",
                 "sha256:f4da1763d3becf2e2cd92a14a7c920f0f00eca30fdde9ea992c836685b9faf28"
             ],
-            "index": "douban",
+            "index": "aliyun",
             "markers": "python_version == '3.7'",
             "version": "==0.33.6"
         }
