@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-set -e
-
-ssh -o "StrictHostKeyChecking no" -i ~/.ssh/admin.pem admin@${1}
-

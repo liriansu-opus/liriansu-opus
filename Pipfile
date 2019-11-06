@@ -1,13 +1,16 @@
 [[source]]
-url = "https://pypi.douban.com/simple"
+name = "aliyun"
+url = "https://mirrors.aliyun.com/pypi/simple"
 verify_ssl = true
-name = "douban"
+
+[dev-packages]
+black = {version = "==19.10b0", markers = "python_version == '3.7'"}
+pipenv = {version = ">=2018.11.26", markers = "python_version == '3.7'"}
+twine = {version = ">=2.0.0", markers = "python_version == '3.7'"}
+wheel = {version = ">=0.33.6", markers = "python_version == '3.7'"}
 
 [packages]
 fire = "==0.2.1"
-
-[dev-packages]
-twine = ">=0.33.6"
 
 [requires]
 python_version = "3.7"
