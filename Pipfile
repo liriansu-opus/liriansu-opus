@@ -4,10 +4,10 @@ verify_ssl = true
 name = "douban"
 
 [packages]
-fire = "*"
+fire = "==0.2.1"
 
 [dev-packages]
-twine = "*"
+twine = ">=0.33.6"
 
 [requires]
 python_version = "3.7"
