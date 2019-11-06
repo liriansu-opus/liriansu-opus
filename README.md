@@ -1,40 +1,46 @@
-# LKI's Conf - 我的配置脚本
+# Lirian Su's Configuration, 我的配置
 
 [![Build Status][svg]][travis]
 
 [我][me]的[开发环境是 Windows 系统][win-env]，
-时常也会在 \*nix 系统上游荡，
-本 repo 存了一些我常用的配置。
+时常也会在 Unix 系统上游荡。
+因为经常折腾环境，
+所以本项目就是用来同步我常用的配置的。
 
-# Dev Environment 配置
 
-* Unix 系统可以用 curl 命令一键安装：
+## 风格介绍
 
-```sh
-    bash -c "$(curl -fsSL https://raw.githubusercontent.com/LKI/LKI/master/setup.sh)"
+我的风格是懒人专用，而且任何改动都是附加项，不会变动原有的任何命令习惯。
+
+
+## 快速安装
+
+首先，确保环境中有 Python 3.5+，然后使用 `pip` 快速安装：
+
+```
+pip install lki && lki install
 ```
 
-* Windows 系统
+> 本命令同时支持 Unix, MacOS, Windows 环境
 
-> Working on it...
 
-# Server 配置
+## 开源协议
 
-在 Server 上我不习惯引入过多配置，一般来说只会包括这么几个配置：
+[宽松的 MIT License][license],
+意味着你可以做任何更改，
+甚至把作者名都改成你。
 
-* git aliases
-* tmux conf
-* [vim-sensible][vim-sensible]
 
-可以用以下命令一键安装：
+## 我有问题要问
 
-```sh
-    bash -c "$(curl -fsSL https://raw.githubusercontent.com/LKI/LKI/master/setup-lite.sh)"
-```
+没关系，不论是对项目的问题还是对我个人的问题，
+或者是你觉得哪条命令不够好用，
+都欢迎[来项目里直接提 Issue。][issue]
 
+
+[issue]: https://github.com/LKI/LKI/issues/new
+[license]: https://github.com/LKI/LKI/blob/master/LICENSE
+[me]: http://www.liriansu.com/about
 [svg]: https://travis-ci.org/LKI/LKI.svg?branch=master
 [travis]: https://travis-ci.org/LKI/LKI
-[me]: http://www.liriansu.com/about
 [win-env]: http://www.liriansu.com/windows-dev-env
-[vim-sensible]: https://github.com/tpope/vim-sensible/
-
