@@ -2,6 +2,7 @@ import datetime
 import os
 import re
 import shutil
+import sys
 
 from lki.config import LKIConfig
 from lki.exceptions import LKIComplain
@@ -11,9 +12,12 @@ REGEX_GIT_URLS = (
     re.compile(r"^git@([^:]+):(.*?)(.git)?$"),
     re.compile(r"^http[s]?://([^/]+)/(.*?)(.git)?$"),
 )
+HOME = os.path.expanduser('~')
+IS_WIN32 = sys.platform == 'win32'
 
 
 class Command:  # base command class
+
     def __str__(self):
         return self.__class__.__doc__.strip()
 
@@ -25,6 +29,36 @@ class LKI(Command):
         self._config = LKIConfig()
         self.op = Operation()
 
+    def install(self):
+        check_executable("git")
+        repo_path = os.path.join(HOME, '.lki')
+        if not os.path.exists(repo_path):
+            run('git clone -o o --recursive https://github.com/LKI/LKI.git {}'.format(repo_path))
+        else:
+            run('git -C {} pull --rebase'.format(repo_path))
+
+        def _link(src, dst=None, **kwargs):
+            target = os.path.join(HOME, dst or src)
+            if not os.path.exists(target):
+                os.symlink(os.path.join(repo_path, src), target, **kwargs)
+
+        try:
+            _link('.gitconfig')
+            _link('.gitignore')
+            _link('.ideavimrc')
+            _link('.profile')
+            _link('.tmux.conf')
+            _link('dotvim/vimrc', '.vimrc')
+
+            if IS_WIN32:
+                _link('dotvim/vimrc', '_vimrc')
+                _link('dotvim', 'vimfiles', target_is_directory=True)
+                _link('dotvim', '.vim', target_is_directory=True)
+        except OSError as ex:
+            print("OSError: {}".format(ex))
+            print('Please check your permissions.')
+            print('  Hint: windows requires admin permission when creating symlink.')
+
     def clone(self, url: str):
         """ lki will clone a repo at a proper place.
 
@@ -34,6 +68,7 @@ class LKI(Command):
             git clone -o o git@github.com:zaihui/hutils.git {workspace}/github/zaihui-hutils
 
         """
+        check_executable("git")
         if not url.startswith("git@") and not url.startswith("http"):
             url = "https://{}".format(url)
         match = next((m for m in (e.search(url) for e in REGEX_GIT_URLS) if m), None)
