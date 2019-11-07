@@ -4,6 +4,7 @@ set -o vi
 # general aliases
 alias ..='cd ..'
 alias cnpm="npm --registry=https://registry.npm.taobao.org --cache=${HOME}/.npm/.cache/cnpm --disturl=https://npm.taobao.org/dist --userconfig=${HOME}/.cnpmrc"
+alias n="npm"
 alias conf="vim ~/.profile"
 alias la='/bin/ls -ah --color'
 alias ll='/bin/ls -lh --color'
@@ -65,7 +66,7 @@ alias k="kubectl"
 alias kaf="kubectl apply -f"
 alias kak="kubectl apply -k"
 alias kc="kubectl config"
-alias kcl="kubectl config get-contexts | cut -c1-18,66-100"
+alias kcl="kubectl config get-contexts | cut -c1-16,64-100"
 alias kcns="kubectl config set-context --current --namespace"
 alias kcu="kubectl config use-context"
 alias kd="kubectl describe"
@@ -73,7 +74,7 @@ alias kdel="kubectl delete"
 alias ke="kubectl edit"
 alias kex="kubectl exec -it"
 alias kg="kubectl get"
-alias kl="kubectl logs"
+alias kl="kubectl logs --tail=100"
 alias km="kustomize"
 alias kr="kubectl rollout"
 alias krr="kubectl rollout restart"
@@ -91,8 +92,8 @@ alias gash='ssh -t agate ssh -l zaihui -t'
 alias gush='ssh -t gate ssh -l ubuntu -t'
 alias ush='ssh -t ga ssh -l ubuntu -t'
 alias ish='ssh -t igate ssh -t'
-alias stest='kcu stest && kex `kg po | grep celery-worker | head -n1 | cut -d" " -f1` pipenv run python manage.py shell'
-alias sprod='kcu sprod && kex `kg po | grep celery-worker | head -n1 | cut -d" " -f1` pipenv run python manage.py shell'
+alias stt='kcu stt && kex `kg po | grep celery-worker | head -n1 | cut -d" " -f1` pipenv run python manage.py shell'
+alias stp='kcu stp && kex `kg po | grep celery-worker | head -n1 | cut -d" " -f1` pipenv run python manage.py shell'
 alias gethost='ssh gate gethost'
 
 fsh() {
