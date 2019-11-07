@@ -12,12 +12,11 @@ REGEX_GIT_URLS = (
     re.compile(r"^git@([^:]+):(.*?)(.git)?$"),
     re.compile(r"^http[s]?://([^/]+)/(.*?)(.git)?$"),
 )
-HOME = os.path.expanduser('~')
-IS_WIN32 = sys.platform == 'win32'
+HOME = os.path.expanduser("~")
+IS_WIN32 = sys.platform == "win32"
 
 
 class Command:  # base command class
-
     def __str__(self):
         return self.__class__.__doc__.strip()
 
@@ -31,11 +30,11 @@ class LKI(Command):
 
     def install(self):
         check_executable("git")
-        repo_path = os.path.join(HOME, '.lki')
+        repo_path = os.path.join(HOME, ".lki")
         if not os.path.exists(repo_path):
-            run('git clone -o o --recursive https://github.com/LKI/LKI.git {}'.format(repo_path))
+            run("git clone -o o --recursive https://github.com/LKI/LKI.git {}".format(repo_path))
         else:
-            run('git -C {} pull --rebase'.format(repo_path))
+            run("git -C {} pull --rebase".format(repo_path))
 
         def _link(src, dst=None, **kwargs):
             target = os.path.join(HOME, dst or src)
@@ -43,21 +42,21 @@ class LKI(Command):
                 os.symlink(os.path.join(repo_path, src), target, **kwargs)
 
         try:
-            _link('.gitconfig')
-            _link('.gitignore')
-            _link('.ideavimrc')
-            _link('.profile')
-            _link('.tmux.conf')
-            _link('dotvim/vimrc', '.vimrc')
+            _link(".gitconfig")
+            _link(".gitignore")
+            _link(".ideavimrc")
+            _link(".profile")
+            _link(".tmux.conf")
+            _link("dotvim/vimrc", ".vimrc")
 
             if IS_WIN32:
-                _link('dotvim/vimrc', '_vimrc')
-                _link('dotvim', 'vimfiles', target_is_directory=True)
-                _link('dotvim', '.vim', target_is_directory=True)
+                _link("dotvim/vimrc", "_vimrc")
+                _link("dotvim", "vimfiles", target_is_directory=True)
+                _link("dotvim", ".vim", target_is_directory=True)
         except OSError as ex:
             print("OSError: {}".format(ex))
-            print('Please check your permissions.')
-            print('  Hint: windows requires admin permission when creating symlink.')
+            print("Please check your permissions.")
+            print("  Hint: windows requires admin permission when creating symlink.")
 
     def clone(self, url: str):
         """ lki will clone a repo at a proper place.
