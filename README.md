@@ -38,11 +38,11 @@ pip install lki && lki install
 都欢迎[来项目里直接提 Issue。][issue]
 
 
-[badge-pypi]: https://img.shields.io/pypi/v/meican.svg
+[badge-pypi]: https://img.shields.io/pypi/v/lki.svg
 [badge-travis]: https://travis-ci.org/LKI/LKI.svg?branch=master
 [issue]: https://github.com/LKI/LKI/issues/new
 [license]: https://github.com/LKI/LKI/blob/master/LICENSE
 [me]: https://www.liriansu.com/about
-[pypi]: [![PyPI](https://img.shields.io/pypi/v/meican.svg)](https://pypi.python.org/pypi/meican)
+[pypi]: [![PyPI](https://img.shields.io/pypi/v/lki.svg)](https://pypi.python.org/pypi/lki)
 [travis]: https://travis-ci.org/LKI/LKI
 [win-env]: https://www.liriansu.com/windows-dev-env
