@@ -31,6 +31,7 @@ alias sb2="source env2/bin/activate"
 alias sb3="source env3/bin/activate"
 
 # pipenv aliases
+alias pv="pipenv"
 alias pr="pipenv run"
 alias pf="pipenv run fab"
 alias pinv="pipenv run inv"
