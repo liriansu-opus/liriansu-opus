@@ -75,12 +75,15 @@ alias kdel="kubectl delete"
 alias ke="kubectl edit"
 alias kex="kubectl exec -it"
 alias kg="kubectl get"
+alias kga="kubectl get all"
+alias kgp="kubectl get pods"
 alias kl="kubectl logs --tail=100"
 alias km="kustomize"
 alias kr="kubectl rollout"
 alias krr="kubectl rollout restart"
 alias krs="kubectl rollout status"
 kpo() { kg po | grep $1 | head -n1 | cut -d" " -f1; }
+kpm() { kex `kpo $1` pipenv run python manage.py shell; }
 
 # --- --- --- #
 
