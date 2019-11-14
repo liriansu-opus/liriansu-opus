@@ -27,6 +27,7 @@ alias qgit='git'
 # python aliases
 alias pm="python manage.py"
 alias psi="python setup.py install"
+alias bv="bumpversion"
 
 # pipenv aliases
 alias pv="pipenv"
