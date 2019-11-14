@@ -26,9 +26,7 @@ alias qgit='git'
 
 # python aliases
 alias pm="python manage.py"
-alias sb="source env/bin/activate"
-alias sb2="source env2/bin/activate"
-alias sb3="source env3/bin/activate"
+alias psi="python setup.py install"
 
 # pipenv aliases
 alias pv="pipenv"
