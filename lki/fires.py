@@ -5,8 +5,8 @@ import shutil
 import sys
 
 from lki.config import LKIConfig
-from lki.exceptions import LKIComplain
-from lki.utils import check_executable, check_file, run
+from lki.error import LKIError
+from lki.utils import check_executable, check_file, link, run
 
 REGEX_GIT_URLS = (
     re.compile(r"^git@([^:]+):(.*?)(.git)?$"),
@@ -22,13 +22,22 @@ class Command:  # base command class
 
 
 class LKI(Command):
-    """ lki is omnipotent! """
+    """ Lirian Su's useful configuration and shortcuts.
+    This command will helps you swim through windows and unix,
+    git and vim, docker and k8s, and all the fancy.
+
+    See also: https://github.com/LKI/LKI """
 
     def __init__(self):
         self._config = LKIConfig()
         self.op = Operation()
 
     def install(self):
+        """ install configuration to ~/.lki/
+
+        Examples:
+            lki install
+        """
         check_executable("git")
         repo_path = os.path.join(HOME, ".lki")
         if not os.path.exists(repo_path):
@@ -59,7 +68,7 @@ class LKI(Command):
             print("  Hint: windows requires admin permission when creating symlink.")
 
     def clone(self, url: str):
-        """ lki will clone a repo at a proper place.
+        """ clone a git repository to workspace
 
         Examples:
             lki clone git@github.com:zaihui/hutils.git
@@ -72,7 +81,7 @@ class LKI(Command):
             url = "https://{}".format(url)
         match = next((m for m in (e.search(url) for e in REGEX_GIT_URLS) if m), None)
         if not match:
-            raise LKIComplain("lki can not understand git url: {}".format(url))
+            raise LKIError("lki can not understand git url: {}".format(url))
         domain, project, _ = match.groups()  # type: str
         slug_domain = domain.split(".", 1)[0]
         slug_project = project.replace("/", "-")
@@ -82,10 +91,13 @@ class LKI(Command):
         for key, value in self._config.get(domain, {}).items():
             run("cd {} && git config {} {}".format(path, key, value))
 
+    def hook(self, force=False):
+        link("~/.lki/.pre-commit.sh", ".git/hooks/pre-commit", force=force)
+
     def set_workspace(self, path: str):
         """ set your workspace, where lki clones repositories into """
         if not os.path.isdir(path):
-            raise LKIComplain("lki thinks this is not a directory: {}".format(path))
+            raise LKIError("lki thinks this is not a directory: {}".format(path))
         self._config["workspace"] = path
 
     def set_git_config(self, domain: str, **kwargs: str):

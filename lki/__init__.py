@@ -1,12 +1,12 @@
 import fire
 
-from lki.exceptions import LKIComplain
+from lki.error import LKIError
 from lki.fires import LKI
 
 __version__ = "0.1.1"
 __all__ = [
     "LKI",
-    "LKIComplain",
+    "LKIError",
 ]
 
 
