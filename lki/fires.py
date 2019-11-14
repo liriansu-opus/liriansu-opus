@@ -17,6 +17,7 @@ IS_WIN32 = sys.platform == "win32"
 
 
 class Command:  # base command class
+
     def __str__(self):
         return self.__class__.__doc__.strip()
 
@@ -92,7 +93,12 @@ class LKI(Command):
             run("cd {} && git config {} {}".format(path, key, value))
 
     def hook(self, force=False):
+        """ install git hook """
         link("~/.lki/.pre-commit.sh", ".git/hooks/pre-commit", force=force)
+
+    def link(self, target, link_path, force=False):
+        """ link target to link_path """
+        link(target, link_path, force=force)
 
     def set_workspace(self, path: str):
         """ set your workspace, where lki clones repositories into """
