@@ -78,7 +78,10 @@ class LKI(Command):
         """
         check_executable("git")
         if not url.startswith("git@") and not url.startswith("http"):
-            url = "https://{}".format(url)
+            if url.count("/") == 1:
+                url = "git@github.com:{}.git".format(url)
+            else:
+                url = "https://{}".format(url)
         match = next((m for m in (e.search(url) for e in REGEX_GIT_URLS) if m), None)
         if not match:
             raise LKIError("lki can not understand git url: {}".format(url))
