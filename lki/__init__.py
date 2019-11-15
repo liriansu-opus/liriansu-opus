@@ -3,7 +3,7 @@ import fire
 from lki.error import LKIError
 from lki.fires import LKI
 
-__version__ = "0.1.5"
+__version__ = "0.1.6"
 __all__ = [
     "LKI",
     "LKIError",
