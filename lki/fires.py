@@ -17,7 +17,6 @@ IS_WIN32 = sys.platform == "win32"
 
 
 class Command:  # base command class
-
     def __str__(self):
         return self.__class__.__doc__.strip()
 
@@ -90,7 +89,7 @@ class LKI(Command):
         path = os.path.join(workspace, slug_domain, slug_project)
         run("git clone -o o {} {}".format(url, path))
         for key, value in self._config.get(domain, {}).items():
-            run("cd {} && git config {} {}".format(path, key, value))
+            run("git -C {} config {} {}".format(path, key, value))
 
     def hook(self, force=False):
         """ install git hook """
