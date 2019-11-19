@@ -44,6 +44,7 @@
     rroo = remote rename origin o
     save = stash
     slog = log --graph --decorate --oneline --all --simplify-by-decoration
+    sm = submodule
     squash = rebase HEAD~2 -i
     st = status
     unchanged = update-index --assume-unchanged  # assume a file is unchanged, often use to change some local config

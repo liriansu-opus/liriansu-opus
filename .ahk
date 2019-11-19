@@ -6,3 +6,10 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 !f::
     Run, https://aria2.kezaihui.com/stdev/forseti-be/merge_requests/
 Return
+
+!v::
+    IfWinExist, , GVIM
+        WinActivate
+    else
+        RunWait, gvim.exe
+Return
