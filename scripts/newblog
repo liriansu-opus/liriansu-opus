@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# make a new jekyll blog
+# start a new hugo blog
 
 set -e
 
@@ -9,25 +9,6 @@ if [[ $# -lt 1 ]]; then
 fi
 
 NAME=$1
-FILENAME="`date '+%Y-%m-%d'`-$1.md"
+FILENAME="content/cn/posts/`date '+%Y-%m-%d'`-$1.md"
 
-if [[ -d "_posts" ]]; then
-  FILENAME="_posts/${FILENAME}"
-fi
-
-cat > ${FILENAME} <<EOF
----
-layout:    post
-title:     "${NAME}"
-date:      "`date '+%Y-%m-%d %H:%M:%S'`"
-permalink: /${NAME}
----
-
-${NAME}
-
-<!--MORE-->
-
-EOF
-
-echo ${FILENAME}
-
+hugo new ${FILENAME}
