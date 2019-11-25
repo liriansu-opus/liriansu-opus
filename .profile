@@ -21,7 +21,10 @@ alias vi='vim'
 # git aliases
 alias g='git'
 alias gc='git remote show | xargs -I{} git remote prune {} && git gc'
-alias it="git"
+alias gd='git diff'
+alias gpl='git pull'
+alias gst='git status'
+alias it='git'
 alias lg='git logg'
 alias qgit='git'
 
