@@ -38,6 +38,7 @@
     rbi = rebase -i  # if there's only one git command you should learn, it'll be `git rebase`
     rd = rebase o/master
     regret = reset HEAD^  # regret last commit, same with `git ag`
+    rs = reset
     rh = reset --hard
     rhd = reset --hard z/dev
     rp = remote prune

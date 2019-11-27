@@ -2,31 +2,31 @@
 set -o vi
 
 # general aliases
-alias ..='cd ..'
-alias ws='cd /D/Code'
+alias ..="cd .."
+alias ws="cd /D/Code"
 alias cnpm="npm --registry=https://registry.npm.taobao.org --cache=${HOME}/.npm/.cache/cnpm --disturl=https://npm.taobao.org/dist --userconfig=${HOME}/.cnpmrc"
 alias n="npm"
 alias conf="vim ~/.profile"
-alias la='/bin/ls -ah --color'
-alias ll='/bin/ls -lh --color'
-alias ls='/bin/ls --color'
-alias please='sudo'
-alias pp='popd'
-alias pu='pushd'
+alias la="/bin/ls -ah --color"
+alias ll="/bin/ls -lh --color"
+alias ls="/bin/ls --color"
+alias please="sudo"
+alias pp="popd"
+alias pu="pushd"
 alias py="winpty python"
 alias reload="source ~/.profile"
-alias ta='tmux attach'
-alias vi='vim'
+alias ta="tmux attach"
+alias vi="vim"
 
 # git aliases
-alias g='git'
-alias gc='git remote show | xargs -I{} git remote prune {} && git gc'
-alias gd='git diff'
-alias gpl='git pull'
-alias gst='git status'
-alias it='git'
-alias lg='git logg'
-alias qgit='git'
+alias g="git"
+alias gc="git remote show | xargs -I{} git remote prune {} && git gc"
+alias gd="git diff"
+alias gpl="git pull"
+alias gst="git status"
+alias it="git"
+alias lg="git logg"
+alias qgit="git"
 
 # python aliases
 alias pm="python manage.py"
@@ -47,8 +47,9 @@ alias vst="vagrant status"
 alias vu="vagrant up"
 
 # docker aliases from tcnksm/docker-alias
-alias dc='docker-compose'
-alias dm='docker-machine'
+alias d="docker"
+alias dc="docker-compose"
+alias dm="docker-machine"
 alias dl="docker ps -l -q"
 alias dps="docker ps"
 alias dpa="docker ps -a"
@@ -70,7 +71,7 @@ alias k="kubectl"
 alias kaf="kubectl apply -f"
 alias kak="kubectl apply -k"
 alias kc="kubectl config"
-alias kcl="kubectl config get-contexts | cut -c1-16,64-100"
+alias kcl="kubectl config get-contexts"
 alias kcns="kubectl config set-context --current --namespace"
 alias kcu="kubectl config use-context"
 alias kd="kubectl describe"
@@ -79,14 +80,15 @@ alias ke="kubectl edit"
 alias kex="kubectl exec -it"
 alias kg="kubectl get"
 alias kga="kubectl get all"
+alias kgns="kubectl get ns"
 alias kgp="kubectl get pods"
 alias kl="kubectl logs --tail=100"
 alias km="kustomize"
 alias kr="kubectl rollout"
 alias krr="kubectl rollout restart"
 alias krs="kubectl rollout status"
-kpo() { kg po | grep $1 | head -n1 | cut -d" " -f1; }
 kpm() { kex `kpo $1` pipenv run python manage.py shell; }
+kpo() { kg po | grep $1 | head -n1 | cut -d" " -f1; }
 
 # --- --- --- #
 
