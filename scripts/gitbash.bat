@@ -1,3 +1,3 @@
 @echo off
 
-bash.exe -l -i
+bash.exe -l -i %*
