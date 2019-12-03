@@ -28,7 +28,7 @@ fi
 if [[ ! -z "`pipenv run pip list | grep '^isort '`" ]];
 then
   echo 'Running isort...'
-  pipenv run isort ${PYTHON_FILES}
+  pipenv run isort -up -y ${PYTHON_FILES}
   git add ${PYTHON_FILES}
 fi
 
