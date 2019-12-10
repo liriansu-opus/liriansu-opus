@@ -3,5 +3,5 @@
 IF "%~1" == "" (
     %CODEENV%\Git\usr\bin\bash.exe -l -i
 ) ELSE (
-    cmd %*
+    %CODEENV%\Git\usr\bin\bash.exe %*
 )
