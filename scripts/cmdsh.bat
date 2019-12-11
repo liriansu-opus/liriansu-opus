@@ -1,7 +1,7 @@
 @ECHO OFF
 
 IF "%~1" == "" (
-    %CODEENV%\Git\usr\bin\bash.exe -l -i
+    %CODEENV%\Git\bin\bash.exe -l -i
 ) ELSE (
-    %CODEENV%\Git\usr\bin\bash.exe %*
+    %CODEENV%\Git\bin\bash.exe -c "%*"
 )
