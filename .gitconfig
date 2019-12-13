@@ -25,6 +25,9 @@
     mgf = merge --ff-only
     p = push
     pf = push -f
+    po = push o
+    pod = push o -o merge_request.create -o merge_request.target=dev HEAD
+    pull = pull --rebase
     puo = push -u o
     puod = push -u o -o merge_request.create -o merge_request.target=dev
     puof = push -u o -o merge_request.create -o merge_request.target=freeze
@@ -32,17 +35,16 @@
     puz = push -u z
     puzd = push -u z -o merge_request.create -o merge_request.target=dev
     puzm = push -u z -o merge_request.create -o merge_request.target=master
-    pull = pull --rebase
     rb = rebase
     rbc = rebase --continue
     rbi = rebase -i  # if there's only one git command you should learn, it'll be `git rebase`
     rd = rebase o/master
     regret = reset HEAD^  # regret last commit, same with `git ag`
-    rs = reset
     rh = reset --hard
     rhd = reset --hard z/dev
     rp = remote prune
     rroo = remote rename origin o
+    rs = reset
     save = stash
     slog = log --graph --decorate --oneline --all --simplify-by-decoration
     sm = submodule
@@ -56,8 +58,8 @@
     autocrlf = false
     editor = vim
     eol = lf
-    ignorecase = false
     excludesfile = ~/.gitignore
+    ignorecase = false
     pager = less --raw-control-chars
 [color]
     ui = true
