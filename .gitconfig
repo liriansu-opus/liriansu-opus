@@ -5,8 +5,7 @@
     changed = update-index --no-assume-unchanged  # revert op of `git unchanged`
     ci = commit
     cia = commit --all
-    cim = commit --amend
-    cima = commit --amend --all
+    cim = commit --amend --no-edit --all
     clone = clone -o o
     co = checkout
     crp = cherry-pick
@@ -40,6 +39,7 @@
     rbi = rebase -i  # if there's only one git command you should learn, it'll be `git rebase`
     rd = rebase o/master
     regret = reset HEAD^  # regret last commit, same with `git ag`
+    rg = reset HEAD^
     rh = reset --hard
     rhd = reset --hard z/dev
     rp = remote prune

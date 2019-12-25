@@ -22,6 +22,7 @@ alias sp="scoop"
 # git aliases
 alias g="git"
 alias gc="git remote show | xargs -I{} git remote prune {} && git gc"
+alias gco="git checkout"
 alias gd="git diff"
 alias gpl="git pull"
 alias gst="git status"
