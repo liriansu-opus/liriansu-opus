@@ -104,8 +104,8 @@ alias gash='ssh -t agate ssh -l zaihui -t'
 alias gush='ssh -t gate ssh -l ubuntu -t'
 alias ush='ssh -t ga ssh -l ubuntu -t'
 alias ish='ssh -t igate ssh -t'
-alias stt='kcu stt && kex `kg po | grep celery-worker | head -n1 | cut -d" " -f1` pipenv run python manage.py shell'
-alias stp='kcu stp && kex `kg po | grep celery-worker | head -n1 | cut -d" " -f1` pipenv run python manage.py shell'
+alias stt='kcu stt && kex `kg po | grep worker | head -n1 | cut -d" " -f1` pipenv run python manage.py shell'
+alias stp='kcu stp && kex `kg po | grep worker | head -n1 | cut -d" " -f1` pipenv run python manage.py shell'
 alias gethost='ssh gate gethost'
 
 fsh() {
