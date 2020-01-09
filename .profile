@@ -101,15 +101,12 @@ export LANG=en
 export PATH=/c/codeenv/git/usr/bin:~/.lki/scripts:${PATH}
 export DOCKER_REGISTRY=docker-inter.zaihui.com.cn
 
-# my aliases
-alias gsh='ssh -t gate ssh -t'
-alias gash='ssh -t agate ssh -l zaihui -t'
-alias gush='ssh -t gate ssh -l ubuntu -t'
-alias ush='ssh -t ga ssh -l ubuntu -t'
-alias ish='ssh -t igate ssh -t'
-alias stt='kcu stt && kex `kg po | grep worker | head -n1 | cut -d" " -f1` pipenv run python manage.py shell'
-alias stp='kcu stp && kex `kg po | grep worker | head -n1 | cut -d" " -f1` pipenv run python manage.py shell'
+# ssh aliases
+alias gash='ssh -t awsgate ssh -t'
 alias gethost='ssh gate gethost'
+alias gsh='ssh -t gate ssh -l zaihui -t'
+alias stp='kcu stp && kex `kg po | grep worker | head -n1 | cut -d" " -f1` pipenv run python manage.py shell'
+alias stt='kcu stt && kex `kg po | grep worker | head -n1 | cut -d" " -f1` pipenv run python manage.py shell'
 
 fsh() {
   IMAGE=${1}
