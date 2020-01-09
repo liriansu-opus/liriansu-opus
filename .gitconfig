@@ -13,7 +13,7 @@
     dfl = diff --name-status  # diff and list name
     dfs = diff --staged
     dl = diff HEAD^
-    f = fetch --tags
+    f = fetch o --tags
     g = grep -in  # ignore case, line number
     hide = update-index --assume-unchanged  # same with `git unchanged`
     last = log -1 HEAD
@@ -37,12 +37,13 @@
     rb = rebase
     rbc = rebase --continue
     rbi = rebase -i  # if there's only one git command you should learn, it'll be `git rebase`
-    rd = rebase o/master
+    rd = rebase o/HEAD
     regret = reset HEAD^  # regret last commit, same with `git ag`
     rg = reset HEAD^
     rh = reset --hard
     rhd = reset --hard z/dev
     rp = remote prune
+    rpo = remote prune o
     rroo = remote rename origin o
     rs = reset
     save = stash

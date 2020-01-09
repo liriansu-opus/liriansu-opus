@@ -96,7 +96,10 @@ kpo() { kg po | grep $1 | head -n1 | cut -d" " -f1; }
 # --- --- --- #
 
 # set path
-export PATH=/c/codeenv/git/usr/bin:~/.virtualenvs/py35/Scripts:~/.lki/scripts:${PATH} LANG=en EDITOR=vim
+export EDITOR=vim
+export LANG=en
+export PATH=/c/codeenv/git/usr/bin:~/.lki/scripts:${PATH}
+export DOCKER_REGISTRY=docker-inter.zaihui.com.cn
 
 # my aliases
 alias gsh='ssh -t gate ssh -t'
