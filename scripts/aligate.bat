@@ -1,1 +1,1 @@
-ssh -N -D 1280 agate
+ssh -N -D 1280 gate
