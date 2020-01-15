@@ -24,6 +24,7 @@
     mgf = merge --ff-only
     p = push
     pf = push -f
+    pl = pull --rebase
     po = push o
     pod = push o -o merge_request.create -o merge_request.target=dev HEAD
     pull = pull --rebase
