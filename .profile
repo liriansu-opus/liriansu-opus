@@ -22,11 +22,6 @@ alias sp="scoop"
 # git aliases
 alias g="git"
 alias gc="git remote show | xargs -I{} git remote prune {} && git gc"
-alias gco="git checkout"
-alias gd="git diff"
-alias gpl="git pull"
-alias gst="git status"
-alias gcp="git cia && git p"
 alias it="git"
 alias lg="git logg"
 alias qgit="git"
@@ -117,3 +112,7 @@ alias sv="cd /c/code/aria2"
 alias svf="cd /c/code/aria2/stdev-forseti-be"
 alias svl="cd /c/code/github/LKI-lki.github.io"
 
+# auto aliases  TODO: optimize speed
+mkdir -p ~/.bash_aliases
+sed '/\[core\]/Q' ~/.gitconfig | tail -n +2 | sed -e 's/ = /="git /' | sed -e 's/^\s\+/alias g/' | sed -e 's/\(\s\+#.*\)\?$/"/' > ~/.bash_aliases/git_aliases
+source ~/.bash_aliases/*_aliases
