@@ -1,12 +1,14 @@
 [alias]
     ag = reset HEAD^  # again
     b = branch
+    bd = branch -D
     br = branch
+    cb = checkout -b
     changed = update-index --no-assume-unchanged  # revert op of `git unchanged`
     ci = commit
     cia = commit --all
-    cim = commit --amend --no-edit --all
     clone = clone -o o
+    cm = commit --amend --no-edit --all
     co = checkout
     crp = cherry-pick
     d = diff
@@ -23,10 +25,10 @@
     logs = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     mgf = merge --ff-only
     p = push
+    pd = push o -o merge_request.create -o merge_request.target=dev HEAD -f
     pf = push -f
     pl = pull --rebase
     po = push o
-    pod = push o -o merge_request.create -o merge_request.target=dev HEAD
     pull = pull --rebase
     puo = push -u o
     puod = push -u o -o merge_request.create -o merge_request.target=dev
@@ -42,7 +44,7 @@
     regret = reset HEAD^  # regret last commit, same with `git ag`
     rg = reset HEAD^
     rh = reset --hard
-    rhd = reset --hard z/dev
+    rhd = reset --hard o/HEAD
     rp = remote prune
     rpo = remote prune o
     rroo = remote rename origin o
