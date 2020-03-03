@@ -3,21 +3,22 @@ set -o vi
 
 # general aliases
 alias ..="cd .."
-alias ws="cd /D/Code"
 alias cnpm="npm --registry=https://registry.npm.taobao.org --cache=${HOME}/.npm/.cache/cnpm --disturl=https://npm.taobao.org/dist --userconfig=${HOME}/.cnpmrc"
-alias n="npm"
 alias conf="vim ~/.profile"
 alias la="/bin/ls -ah --color"
 alias ll="/bin/ls -lh --color"
 alias ls="/bin/ls --color"
+alias n="npm"
+alias pi="python -m pip"
 alias please="sudo"
 alias pp="popd"
 alias pu="pushd"
 alias py="winpty python"
 alias reload="source ~/.profile"
+alias sp="scoop"
 alias ta="tmux attach"
 alias vi="vim"
-alias sp="scoop"
+alias ws="cd /D/Code"
 
 # git aliases
 alias g="git"
