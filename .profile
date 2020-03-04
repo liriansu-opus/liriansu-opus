@@ -109,9 +109,9 @@ fsh() {
   ssh -t gate ssh -l zaihui -t f1 docker exec -e ENV_TEST=1 -it ${IMAGE:="forseti_uwsgi"} pipenv run python manage.py shell
 }
 
-alias sv="cd /c/code/aria2"
-alias svf="cd /c/code/aria2/stdev-forseti-be"
-alias svl="cd /c/code/github/LKI-lki.github.io"
+alias sv="cd /d/code/pasta"
+alias svf="cd /d/code/pasta/stdev-forseti-be"
+alias svl="cd /d/code/github/LKI-lki.github.io"
 
 # auto aliases  TODO: optimize speed
 mkdir -p ~/.bash_aliases
