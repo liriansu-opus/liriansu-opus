@@ -8,7 +8,6 @@ black = {version = "==19.10b0", markers = "python_version == '3.7'"}
 bump2version = {version = ">=0.5.11", markers = "python_version == '3.7'"}
 pipenv = {version = ">=2018.11.26", markers = "python_version == '3.7'"}
 secretstorage = {version = ">=3", markers = "sys_platform == 'linux'"}
-twine = {version = ">=2.0.0", markers = "python_version == '3.7'"}
 wheel = {version = ">=0.33.6", markers = "python_version == '3.7'"}
 
 [packages]
