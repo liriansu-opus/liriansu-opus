@@ -15,14 +15,20 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up python ${{ matrix.python-version }}
       uses: actions/setup-python@v1
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
+    - name: Install requirements
       run: |
         python -m pip install -U pip pipenv
         pipenv install --deploy --system
-        python setup.py install
+    - name: Check code style
+      if: matrix.python-version == 3.7
+      run: |
+        pipenv install --deploy --system --dev
+        black -l 120 -t py35 -t py36 -t py37 -t py38 --check lki
     - name: Verify Installation
-      run: lki
+      run: |
+        python setup.py install
+        lki
