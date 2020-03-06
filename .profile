@@ -64,6 +64,8 @@ drmf() { docker stop $1; docker rm $1; }
 dri() { docker rmi $(docker images -q); }
 dbu() { docker build -t=$1 .; }
 dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
+dsr() { dki -v d:/Code/pasta/zaihui-server:/home/zaihui/server:ro docker-inter.zaihui.com.cn/zaihui/server/base:latest $@; }
+dspm() { dsr python home/zaihui/server/ygg/manage.py $@; }
 
 # kubectl aliases
 alias k="kubectl"
