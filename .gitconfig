@@ -20,6 +20,7 @@
     g = grep -in  # ignore case, line number
     hide = update-index --assume-unchanged  # same with `git unchanged`
     last = log -1 HEAD
+    ld = stash pop
     load = stash pop
     logg = log --graph --decorate --oneline --abbrev-commit --all  # VERY VERY useful command
     logo = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --no-merges
@@ -55,6 +56,7 @@
     sm = submodule
     squash = rebase HEAD~2 -i
     st = status
+    sv = stash
     unchanged = update-index --assume-unchanged  # assume a file is unchanged, often use to change some local config
     unhide = update-index --no-assume-unchanged  # same with `git changed`
     wp = commit --all --message 'ST-123(feat): WIP' --allow-empty --no-verify  # commit with Work In Progress quickly
