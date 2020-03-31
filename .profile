@@ -83,7 +83,7 @@ alias kex="kubectl exec -it"
 alias kg="kubectl get"
 alias kga="kubectl get all"
 alias kgns="kubectl get ns"
-alias kgp="kubectl get pods"
+alias kgp="kubectl get pods -o wide"
 alias kl="kubectl logs --tail=100"
 alias km="kustomize"
 alias kr="kubectl rollout"
@@ -106,6 +106,7 @@ alias gethost='ssh gate gethost'
 alias gsh='ssh -t gate ssh -l zaihui -t'
 alias stp='kcu stp && kex `kg po | grep worker | head -n1 | cut -d" " -f1` pipenv run python manage.py shell'
 alias stt='kcu stt && kex `kg po | grep worker | head -n1 | cut -d" " -f1` pipenv run python manage.py shell'
+alias svp='kcu ddp && kcns zaihui-main && kex `kpo prod-celerybeat-` python manage.py shell'
 
 fsh() {
   IMAGE=${1}
