@@ -58,6 +58,7 @@ alias dkd="docker run -d -P"
 alias dki="docker run -i -t -P --rm"
 alias dex="docker exec -i -t"
 alias trans="dki soimort/translate-shell"
+alias drminone="docker images | grep none | tr -s ' ' | cut -d' ' -f3 | xargs -I{} docker rmi {}"
 dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort; }
 dstop() { docker stop $(docker ps -a -q); }
 drm() { docker rm $1; }
