@@ -4,6 +4,7 @@
 *.exe
 *.pyc
 *.swp
+*.log*
 *~
 ~*
 
