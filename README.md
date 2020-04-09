@@ -1,6 +1,6 @@
 # Lirian Su(LKI)'s Configuration, 我的配置
 
-[![Build Status][badge-build]][github] [![PyPI][badge-pypi]][pypi]
+[![Build Status][badge-build]][github] [![PyPI][badge-pypi]][pypi] [![PyPI][badge-version]][pypi]
 
 [我][me]的[开发环境是 Windows 系统][win-env]，
 但我也时常会在 Unix 系统上游荡。
@@ -93,12 +93,13 @@ $ stp  # exec bash into k8s cluster
 都欢迎[来项目里直接提 Issue。][issue]
 
 
-[badge-pypi]: https://img.shields.io/pypi/v/lki.svg
 [badge-build]: https://github.com/LKI/LKI/workflows/Build/badge.svg
+[badge-pypi]: https://img.shields.io/pypi/v/lki.svg
+[badge-version]: https://img.shields.io/pypi/pyversions/LKI.svg
+[dotvim]: https://github.com/LKI/dotvim
+[github]: https://github.com/LKI/LKI
 [issue]: https://github.com/LKI/LKI/issues/new
 [license]: https://github.com/LKI/LKI/blob/master/LICENSE
 [me]: https://www.liriansu.com/about
 [pypi]: https://pypi.python.org/pypi/lki
-[github]: https://github.com/LKI/LKI
 [win-env]: https://www.liriansu.com/windows-dev-env
-[dotvim]: https://github.com/LKI/dotvim

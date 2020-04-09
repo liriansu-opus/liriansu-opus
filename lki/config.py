@@ -1,3 +1,4 @@
+import io
 import json
 import logging
 import os
@@ -18,14 +19,14 @@ class LKIConfig(dict):
         if not os.path.isfile(self.path):
             return
         try:
-            with open(self.path, "r", encoding="utf-8") as f:
+            with io.open(self.path, "r", encoding="utf-8") as f:
                 self.update(json.loads(f.read()))
         except Exception as ex:
             logging.warning(ex)
 
     def _save_config(self):
         try:
-            with open(os.path.expanduser(self.path), "w", encoding="utf-8") as f:
+            with io.open(os.path.expanduser(self.path), "w", encoding="utf-8") as f:
                 f.write(json.dumps(self, ensure_ascii=False, indent=2))
         except Exception as ex:
             logging.warning(ex)

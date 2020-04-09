@@ -63,11 +63,16 @@ class LKI(Command):
                 _link("dotvim", "vimfiles", target_is_directory=True)
                 _link("dotvim", ".vim", target_is_directory=True)
         except OSError as ex:
-            print("OSError: {}".format(ex))
-            print("Please check your permissions.")
-            print("  Hint: windows requires admin permission when creating symlink.")
+            sys.stderr.writelines(
+                [
+                    "OSError: {}".format(ex),
+                    "  Please check your permissions.",
+                    "Hint: windows requires admin permission when creating symlink.",
+                ]
+            )
+            sys.exit(1)
 
-    def clone(self, url: str):
+    def clone(self, url):
         """ clone a git repository to workspace
 
         Examples:
@@ -102,13 +107,13 @@ class LKI(Command):
         """ link target to link_path """
         link(target, link_path, force=force)
 
-    def set_workspace(self, path: str):
+    def set_workspace(self, path):
         """ set your workspace, where lki clones repositories into """
         if not os.path.isdir(path):
             raise LKIError("lki thinks this is not a directory: {}".format(path))
         self._config["workspace"] = path
 
-    def set_git_config(self, domain: str, **kwargs: str):
+    def set_git_config(self, domain, **kwargs):
         """ set your domain specific configurations. user.name/user.email for example """
         domain_config = self._config.get(domain, {})
         domain_config.update(**kwargs)
