@@ -127,5 +127,5 @@ alias svl="cd /d/code/github/LKI-lki.github.io"
 
 # auto aliases  TODO: optimize speed
 mkdir -p ~/.bash_aliases
-sed '/\[core\]/Q' ~/.gitconfig | tail -n +2 | sed -e 's/ = /="git /' | sed -e 's/^\s\+/alias g/' | sed -e 's/\(\s\+#.*\)\?$/"/' > ~/.bash_aliases/git_aliases
+sed -n '/\[alias\]/,/\[core\]/ p' ~/.gitconfig | tail -n +2 | head -n -1 | sed -e 's/ = /="git /' | sed -e 's/^\s\+/alias g/' | sed -e 's/\(\s\+#.*\)\?$/"/' > ~/.bash_aliases/git_aliases
 source ~/.bash_aliases/*_aliases
