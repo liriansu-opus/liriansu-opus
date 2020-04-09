@@ -27,6 +27,11 @@ alias it="git"
 alias lg="git logg"
 alias qgit="git"
 
+# go aliases
+alias gmt="go mod tidy"
+alias gfm="go fmt"
+gguv() { go get -u -v github.com/$1; }
+
 # python aliases
 alias pm="python manage.py"
 alias psi="python setup.py install"
@@ -58,6 +63,7 @@ alias dkd="docker run -d -P"
 alias dki="docker run -i -t -P --rm"
 alias dex="docker exec -i -t"
 alias trans="dki soimort/translate-shell"
+alias tz="trans :zh"
 alias drminone="docker images | grep none | tr -s ' ' | cut -d' ' -f3 | xargs -I{} docker rmi {}"
 dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort; }
 dstop() { docker stop $(docker ps -a -q); }
