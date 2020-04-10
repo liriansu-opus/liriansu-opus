@@ -32,8 +32,15 @@ jobs:
         run: |
           pipenv install --deploy --system --dev
           black -l 120 -t py35 -t py36 -t py37 -t py38 --check lki
-      - name: Verify Installation
+      - name: Command Installation
         run: |
           python setup.py install
-          lki
+      - name: Config Installation
+        run: |
           lki install
+          lki install
+      - name: Config Verification
+        if: matrix.os != 'windows-latest'
+        run: |
+          source ~/.profile
+          git yes

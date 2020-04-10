@@ -47,8 +47,9 @@ class LKI(Command):
 
         def _link(src, dst=None, **kwargs):
             target = os.path.join(HOME, dst or src)
-            if not os.path.exists(target):
-                os.symlink(os.path.join(repo_path, src), target, **kwargs)
+            if os.path.exists(target):
+                os.remove(target)
+            link(os.path.join(repo_path, src), target)
 
         try:
             _link(".gitconfig")
@@ -56,12 +57,13 @@ class LKI(Command):
             _link(".ideavimrc")
             _link(".profile")
             _link(".tmux.conf")
-            _link("dotvim/vimrc", ".vimrc")
-
-            if IS_WIN32:
-                _link("dotvim/vimrc", "_vimrc")
-                _link("dotvim", "vimfiles", target_is_directory=True)
-                _link("dotvim", ".vim", target_is_directory=True)
+            # TODO: implement `lki install --vim`
+            # _link("dotvim/vimrc", ".vimrc")
+            #
+            # if IS_WIN32:
+            #     _link("dotvim/vimrc", "_vimrc")
+            #     _link("dotvim", "vimfiles", target_is_directory=True)
+            #     _link("dotvim", ".vim", target_is_directory=True)
         except OSError as ex:
             sys.stderr.writelines(
                 [
