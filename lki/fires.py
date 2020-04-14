@@ -80,23 +80,28 @@ class LKI(Command):
         Examples:
             lki clone git@github.com:zaihui/hutils.git
         Equals to:
-            git clone -o o git@github.com:zaihui/hutils.git {workspace}/github/zaihui-hutils
+            git clone -o o git@github.com:zaihui/hutils.git {workspace}/github.com/zaihui/hutils
 
         """
         check_executable("git")
         if not url.startswith("git@") and not url.startswith("http"):
             if url.count("/") == 1:
-                url = "git@github.com:{}.git".format(url)
+                if os.path.exists("~/.ssh/id_rsa"):
+                    url = "git@github.com:{}.git".format(url)
+                else:
+                    url = "https://github.com/{}.git".format(url)
             else:
                 url = "https://{}".format(url)
         match = next((m for m in (e.search(url) for e in REGEX_GIT_URLS) if m), None)
         if not match:
             raise LKIError("lki can not understand git url: {}".format(url))
         domain, project, _ = match.groups()  # type: str
-        slug_domain = domain.split(".", 1)[0]
-        slug_project = project.replace("/", "-")
         workspace = self._config.get("workspace", ".")
-        path = os.path.join(workspace, slug_domain, slug_project)
+        path = os.path.join(workspace, domain, project)
+        try:
+            os.makedirs(os.path.dirname(path))
+        except OSError:
+            pass
         run("git clone -o o {} {}".format(url, path))
         for key, value in self._config.get(domain, {}).items():
             run("git -C {} config {} {}".format(path, key, value))

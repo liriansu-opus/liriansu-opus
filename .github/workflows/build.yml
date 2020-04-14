@@ -44,3 +44,5 @@ jobs:
         run: |
           source ~/.profile
           git yes
+          lki clone LKI/LKI
+          test -d github.com/LKI/LKI || exit 1
