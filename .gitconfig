@@ -4,6 +4,7 @@
     b = branch
     bd = branch -D
     br = branch
+    ca = commit --all
     cb = checkout -b
     changed = update-index --no-assume-unchanged  # revert op of `git unchanged`
     ci = commit
@@ -31,6 +32,7 @@
     pf = push -f
     pl = pull --rebase
     po = push o
+    ps = push
     pull = pull --rebase
     puo = push -u o
     puod = push -u o -o merge_request.create -o merge_request.target=dev
