@@ -19,6 +19,8 @@ alias sp="scoop"
 alias ta="tmux attach"
 alias vi="vim"
 alias ws="cd /D/Code"
+alias wsg="cd /D/Code/github.com"
+alias wsp="cd /D/Code/pasta.zaihui.com.cn"
 
 # git aliases
 alias g="git"
@@ -73,7 +75,7 @@ drmf() { docker stop $1; docker rm $1; }
 dri() { docker rmi $(docker images -q); }
 dbu() { docker build -t=$1 .; }
 dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
-dsr() { dki -v d:/Code/pasta/zaihui-server:/home/zaihui/server:ro docker-inter.zaihui.com.cn/zaihui/server/base:latest $@; }
+dsr() { dki -v d:/Code/pasta.zaihui.com.cn/zaihui/server:/home/zaihui/server:ro docker-inter.zaihui.com.cn/zaihui/server/base:latest $@; }
 dspm() { dsr python -W ignore::RuntimeWarning home/zaihui/server/ygg/manage.py $@; }
 dst() { dspm test --failfast $@; }
 
