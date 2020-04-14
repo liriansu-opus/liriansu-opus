@@ -25,6 +25,7 @@ alias g="git"
 alias gc="git remote show | xargs -I{} git remote prune {} && git gc"
 alias it="git"
 alias lg="git logg"
+alias lgs="git logs"
 alias qgit="git"
 
 # go aliases
