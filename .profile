@@ -18,9 +18,9 @@ alias reload="source ~/.profile"
 alias sp="scoop"
 alias ta="tmux attach"
 alias vi="vim"
-alias ws="cd $CODE"
-alias wsg="cd $CODE/github.com"
-alias wsp="cd $CODE/pasta.zaihui.com.cn"
+alias ws="cd '$CODE'"
+alias wsg="cd '$CODE'/github.com"
+alias wsp="cd '$CODE'/pasta.zaihui.com.cn"
 
 # git aliases
 alias g="git"
