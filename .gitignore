@@ -2,10 +2,12 @@
 *.bak
 *.egg-info*
 *.exe
-*.pyc
-*.swp
 *.log
 *.log.*
+*.pyc
+*.swp
+*.xls
+*.xlsx
 *~
 ~*
 

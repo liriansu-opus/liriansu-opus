@@ -9,7 +9,6 @@ alias la="/bin/ls -ah --color"
 alias ll="/bin/ls -lh --color"
 alias ls="/bin/ls --color"
 alias n="npm"
-alias pi="python -m pip"
 alias please="sudo"
 alias pp="popd"
 alias pu="pushd"
@@ -40,12 +39,15 @@ alias pm="python manage.py"
 alias psi="python setup.py install"
 alias bv="bumpversion"
 
-# pipenv aliases
+# pip/pipenv aliases
+alias pi="python -m pip"
+alias pii="python -m pip install"
+alias piiu="python -m pip install -U"
+alias pilo="python -m pip list --outdated"
 alias pv="pipenv"
-alias pr="pipenv run"
 alias pf="pipenv run fab"
-alias pinv="pipenv run inv"
 alias ppm="pipenv run python manage.py"
+alias pr="pipenv run"
 
 # vagrant aliases
 alias vgst="vagrant global-status"
