@@ -116,7 +116,7 @@ export DOCKER_REGISTRY=docker-inter.zaihui.com.cn
 
 # ssh aliases
 alias gash='ssh -t awsgate ssh -t'
-alias gethost='ssh gate gethost'
+alias gethost='cat ~/.ssh/zaihui_ssh_config | grep -e "^Host" | grep --color'
 alias gsh='ssh -t gate ssh -l zaihui -t'
 alias stp='kcu stp && kex `kg po | grep worker | head -n1 | cut -d" " -f1` pipenv run python manage.py shell'
 alias stt='kcu stt && kex `kg po | grep worker | head -n1 | cut -d" " -f1` pipenv run python manage.py shell'
