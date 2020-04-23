@@ -5,6 +5,7 @@
 *.log
 *.log.*
 *.pyc
+*.sqlite3
 *.swp
 *.xls
 *.xlsx
