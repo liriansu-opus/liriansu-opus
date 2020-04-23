@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# find crlf in current folder
+
+set -e
+
+find ${1:-.} -not -type d -exec file "{}" ";" | grep CRLF | sed s/:.*//
+

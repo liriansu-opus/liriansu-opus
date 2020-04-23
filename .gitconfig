@@ -65,7 +65,7 @@
     yes = log --oneline --since yesterday --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --no-merges  # see what's new since yesterday
 [core]
     autocrlf = false
-    editor = nvim
+    editor = vim
     eol = lf
     excludesfile = ~/.gitignore
     ignorecase = false
