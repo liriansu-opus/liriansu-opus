@@ -7,8 +7,8 @@
 *.pyc
 *.sqlite3
 *.swp
-*.xls
-*.xlsx
+20*.xls
+20*.xlsx
 *~
 ~*
 
