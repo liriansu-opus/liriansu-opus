@@ -3,13 +3,13 @@ set -o vi
 
 # general aliases
 alias ..="cd .."
+alias bv="bumpversion"
 alias cls="echo -e '\\0033c'"
 alias cnpm="npm --registry=https://registry.npm.taobao.org --cache=${HOME}/.npm/.cache/cnpm --disturl=https://npm.taobao.org/dist --userconfig=${HOME}/.cnpmrc"
 alias conf="vim ~/.profile"
 alias la="/bin/ls -ah --color=auto 2>/dev/null"
 alias ll="/bin/ls -lh --color=auto 2>/dev/null"
 alias ls="/bin/ls --color=auto 2>/dev/null"
-alias m="make"
 alias n="npm"
 alias please="sudo"
 alias pp="popd"
@@ -37,31 +37,25 @@ alias gmt="go mod tidy"
 alias gfm="go fmt"
 gguv() { go get -u -v github.com/$1; }
 
-# python aliases
-alias pm="python manage.py"
-alias psi="python setup.py install"
-alias bv="bumpversion"
-
-# pip/pipenv aliases
+# python/pip/pipenv aliases
+alias pf="pipenv run fab"
 alias pi="python -m pip"
 alias pii="python -m pip install"
 alias piiu="python -m pip install -U"
 alias pilo="python -m pip list --outdated"
-alias pv="pipenv"
-alias pf="pipenv run fab"
+alias pm="python manage.py"
 alias ppm="pipenv run python manage.py"
 alias pr="pipenv run"
+alias psi="python setup.py install"
+alias pv="pipenv"
 
-# vagrant aliases
-alias vgst="vagrant global-status"
-alias vr="vagrant"
-alias vst="vagrant status"
-alias vu="vagrant up"
+# make aliases
+alias m="make"
+alias mt="make test"
 
 # docker aliases from tcnksm/docker-alias
 alias d="docker"
 alias dc="docker-compose"
-alias dm="docker-machine"
 alias dl="docker ps -l -q"
 alias dps="docker ps"
 alias dpa="docker ps -a"
@@ -119,20 +113,11 @@ export DOCKER_REGISTRY=docker-inter.zaihui.com.cn
 
 # ssh aliases
 alias gash='ssh -t awsgate ssh -t'
-alias gethost='cat ~/.ssh/zaihui_ssh_config | grep -e "^Host" | grep --color'
+alias gethost='cat ~/.ssh/*_config | grep -e "^Host" | grep --color'
 alias gsh='ssh -t gate ssh -l zaihui -t'
 alias stp='kcu stp && kex `kg po | grep worker | head -n1 | cut -d" " -f1` pipenv run python manage.py shell'
 alias stt='kcu stt && kex `kg po | grep worker | head -n1 | cut -d" " -f1` pipenv run python manage.py shell'
 alias svp='kcu ddp && kcns zaihui-main && kex `kpo prod-celerybeat-` python manage.py shell'
-
-fsh() {
-  IMAGE=${1}
-  ssh -t gate ssh -l zaihui -t f1 docker exec -e ENV_TEST=1 -it ${IMAGE:="forseti_uwsgi"} pipenv run python manage.py shell
-}
-
-alias sv="cd /d/code/src/pasta.zaihui.com.cn"
-alias svf="cd /d/code/src/pasta.zaihui.com.cn/stdev/forseti-be"
-alias svl="cd /d/code/github.com/LKI/lki.github.io"
 
 # auto aliases  TODO: optimize speed
 mkdir -p ~/.bash_aliases
