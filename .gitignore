@@ -7,9 +7,11 @@
 *.pyc
 *.sqlite3
 *.swp
+*~
 20*.xls
 20*.xlsx
-*~
+output*.xls
+output*.xlsx
 ~*
 
 .idea/
