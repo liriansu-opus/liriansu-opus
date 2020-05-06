@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  docker:
+    command: ["redis-server", "--appendonly", "yes"]
+    container_name: redis
+    hostname: redis
+    image: redis
+    ports:
+      - "8039:6379"
+    restart: always
+    volumes:
+      - "~/.cache/local-redis/:/data"
