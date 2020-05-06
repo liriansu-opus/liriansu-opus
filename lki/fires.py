@@ -106,9 +106,9 @@ class LKI(Command):
         for key, value in self._config.get(domain, {}).items():
             run("git -C {} config {} {}".format(path, key, value))
 
-    def hook(self, force=False):
+    def hook(self, force=False, path="~/.lki/.pre-commit.sh"):
         """ install git hook """
-        link("~/.lki/.pre-commit.sh", ".git/hooks/pre-commit", force=force)
+        link(path, ".git/hooks/pre-commit", force=force)
 
     def link(self, target, link_path, force=False):
         """ link target to link_path """
