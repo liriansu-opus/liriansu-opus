@@ -86,7 +86,7 @@ class LKI(Command):
         check_executable("git")
         if not url.startswith("git@") and not url.startswith("http"):
             if url.count("/") == 1:
-                if os.path.exists("~/.ssh/id_rsa"):
+                if os.path.exists("{}/.ssh/id_rsa".format(HOME)):
                     url = "git@github.com:{}.git".format(url)
                 else:
                     url = "https://github.com/{}.git".format(url)
@@ -106,7 +106,7 @@ class LKI(Command):
         for key, value in self._config.get(domain, {}).items():
             run("git -C {} config {} {}".format(path, key, value))
 
-    def hook(self, force=False, path="~/.lki/.pre-commit.sh"):
+    def hook(self, force=False, path="{}/.lki/.pre-commit.sh".format(HOME)):
         """ install git hook """
         link(path, ".git/hooks/pre-commit", force=force)
 
