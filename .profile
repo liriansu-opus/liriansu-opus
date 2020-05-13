@@ -83,9 +83,6 @@ alias k="kubectl"
 alias kaf="kubectl apply -f"
 alias kak="kubectl apply -k"
 alias kc="kubectl config"
-alias kcl="kubectl config get-contexts"
-alias kcns="kubectl config set-context --current --namespace"
-alias kcu="kubectl config use-context"
 alias kd="kubectl describe"
 alias kdel="kubectl delete"
 alias ke="kubectl edit"
@@ -94,12 +91,14 @@ alias kg="kubectl get"
 alias kga="kubectl get all"
 alias kgns="kubectl get ns"
 alias kgp="kubectl get pods -o wide"
-alias kl="kubectl logs --tail=100"
 alias km="kustomize"
 alias kr="kubectl rollout"
 alias krr="kubectl rollout restart"
 alias krs="kubectl rollout status"
 alias kt="kubectl top"
+kl() { kubectl logs --tail=100 -f "`kpo $1`"; }
+kcl() { if [[ -z "$1" ]]; then kubectl config get-contexts; else kubectl config use-context $1; fi; }
+kns() { if [[ -z "$1" ]]; then kubectl get ns; else kubectl config set-context --current --namespace $1; fi; }
 kpm() { kex `kpo $1` pipenv run python manage.py shell; }
 kpo() { kg po | grep $1 | head -n1 | cut -d" " -f1; }
 
