@@ -86,6 +86,7 @@ alias kc="kubectl config"
 alias kd="kubectl describe"
 alias kdel="kubectl delete"
 alias ke="kubectl edit"
+alias kex="kubectl exec -it"
 alias kg="kubectl get"
 alias kga="kubectl get all"
 alias kgns="kubectl get ns"
@@ -96,11 +97,11 @@ alias krr="kubectl rollout restart"
 alias krs="kubectl rollout status"
 alias kt="kubectl top"
 kcl() { if [[ -z "$1" ]]; then kubectl config get-contexts; else kubectl config use-context $1; fi; }
-kex() { kubectl exec -it `kpo $1`; }
 kl() { kubectl logs --tail=100 -f "`kpo $1`"; }
 kns() { if [[ -z "$1" ]]; then kubectl get ns; else kubectl config set-context --current --namespace $1; fi; }
-kpm() { kubectl exec -it `kpo $1` pipenv run python manage.py shell; }
+kpm() { kex `kpo $1` pipenv run python manage.py shell; }
 kpo() { kg po | grep $1 | head -n1 | cut -d" " -f1; }
+ksh() { kex `kpo $1` -- bash; }
 
 # --- --- --- #
 
