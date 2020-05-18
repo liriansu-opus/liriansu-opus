@@ -78,6 +78,7 @@ drm() { docker rm $1; }
 drmf() { docker stop $1; docker rm $1; }
 dspm() { dsr python -W ignore::RuntimeWarning home/zaihui/server/ygg/manage.py $@; }
 dsr() { dki -v d:/Code/pasta.zaihui.com.cn/zaihui/server:/home/zaihui/server:ro docker-inter.zaihui.com.cn/zaihui/server/base:latest $@; }
+dkiv() { MSYS_NO_PATHCONV=1 dki -v $(pwd):/app --workdir /app $@; }
 dst() { dspm test --failfast $@; }
 dstop() { docker stop $(docker ps -a -q); }
 
