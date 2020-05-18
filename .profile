@@ -54,29 +54,35 @@ alias m="make"
 alias mt="make test"
 
 # docker aliases from tcnksm/docker-alias
+# if [[ -x "$(command -v docker.exe)" ]];
+# then
+#   docker() { (MSYS_NO_PATHCONV=1; "docker.exe" "$@"); }
+# fi
+
 alias d="docker"
 alias dc="docker-compose"
-alias dl="docker ps -l -q"
-alias dps="docker ps"
-alias dpa="docker ps -a"
+alias dex="docker exec -i -t"
 alias di="docker images"
 alias dip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
 alias dkd="docker run -d -P"
 alias dki="docker run -i -t -P --rm"
-alias dex="docker exec -i -t"
-alias ts="dki soimort/translate-shell"
-alias tz="ts :zh"
+alias dl="docker ps -l -q"
+alias dpa="docker ps -a"
+alias dps="docker ps"
 alias drminone="docker images | grep none | tr -s ' ' | cut -d' ' -f3 | xargs -I{} docker rmi {}"
 dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort; }
-dstop() { docker stop $(docker ps -a -q); }
+dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
+dbu() { docker build -t=$1 .; }
+dri() { docker rmi $(docker images -q); }
 drm() { docker rm $1; }
 drmf() { docker stop $1; docker rm $1; }
-dri() { docker rmi $(docker images -q); }
-dbu() { docker build -t=$1 .; }
-dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
-dsr() { dki -v d:/Code/pasta.zaihui.com.cn/zaihui/server:/home/zaihui/server:ro docker-inter.zaihui.com.cn/zaihui/server/base:latest $@; }
 dspm() { dsr python -W ignore::RuntimeWarning home/zaihui/server/ygg/manage.py $@; }
+dsr() { dki -v d:/Code/pasta.zaihui.com.cn/zaihui/server:/home/zaihui/server:ro docker-inter.zaihui.com.cn/zaihui/server/base:latest $@; }
 dst() { dspm test --failfast $@; }
+dstop() { docker stop $(docker ps -a -q); }
+
+alias ts="dki soimort/translate-shell"
+alias tz="ts :zh"
 
 # kubectl aliases
 alias k="kubectl"
@@ -91,13 +97,13 @@ alias kg="kubectl get"
 alias kga="kubectl get all"
 alias kgns="kubectl get ns"
 alias kgp="kubectl get pods -o wide"
+alias kl="kubectl logs --tail=100 -f"
 alias km="kustomize"
 alias kr="kubectl rollout"
 alias krr="kubectl rollout restart"
 alias krs="kubectl rollout status"
 alias kt="kubectl top"
 kcl() { if [[ -z "$1" ]]; then kubectl config get-contexts; else kubectl config use-context $1; fi; }
-kl() { kubectl logs --tail=100 -f "`kpo $1`"; }
 kns() { if [[ -z "$1" ]]; then kubectl get ns; else kubectl config set-context --current --namespace $1; fi; }
 kpm() { kex `kpo $1` pipenv run python manage.py shell; }
 kpo() { kg po | grep $1 | head -n1 | cut -d" " -f1; }

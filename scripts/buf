@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -e
+
+MSYS_NO_PATHCONV=1 docker run -i -t -P --rm --volume $(pwd):/workspace --workdir /workspace bufbuild/buf $@
