@@ -31,6 +31,7 @@
     pd = push o -o merge_request.create -o merge_request.target=dev HEAD -f
     pf = push -f
     pl = pull --rebase
+    pm = push o -o merge_request.create -o merge_request.target=master HEAD -f
     po = push o
     ps = push
     pull = pull --rebase
