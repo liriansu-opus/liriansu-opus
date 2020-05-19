@@ -48,6 +48,8 @@ alias ppm="pipenv run python manage.py"
 alias pr="pipenv run"
 alias psi="python setup.py install"
 alias pv="pipenv"
+alias pvsd="pipenv sync --dev"
+alias pvud="pipenv update --dev"
 
 # make aliases
 alias m="make"
