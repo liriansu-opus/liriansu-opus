@@ -110,7 +110,8 @@ kcl() { if [[ -z "$1" ]]; then kubectl config get-contexts; else kubectl config 
 kns() { if [[ -z "$1" ]]; then kubectl get ns; else kubectl config set-context --current --namespace $1; fi; }
 kpm() { kex `kpo $1` pipenv run python manage.py shell; }
 kpo() { kg po | grep $1 | head -n1 | cut -d" " -f1; }
-ksh() { kex `kpo $1` -- bash; }
+ksh() { kex `kpo $1` -- sh; }
+kbash() { kex `kpo $1` -- bash; }
 
 # --- --- --- #
 
