@@ -10,7 +10,8 @@
       "cursorShape": "filledBox",
       "fontFace": "Fira Code",
       "fontSize": 11,
-      "historySize": 9001
+      "historySize": 9001,
+      "padding": "0, 0, 0, 0"
     },
     "list": [
       {
@@ -18,7 +19,6 @@
         "commandline": "\"D:\\CodeEnv\\Git\\usr\\bin\\bash.exe\" -i -l",
         "icon": "ms-appdata:///roaming/git-bash_32px.ico",
         "name": "Git Bash",
-        "padding": "0, 0, 0, 0",
         "snapOnInput": true,
         "startingDirectory": "%USERPROFILE%"
       },
@@ -39,12 +39,6 @@
         "hidden": false,
         "name": "WSL",
         "source": "Windows.Terminal.Wsl"
-      },
-      {
-        "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
-        "hidden": false,
-        "name": "Azure Cloud Shell",
-        "source": "Windows.Terminal.Azure"
       }
     ]
   },
