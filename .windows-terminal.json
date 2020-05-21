@@ -47,36 +47,22 @@
         ]
     },
     "schemes": [],
-    // Add custom keybindings to this array.
-    // To unbind a key combination from your defaults.json, set the command to "unbound".
-    // To learn more about keybindings, visit https://aka.ms/terminal-keybindings
     "keybindings": [
         {
             "command": {
-                "action": "copy",
-                "singleLine": false
+                "action": "splitPane",
+                "split": "horizontal",
+                "splitMode": "duplicate"
             },
-            "keys": "ctrl+c"
+            "keys": "alt+shift+h"
         },
-        {
-            "command": "paste",
-            "keys": "ctrl+v"
-        },
-        {
-            "command": "find",
-            "keys": "ctrl+shift+f"
-        },
-        // Press Alt+Shift+D to open a new pane.
-        // - "split": "auto" makes this pane open in the direction that provides the most surface area.
-        // - "splitMode": "duplicate" makes the new pane use the focused pane's profile.
-        // To learn more about panes, visit https://aka.ms/terminal-panes
         {
             "command": {
                 "action": "splitPane",
-                "split": "auto",
+                "split": "vertical",
                 "splitMode": "duplicate"
             },
-            "keys": "alt+shift+d"
+            "keys": "alt+shift+v"
         }
     ]
 }
