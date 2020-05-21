@@ -9,7 +9,7 @@
 set -e
 
 # /dev/null not work on Windows
-VENV="`pipenv --venv 2>&1`"
+VENV="`pipenv --venv 2>&1 || true`"
 
 if [[ ${VENV} =~ "Aborted" ]];
 then
