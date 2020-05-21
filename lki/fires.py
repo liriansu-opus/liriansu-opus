@@ -49,7 +49,7 @@ class LKI(Command):
             target = os.path.join(HOME, dst or src)
             if os.path.exists(target):
                 os.remove(target)
-            link(os.path.join(repo_path, src), target)
+            link(os.path.join(repo_path, src), target, force=True)
 
         try:
             _link(".gitconfig")

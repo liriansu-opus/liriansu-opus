@@ -8,8 +8,8 @@
       "closeOnExit": "always",
       "colorScheme": "Tango Dark",
       "cursorShape": "filledBox",
-      "fontFace": "Fira Code",
-      "fontSize": 11,
+      "fontFace": "Fira Code Retina",
+      "fontSize": 10,
       "historySize": 9001,
       "padding": "0, 0, 0, 0"
     },
@@ -39,6 +39,12 @@
         "hidden": false,
         "name": "WSL",
         "source": "Windows.Terminal.Wsl"
+      },
+      {
+          "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
+          "hidden": false,
+          "name": "Azure Cloud Shell",
+          "source": "Windows.Terminal.Azure"
       }
     ]
   },
