@@ -51,6 +51,8 @@ alias pv="pipenv"
 alias pvsd="pipenv sync --dev"
 alias pvud="pipenv update --dev"
 
+alias jsonify="python -mjson.tool"
+
 # make aliases
 alias m="make"
 alias mt="make test"
