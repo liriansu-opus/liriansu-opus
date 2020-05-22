@@ -106,12 +106,28 @@ alias kr="kubectl rollout"
 alias krr="kubectl rollout restart"
 alias krs="kubectl rollout status"
 alias kt="kubectl top"
-kcl() { if [[ -z "$1" ]]; then kubectl config get-contexts; else kubectl config use-context $1; fi; }
-kns() { if [[ -z "$1" ]]; then kubectl get ns; else kubectl config set-context --current --namespace $1; fi; }
 kpm() { kex `kpo $1` pipenv run python manage.py shell; }
 kpo() { kg po | grep $1 | head -n1 | cut -d" " -f1; }
 ksh() { kex `kpo $1` -- sh; }
 kbash() { kex `kpo $1` -- bash; }
+kcl() {
+  CONTEXT=${1}
+  if [[ -z "${CONTEXT}" ]]; then
+    CURRENT=`kc current-context`
+    CONTEXT=$(kc get-contexts -o=name | fzf --height=20 --preview='kubectl config use-context {} && kubectl get ns' --preview-window=:75%)
+    CONTEXT=${CONTEXT:-${CURRENT}}
+  fi
+  kubectl config use-context ${CONTEXT} > /dev/null
+}
+kns() {
+  NAMESPACE=${1}
+  if [[ -z "${NAMESPACE}" ]]; then
+    NAMESPACE=$(kg ns -o=name | sed 's/namespace\///' | fzf --height=50% --preview='kubectl get all -n {}' --preview-window=:70%)
+  fi
+  if [[ ! -z "${NAMESPACE}" ]]; then
+    kubectl config set-context --current --namespace ${NAMESPACE} > /dev/null
+  fi
+}
 
 # --- --- --- #
 
