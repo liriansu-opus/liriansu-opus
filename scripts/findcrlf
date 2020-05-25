@@ -3,5 +3,9 @@
 
 set -e
 
-grep -IUrl --color $'\r' ${1:-.} | grep -v '.git/'
-
+if [[ $1 == '--fix' ]];
+then
+  grep -IUrl --color $'\r' ${1:-.} | grep -v '.git/' | xargs -I{} dos2unix {}
+else
+  grep -IUrl --color $'\r' ${1:-.} | grep -v '.git/'
+fi
