@@ -3,5 +3,5 @@
 
 set -e
 
-find ${1:-.} -not -type d -exec file "{}" ";" | grep CRLF | sed s/:.*//
+grep -IUrl --color $'\r' ${1:-.} | grep -v '.git/'
 
