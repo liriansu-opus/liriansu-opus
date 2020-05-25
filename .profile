@@ -142,10 +142,18 @@ export DOCKER_REGISTRY=docker-inter.zaihui.com.cn
 # ssh aliases
 alias gash='ssh -t awsgate ssh -t'
 alias gethost='cat ~/.ssh/*_config | grep -e "^Host" | grep --color'
-alias gsh='ssh -t gate ssh -l zaihui -t'
 alias stp='kcl stp && kns forseti-sun && kex `kg po | grep worker | head -n1 | cut -d" " -f1` pipenv run python manage.py shell'
 alias stt='kcl stt && kns forseti-sun && kex `kg po | grep worker | head -n1 | cut -d" " -f1` pipenv run python manage.py shell'
 alias svp='kcl ddp && kcns zaihui-main && kex `kpo prod-celerybeat-` python manage.py shell'
+gsh() {
+  HOSTNAME=${1}
+  if [[ -z "${HOSTNAME}" ]]; then
+    HOSTNAME=$(cat ~/.ssh/*config  | grep ^Host | awk -F' ' '{print $NF}' | fzf --height=20)
+  fi
+  if [[ ! -z "{HOSTNAME}" ]]; then
+    ssh -t ${HOSTNAME}
+  fi
+}
 
 # auto aliases  TODO: optimize speed
 mkdir -p ~/.bash_aliases
