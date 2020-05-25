@@ -28,7 +28,7 @@ jobs:
           python -m pip install -U pip pipenv
           pipenv install --deploy --system
       - name: Check code style
-        if: matrix.python-version == 3.7
+        if: matrix.python-version == 3.8
         run: |
           pipenv install --deploy --system --dev
           black -l 120 -t py35 -t py36 -t py37 -t py38 --check lki
