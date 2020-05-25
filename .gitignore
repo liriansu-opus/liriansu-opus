@@ -14,6 +14,8 @@ output*.xls
 output*.xlsx
 ~*
 
+.coverage
+
 .idea/
 .vscode/
 dist/
