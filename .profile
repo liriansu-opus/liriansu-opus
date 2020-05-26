@@ -4,7 +4,6 @@ set -o vi
 # general aliases
 alias ..="cd .."
 alias bv="bumpversion"
-alias cls="echo -e '\\0033c'"
 alias cnpm="npm --registry=https://registry.npm.taobao.org --cache=${HOME}/.npm/.cache/cnpm --disturl=https://npm.taobao.org/dist --userconfig=${HOME}/.cnpmrc"
 alias conf="vim ~/.profile"
 alias la="/bin/ls -ah --color=auto 2>/dev/null"
