@@ -18,6 +18,7 @@ output*.xlsx
 
 .idea/
 .vscode/
+build/
 dist/
 node_modules/
 tmp/
