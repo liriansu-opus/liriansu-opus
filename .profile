@@ -9,11 +9,6 @@ alias conf="vim ~/.profile"
 alias la="/bin/ls -ah --color=auto 2>/dev/null"
 alias ll="/bin/ls -lh --color=auto 2>/dev/null"
 alias ls="/bin/ls --color=auto 2>/dev/null"
-alias n="npm"
-alias please="sudo"
-alias pp="popd"
-alias pu="pushd"
-alias py="winpty python"
 alias reload="source ~/.profile"
 alias sk="skaffold"
 alias sp="scoop"
@@ -139,7 +134,6 @@ export PATH=/c/codeenv/git/usr/bin:~/.lki/scripts:${PATH}
 export DOCKER_REGISTRY=docker-inter.zaihui.com.cn
 
 # ssh aliases
-alias gash='ssh -t awsgate ssh -t'
 alias gethost='cat ~/.ssh/*_config | grep -e "^Host" | grep --color'
 alias stp='kcl stp && kns forseti-sun && kex `kg po | grep worker | head -n1 | cut -d" " -f1` pipenv run python manage.py shell'
 alias stt='kcl stt && kns forseti-sun && kex `kg po | grep worker | head -n1 | cut -d" " -f1` pipenv run python manage.py shell'
