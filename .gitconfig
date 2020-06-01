@@ -28,6 +28,7 @@
     logs = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     mgf = merge --ff-only
     p = push
+    pa = push --all
     pd = push o -o merge_request.create -o merge_request.target=dev HEAD -f
     pf = push -f
     pl = pull --rebase
