@@ -14,7 +14,7 @@ alias sk="skaffold"
 alias sp="scoop"
 alias ta="tmux attach"
 alias vi="vim"
-alias ws="cd '$CODE'"
+alias ws='cd $(find $CODE -maxdepth 3 -type d | fzf)'
 alias wsg="cd '$CODE'/github.com"
 alias wsp="cd '$CODE'/pasta.zaihui.com.cn"
 
