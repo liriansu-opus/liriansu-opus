@@ -5,7 +5,6 @@ verify_ssl = true
 
 [dev-packages]
 black = {version = "==19.10b0", markers = "python_version == '3.8'"}
-bump2version = {version = ">=0.5.11", markers = "python_version == '3.8'"}
 pipenv = {version = ">=2018.11.26", markers = "python_version == '3.8'"}
 secretstorage = {version = ">=3", markers = "sys_platform == 'linux'"}
 wheel = {version = ">=0.33.6", markers = "python_version == '3.8'"}
@@ -14,4 +13,4 @@ wheel = {version = ">=0.33.6", markers = "python_version == '3.8'"}
 fire = ">=0.2.1"
 
 [requires]
-python_version = "3.8"
+python_version = "3"

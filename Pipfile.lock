@@ -1,11 +1,11 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "a2f53695a44563375810524cabfe95b383aa4008fad6ee70aa2a0bbb80140182"
+            "sha256": "cfbe35e5287aeec675e07e51c8ad9233ce690ab366101ed2357db5e003332751"
         },
         "pipfile-spec": 6,
         "requires": {
-            "python_version": "3.8"
+            "python_version": "3"
         },
         "sources": [
             {
@@ -60,15 +60,6 @@
             "index": "aliyun",
             "markers": "python_version == '3.8'",
             "version": "==19.10b0"
-        },
-        "bump2version": {
-            "hashes": [
-                "sha256:477f0e18a0d58e50bb3dbc9af7fcda464fd0ebfc7a6151d8888602d7153171a0",
-                "sha256:cd4f3a231305e405ed8944d8ff35bd742d9bc740ad62f483bd0ca21ce7131984"
-            ],
-            "index": "aliyun",
-            "markers": "python_version == '3.8'",
-            "version": "==1.0.0"
         },
         "certifi": {
             "hashes": [
@@ -170,13 +161,12 @@
         },
         "pipenv": {
             "hashes": [
-                "sha256:56ad5f5cb48f1e58878e14525a6e3129d4306049cb76d2f6a3e95df0d5fc6330",
-                "sha256:7df8e33a2387de6f537836f48ac6fcd94eda6ed9ba3d5e3fd52e35b5bc7ff49e",
-                "sha256:a673e606e8452185e9817a987572b55360f4d28b50831ef3b42ac3cab3fee846"
+                "sha256:27da0a74f7ed8f24d72422c68cf42ca60aae326d7a894a9d6bfc6c613dbd2216",
+                "sha256:81862314929e3e532502e25bab3c6ba969c0cf67dcaa9d63c2c931ee2d61541c"
             ],
             "index": "aliyun",
             "markers": "python_version == '3.8'",
-            "version": "==2018.11.26"
+            "version": "==2020.5.28"
         },
         "pycparser": {
             "hashes": [
