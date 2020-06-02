@@ -14,7 +14,7 @@ alias sk="skaffold"
 alias sp="scoop"
 alias ta="tmux attach"
 alias vi="vim"
-alias ws='cd $(find $CODE -maxdepth 3 -type d | fzf)'
+alias ws='cd $(find $CODE -maxdepth 5 -type d -name '.git' | sed s/.git// | fzf)'
 alias wsg="cd '$CODE'/github.com"
 alias wsp="cd '$CODE'/pasta.zaihui.com.cn"
 
@@ -37,6 +37,7 @@ alias pi="python -m pip"
 alias pii="python -m pip install"
 alias piiu="python -m pip install -U"
 alias pilo="python -m pip list --outdated"
+alias pip="python -m pip"
 alias pm="python manage.py"
 alias ppm="pipenv run python manage.py"
 alias pr="pipenv run"
