@@ -17,6 +17,11 @@ alias vi="vim"
 alias ws='cd $(find $CODE -maxdepth 5 -type d -name '.git' | sed s/.git// | fzf)'
 alias wsg="cd '$CODE'/github.com"
 alias wsp="cd '$CODE'/pasta.zaihui.com.cn"
+update () {
+  scoop update '*'
+  git -C ~/.vim pull
+  git -C ~/.lki pull
+}
 
 # git aliases
 alias g="git"
