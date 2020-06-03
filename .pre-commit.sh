@@ -42,7 +42,7 @@ fi
 if [[ ! -z "`pipenv run pip list | grep '^flake8 '`" ]];
 then
   echo 'Running flake8...'
-  pipenv run flake8 -q ${PYTHON_FILES}
+  pipenv run flake8 ${PYTHON_FILES}
 fi
 
 PYLINT_FILES="`git diff --name-only --diff-filter=AMR HEAD | grep --color=never '.py$' | grep -v migrations || true`"
