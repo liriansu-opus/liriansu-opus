@@ -28,28 +28,21 @@ fi
 if [[ ! -z "`pipenv run pip list | grep '^isort '`" ]];
 then
   echo 'Running isort...'
-  pipenv run isort -up -y ${PYTHON_FILES}
-  git add ${PYTHON_FILES}
-fi
-
-if [[ ! -z "`pipenv run pip list | grep '^yapf '`" ]];
-then
-  echo 'Running yapf...'
-  pipenv run yapf -i -r ${PYTHON_FILES}
+  pipenv run isort -q -up -y ${PYTHON_FILES}
   git add ${PYTHON_FILES}
 fi
 
 if [[ ! -z "`pipenv run pip list | grep '^black '`" ]];
 then
   echo 'Running black...'
-  pipenv run black -l 120 ${PYTHON_FILES}
+  pipenv run black -q -l 120 ${PYTHON_FILES}
   git add ${PYTHON_FILES}
 fi
 
 if [[ ! -z "`pipenv run pip list | grep '^flake8 '`" ]];
 then
   echo 'Running flake8...'
-  pipenv run flake8 ${PYTHON_FILES}
+  pipenv run flake8 -q ${PYTHON_FILES}
 fi
 
 PYLINT_FILES="`git diff --name-only --diff-filter=AMR HEAD | grep --color=never '.py$' | grep -v migrations || true`"
