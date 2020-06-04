@@ -158,3 +158,10 @@ gsh() {
 mkdir -p ~/.bash_aliases
 python ~/.lki/scripts/git-to-bash.py > ~/.bash_aliases/git_aliases
 source ~/.bash_aliases/*_aliases
+
+# `lki clone diesire/git_bash_windows_powerline`
+THEME=$CODE/github.com/diesire/git_bash_windows_powerline/theme.bash
+if [ -f $THEME ]; then
+   . $THEME
+fi
+unset THEME
