@@ -6,7 +6,6 @@ scoop bucket add extras
 
 scoop install 7zip
 scoop install ag
-scoop install bat
 scoop install dig
 scoop install fzf
 scoop install go

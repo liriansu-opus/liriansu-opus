@@ -12,7 +12,7 @@ alias ls="/bin/ls --color=auto"
 alias reload="source ~/.profile"
 alias sk="skaffold"
 alias sp="scoop"
-alias st="stern"
+alias st="stern --tail 200"
 alias ta="tmux attach"
 alias vi="vim"
 alias ws='cd $(find $CODE -maxdepth 5 -type d -name ".git" | sed s/\.git$// | fzf)'
@@ -136,7 +136,7 @@ kns() {
 
 # set path
 export EDITOR=vim
-export LANG=en
+export LANG=en_US.UTF-8
 export PATH=/c/codeenv/git/usr/bin:~/.lki/scripts:${PATH}
 export DOCKER_REGISTRY=docker-inter.zaihui.com.cn
 export KUBECONFIG=~/.kube/config
