@@ -12,6 +12,7 @@ alias ls="/bin/ls --color=auto"
 alias reload="source ~/.profile"
 alias sk="skaffold"
 alias sp="scoop"
+alias st="stern"
 alias ta="tmux attach"
 alias vi="vim"
 alias ws='cd $(find $CODE -maxdepth 5 -type d -name ".git" | sed s/\.git$// | fzf)'

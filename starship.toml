@@ -2,3 +2,6 @@ add_newline = false
 
 [kubernetes]
 disabled = false
+
+[python]
+symbol = "Python "

@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+set -e
+
+scoop bucket add extras
+
+scoop install 7zip
+scoop install ag
+scoop install bat
+scoop install dig
+scoop install fzf
+scoop install go
+scoop install hugo
+scoop install kubectl
+scoop install kustomize
+scoop install listen1desktop
+scoop install make
+scoop install nodejs
+scoop install potplayer
+scoop install protobuf
+scoop install ripgrep
+scoop install skaffold
+scoop install starship
+scoop install stern
+scoop install v2rayn
+scoop install vim-nightly
+scoop install windows-terminal
