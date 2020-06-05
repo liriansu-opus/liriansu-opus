@@ -138,6 +138,7 @@ export EDITOR=vim
 export LANG=en
 export PATH=/c/codeenv/git/usr/bin:~/.lki/scripts:${PATH}
 export DOCKER_REGISTRY=docker-inter.zaihui.com.cn
+export KUBECONFIG=~/.kube/config
 
 # ssh aliases
 alias gethost='cat ~/.ssh/*_config | grep -e "^Host" | grep --color'
@@ -159,9 +160,4 @@ mkdir -p ~/.bash_aliases
 python ~/.lki/scripts/git-to-bash.py > ~/.bash_aliases/git_aliases
 source ~/.bash_aliases/*_aliases
 
-# `lki clone diesire/git_bash_windows_powerline`
-THEME=$CODE/github.com/diesire/git_bash_windows_powerline/theme.bash
-if [ -f $THEME ]; then
-   . $THEME
-fi
-unset THEME
+eval "$(starship init bash)"
