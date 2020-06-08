@@ -56,6 +56,7 @@ alias jsonify="python -mjson.tool"
 
 # make aliases
 alias m="make"
+alias mb="make build"
 alias mt="make test"
 
 # docker aliases from tcnksm/docker-alias
