@@ -55,7 +55,7 @@ fi
 if [[ ! -z "`pipenv run pip list | grep '^pylint '`" ]];
 then
   echo 'Running pylint...'
-  pipenv run pylint ${PYLINT_FILES}
+  pipenv run pylint -j 1 ${PYLINT_FILES}
 fi
 
 exit 0
