@@ -60,11 +60,6 @@ alias mb="make build"
 alias mt="make test"
 
 # docker aliases from tcnksm/docker-alias
-# if [[ -x "$(command -v docker.exe)" ]];
-# then
-#   docker() { (MSYS_NO_PATHCONV=1; "docker.exe" "$@"); }
-# fi
-
 alias d="docker"
 alias dc="docker-compose"
 alias dex="docker exec -i -t"
