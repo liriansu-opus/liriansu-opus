@@ -145,7 +145,7 @@ alias svp='kcl ddp && kcns zaihui-main && kex `kpo prod-celerybeat-` python mana
 gsh() {
   HOSTNAME=${1}
   if [[ -z "${HOSTNAME}" ]]; then
-    HOSTNAME=$(cat ~/.ssh/*config  | grep ^Host | awk -F' ' '{print $NF}' | fzf --height=20)
+    HOSTNAME=$(cat ~/.ssh/*config  | grep ^Host | sed 's/^.....//' | fzf --height=20 | awk -F' ' '{print $NF}')
   fi
   if [[ ! -z "{HOSTNAME}" ]]; then
     ssh -t ${HOSTNAME}
