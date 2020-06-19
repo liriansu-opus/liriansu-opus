@@ -106,7 +106,7 @@ alias kr="kubectl rollout"
 alias krr="kubectl rollout restart"
 alias krs="kubectl rollout status"
 alias kt="kubectl top"
-kpm() { kex `kpo $1` pipenv run python manage.py shell; }
+kpm() { kex `kpo $1` -- pipenv run python manage.py shell; }
 kpo() { kg po | grep $1 | head -n1 | cut -d" " -f1; }
 ksh() { kex `kpo $1` -- sh; }
 kbash() { kex `kpo $1` -- bash; }
@@ -149,7 +149,7 @@ gsh() {
     HOSTNAME=$(cat ~/.ssh/*config  | grep ^Host | sed 's/^.....//' | fzf --height=20 | awk -F' ' '{print $NF}')
   fi
   if [[ ! -z "{HOSTNAME}" ]]; then
-    ssh -t ${HOSTNAME}
+    ssh -t ${HOSTNAME} "${@:2}"
   fi
 }
 
