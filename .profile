@@ -50,7 +50,7 @@ alias pr="pipenv run"
 alias psi="python setup.py install"
 alias pv="pipenv"
 alias pvsd="pipenv sync --dev"
-alias pvud="pipenv update --dev"
+alias pvud="pipenv update --dev && pipenv clean"
 
 alias jsonify="python -mjson.tool"
 
