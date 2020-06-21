@@ -38,7 +38,6 @@ alias gfm="go fmt"
 gguv() { go get -u -v github.com/$1; }
 
 # python/pip/pipenv aliases
-alias pf="pipenv run fab"
 alias pi="python -m pip"
 alias pii="python -m pip install"
 alias piiu="python -m pip install -U"
