@@ -71,15 +71,16 @@ alias dl="docker ps -l -q"
 alias dpa="docker ps -a"
 alias dps="docker ps"
 alias drminone="docker images | grep none | tr -s ' ' | cut -d' ' -f3 | xargs -I{} docker rmi {}"
+alias dspf="docker system prune -f"
 dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort; }
 dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
 dbu() { docker build -t=$1 .; }
+dkiv() { MSYS_NO_PATHCONV=1 dki -v $(pwd):/app --workdir /app $@; }
 dri() { docker rmi $(docker images -q); }
 drm() { docker rm $1; }
 drmf() { docker stop $1; docker rm $1; }
 dspm() { dsr python -W ignore::RuntimeWarning home/zaihui/server/ygg/manage.py $@; }
 dsr() { dki -v d:/Code/pasta.zaihui.com.cn/zaihui/server:/home/zaihui/server:ro docker-inter.zaihui.com.cn/zaihui/server/base:latest $@; }
-dkiv() { MSYS_NO_PATHCONV=1 dki -v $(pwd):/app --workdir /app $@; }
 dst() { dspm test --failfast $@; }
 dstop() { docker stop $(docker ps -a -q); }
 
