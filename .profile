@@ -20,6 +20,7 @@ alias wsg="cd '$CODE'/github.com"
 alias wsp="cd '$CODE'/pasta.zaihui.com.cn"
 update () {
   scoop update '*'
+  scoop cleanup '*'
   git -C ~/.vim pull
   git -C ~/.lki pull
 }
