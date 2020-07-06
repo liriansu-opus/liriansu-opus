@@ -20,6 +20,7 @@ output*.xlsx
 .vscode/
 build/
 dist/
+htmlcov/
 node_modules/
 tmp/
 
