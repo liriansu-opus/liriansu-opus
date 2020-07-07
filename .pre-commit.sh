@@ -25,11 +25,18 @@ then
   exit 0
 fi
 
-if [[ ! -z "`pipenv run pip list | grep '^isort '`" ]];
+if [[ ! -z "`pipenv run pip list | grep '^isort ' | grep ' 5.'`" ]];
 then
   echo 'Running isort...'
-  pipenv run isort -q -up -y ${PYTHON_FILES}
+  pipenv run isort -q ${PYTHON_FILES}
   git add ${PYTHON_FILES}
+else
+  if [[ ! -z "`pipenv run pip list | grep '^isort '`" ]];
+  then
+    echo 'Running isort...'
+    pipenv run isort -q -up -y ${PYTHON_FILES}
+    git add ${PYTHON_FILES}
+  fi
 fi
 
 if [[ ! -z "`pipenv run pip list | grep '^black '`" ]];
