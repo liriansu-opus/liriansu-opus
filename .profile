@@ -6,9 +6,9 @@ alias ..="cd .."
 alias bv="bumpversion"
 alias cnpm="npm --registry=https://registry.npm.taobao.org --cache=${HOME}/.npm/.cache/cnpm --disturl=https://npm.taobao.org/dist --userconfig=${HOME}/.cnpmrc"
 alias conf="vim ~/.profile"
-alias la="/bin/ls -ah --color=auto"
-alias ll="/bin/ls -lh --color=auto"
-alias ls="/bin/ls --color=auto"
+alias la="/bin/ls -ah"
+alias ll="/bin/ls -lh"
+alias ls="/bin/ls"
 alias reload="source ~/.profile"
 alias sk="skaffold"
 alias sp="scoop"
@@ -24,6 +24,10 @@ update () {
   git -C ~/.vim pull
   git -C ~/.lki pull
 }
+
+# brew aliases
+alias bc="brew cask"
+alias bi="brew install"
 
 # git aliases
 alias g="git"
@@ -133,6 +137,8 @@ kns() {
 # --- --- --- #
 
 # set path
+export PIPENV_VERBOSITY=-1
+export BASH_SILENCE_DEPRECATION_WARNING=1
 export EDITOR=vim
 export LANG=en_US.UTF-8
 export PATH=/c/codeenv/git/usr/bin:~/.lki/scripts:${PATH}
