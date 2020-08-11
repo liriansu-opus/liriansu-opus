@@ -111,7 +111,8 @@ alias kr="kubectl rollout"
 alias krr="kubectl rollout restart"
 alias krs="kubectl rollout status"
 alias kt="kubectl top"
-kpm() { kex `kpo $1` -- pipenv run python manage.py shell; }
+kpm() { kex `kpo $1` -- python manage.py shell; }
+kpvm() { kex `kpo $1` -- pipenv run python manage.py shell; }
 kpo() { kg po | grep $1 | head -n1 | cut -d" " -f1; }
 ksh() { kex `kpo $1` -- sh; }
 kbash() { kex `kpo $1` -- bash; }
@@ -153,7 +154,7 @@ alias svp='kcl ddp && kcns zaihui-main && kex `kpo prod-celerybeat-` python mana
 gsh() {
   HOSTNAME=${1}
   if [[ -z "${HOSTNAME}" ]]; then
-    HOSTNAME=$(cat ~/.ssh/*config  | grep ^Host | sed 's/^.....//' | fzf --height=20 | awk -F' ' '{print $NF}')
+    HOSTNAME=$(cat ~/.ssh/*config  | grep ^Host | sed 's/^.....//' | fzf --height=20 | awk -F' ' '{print $1}')
   fi
   if [[ ! -z "{HOSTNAME}" ]]; then
     ssh -t ${HOSTNAME} "${@:2}"
@@ -165,4 +166,12 @@ mkdir -p ~/.bash_aliases
 python ~/.lki/scripts/git-to-bash.py > ~/.bash_aliases/git_aliases
 source ~/.bash_aliases/*_aliases
 
-eval "$(starship init bash)"
+if command -v starship &> /dev/null;
+then
+  eval "$(starship init bash)"
+fi
+
+if command -v pyenv &> /dev/null;
+then
+  eval "$(pyenv init -)"
+fi
