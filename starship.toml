@@ -5,3 +5,6 @@ disabled = false
 
 [python]
 symbol = "Python "
+
+[java]
+disabled = true

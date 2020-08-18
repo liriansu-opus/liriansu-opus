@@ -29,6 +29,9 @@ update () {
 alias bc="brew cask"
 alias bi="brew install"
 
+# zeus aliases
+alias z="docker exec -i -t zeus zeus"
+
 # git aliases
 alias g="git"
 alias gc="git remote show | xargs -I{} git remote prune {} && git gc"
