@@ -1,14 +1,17 @@
 # enable vi mode
 set -o vi
 
+if [[ "${OS}" == "Windows_NT" ]]; then
+  alias ls="/bin/ls --color"
+fi
+
 # general aliases
 alias ..="cd .."
 alias bv="bumpversion"
 alias cnpm="npm --registry=https://registry.npm.taobao.org --cache=${HOME}/.npm/.cache/cnpm --disturl=https://npm.taobao.org/dist --userconfig=${HOME}/.cnpmrc"
 alias conf="vim ~/.profile"
-alias la="/bin/ls -ah"
-alias ll="/bin/ls -lh"
-alias ls="/bin/ls"
+alias la="ls -ah"
+alias ll="ls -lh"
 alias reload="source ~/.profile"
 alias sk="skaffold"
 alias sp="scoop"
@@ -16,8 +19,6 @@ alias st="stern --tail 200"
 alias ta="tmux attach"
 alias vi="vim"
 alias ws='cd $(find $CODE -maxdepth 5 -type d -name ".git" | sed s/\.git$// | fzf)'
-alias wsg="cd '$CODE'/github.com"
-alias wsp="cd '$CODE'/pasta.zaihui.com.cn"
 update () {
   scoop update '*'
   scoop cleanup '*'
@@ -46,6 +47,7 @@ alias gfm="go fmt"
 gguv() { go get -u -v github.com/$1; }
 
 # python/pip/pipenv aliases
+alias pf="pipenv run fab"
 alias pi="python -m pip"
 alias pii="python -m pip install"
 alias piiu="python -m pip install -U"
@@ -151,18 +153,7 @@ export KUBECONFIG=~/.kube/config
 
 # ssh aliases
 alias gethost='cat ~/.ssh/*_config | grep -e "^Host" | grep --color'
-alias stp='kcl stp && kns forseti-sun && kex `kg po | grep worker | head -n1 | cut -d" " -f1` pipenv run python manage.py shell'
-alias stt='kcl stt && kns forseti-sun && kex `kg po | grep worker | head -n1 | cut -d" " -f1` pipenv run python manage.py shell'
-alias svp='kcl ddp && kcns zaihui-main && kex `kpo prod-celerybeat-` python manage.py shell'
-gsh() {
-  HOSTNAME=${1}
-  if [[ -z "${HOSTNAME}" ]]; then
-    HOSTNAME=$(cat ~/.ssh/*config  | grep ^Host | sed 's/^.....//' | fzf --height=20 | awk -F' ' '{print $1}')
-  fi
-  if [[ ! -z "{HOSTNAME}" ]]; then
-    ssh -t ${HOSTNAME} "${@:2}"
-  fi
-}
+alias gsh='z gsh'
 
 # auto aliases  TODO: optimize speed
 mkdir -p ~/.bash_aliases
