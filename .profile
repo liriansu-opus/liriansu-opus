@@ -98,6 +98,7 @@ alias tz="ts :zh"
 
 # kubectl aliases
 alias k="kubectl"
+alias kk="k9s"
 alias kaf="kubectl apply -f"
 alias kak="kubectl apply -k"
 alias kc="kubectl config"
