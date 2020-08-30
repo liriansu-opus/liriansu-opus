@@ -21,7 +21,7 @@
     "list": [
       {
         "guid": "{ef9560f4-baf0-4587-bd37-fd66c99a03bb}",
-        "commandline": "\"D:\\CodeEnv\\Git\\usr\\bin\\bash.exe\" -i -l",
+        "commandline": "\"C:\\Users\\lirian\\scoop\\apps\\git\\current\\bin\\bash.exe\" -i -l",
         "icon": "ms-appdata:///roaming/git-bash_32px.ico",
         "name": "Git Bash",
         "snapOnInput": true,

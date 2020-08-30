@@ -1,13 +1,19 @@
 version: '3'
 
 services:
-  docker:
-    command: ["redis-server", "--appendonly", "yes"]
-    container_name: redis
-    hostname: redis
-    image: redis
-    ports:
-      - "8039:6379"
+  zeus:
+    container_name: zeus
+    hostname: zeus
+    image: docker-outer.zaihui.com.cn/inf/common/zeus:latest
     restart: always
+
+    environment:
+      - NAME=suziyue
+    ports:
+      - 1080:1080
     volumes:
-      - "~/.cache/local-redis/:/data"
+      - ~/.ssh/id_rsa:/root/.ssh/id_rsa
+      - ~/.ssh/royal:/root/.ssh/royal
+      - ~/.ssh/holy:/root/.ssh/holy
+      - ~/.kube/:/root/.kube/
+      - ~/Code/src:/src

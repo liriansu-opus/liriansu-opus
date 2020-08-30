@@ -23,5 +23,6 @@ scoop install starship
 scoop install stern
 scoop install telegram
 scoop install vim-nightly
+scoop install wget
 scoop install windows-terminal
 scoop install yarn
