@@ -148,7 +148,7 @@ export PIPENV_VERBOSITY=-1
 export BASH_SILENCE_DEPRECATION_WARNING=1
 export EDITOR=vim
 export LANG=en_US.UTF-8
-export PATH=/c/codeenv/git/usr/bin:~/.lki/scripts:${PATH}
+export PATH=~/.lki/scripts:${PATH}
 export DOCKER_REGISTRY=docker-inter.zaihui.com.cn
 export KUBECONFIG=~/.kube/config
 
