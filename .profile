@@ -22,8 +22,8 @@ alias ws='cd $(find $CODE -maxdepth 5 -type d -name ".git" | sed s/\.git$// | fz
 update () {
   scoop update '*'
   scoop cleanup '*'
-  git -C ~/.vim pull
-  git -C ~/.lki pull
+  git -C ~/.vim pull --rebase
+  git -C ~/.lki pull --rebase
 }
 
 # brew aliases
