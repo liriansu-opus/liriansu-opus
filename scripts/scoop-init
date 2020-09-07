@@ -3,6 +3,8 @@
 set -e
 
 scoop bucket add extras
+scoop bucket add dodorz https://github.com/dodorz/scoop-bucket
+scoop bucket add iszy https://github.com/ZvonimirSun/scoop-iszy
 
 scoop install 7zip
 scoop install ag
@@ -20,9 +22,12 @@ scoop install protobuf
 scoop install ripgrep
 scoop install skaffold
 scoop install starship
+scoop install steam
 scoop install stern
 scoop install telegram
 scoop install vim-nightly
+scoop install wechat
+scoop install wechat-work
 scoop install wget
 scoop install windows-terminal
 scoop install yarn
