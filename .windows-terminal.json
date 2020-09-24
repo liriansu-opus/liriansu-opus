@@ -7,7 +7,7 @@
   "initialRows": 60,
   "profiles": {
     "defaults": {
-      "acrylicOpacity": "0.75",
+      "acrylicOpacity": 0.75,
       "closeOnExit": "always",
       "colorScheme": "Tango Dark",
       "cursorShape": "filledBox",
@@ -16,7 +16,7 @@
       "historySize": 9001,
       "padding": "0, 0, 0, 0",
       "scrollbarState": "hidden",
-      "useAcrylic": "true"
+      "useAcrylic": true
     },
     "list": [
       {
