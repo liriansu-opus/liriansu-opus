@@ -67,11 +67,12 @@
     wj = commit --all --message 'JIRA-123: WIP' --allow-empty --no-verify  # commit with Jira: Work In Progress quickly
     yes = log --oneline --since yesterday --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --no-merges  # see what's new since yesterday
 [core]
-    autocrlf = false
+    autocrlf = false  # don't mess up crlf
     editor = vim
-    eol = lf
-    excludesfile = ~/.gitignore
-    ignorecase = false
+    eol = lf  # use unix style line endings
+    excludesfile = ~/.gitignore  # global gitignore file
+    filemode = false  # filemode is strange under windows
+    ignorecase = false  # don't ignore case
     pager = less --raw-control-chars
 [color]
     ui = true
