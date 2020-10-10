@@ -3,22 +3,30 @@
 set -e
 
 scoop bucket add extras
+scoop bucket add nerd-fonts
 scoop bucket add dodorz https://github.com/dodorz/scoop-bucket
 scoop bucket add iszy https://github.com/ZvonimirSun/scoop-iszy
+scoop bucket add ackerr https://github.com/Ackerr/scoop-bucket
 
 scoop install 7zip
 scoop install ag
 scoop install dig
+scoop install docker-compose
+scoop install firacode
 scoop install fzf
+scoop install git@2.25.1.windows.1
 scoop install go
 scoop install hugo
+scoop install jetbrains-toolbox
 scoop install k9s
 scoop install kubectl
 scoop install kustomize
-scoop install listen1desktop
+scoop install lab
 scoop install make
+scoop install neteasemusic
 scoop install nodejs
 scoop install protobuf
+scoop install python
 scoop install ripgrep
 scoop install skaffold
 scoop install starship
@@ -31,3 +39,6 @@ scoop install wechat-work
 scoop install wget
 scoop install windows-terminal
 scoop install yarn
+
+scoop hold git
+scoop hold python
