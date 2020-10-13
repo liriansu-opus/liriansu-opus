@@ -41,6 +41,9 @@ alias lg="git logg"
 alias lgs="git logs"
 alias qgit="git"
 
+# ackerr/lab aliases
+alias lb="lab browser"
+
 # go aliases
 alias gmt="go mod tidy"
 alias gfm="go fmt"
