@@ -43,6 +43,8 @@ alias qgit="git"
 
 # ackerr/lab aliases
 alias lb="lab browser"
+alias lc="lab clone"
+alias lo="lab open -p"
 
 # go aliases
 alias gmt="go mod tidy"
