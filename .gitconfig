@@ -36,6 +36,7 @@
     po = push o
     ps = push
     pull = pull --rebase
+    pua = push -u o HEAD:alpha-only -f
     puo = push -u o
     puod = push -u o -o merge_request.create -o merge_request.target=dev
     puof = push -u o -o merge_request.create -o merge_request.target=freeze
