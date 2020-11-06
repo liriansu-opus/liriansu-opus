@@ -44,6 +44,8 @@ alias qgit="git"
 # ackerr/lab aliases
 alias lb="lab browser"
 alias lc="lab clone"
+alias li="lab ci"
+alias lia="lab ci -b alpha-only -r o"
 alias lo="lab open -p"
 
 # go aliases
@@ -123,6 +125,7 @@ alias kr="kubectl rollout"
 alias krr="kubectl rollout restart"
 alias krs="kubectl rollout status"
 alias kt="kubectl top"
+kpy() { kex `kpo $1` -- python; }
 kpm() { kex `kpo $1` -- python manage.py shell; }
 kpvm() { kex `kpo $1` -- pipenv run python manage.py shell; }
 kpo() { kg po | grep $1 | head -n1 | cut -d" " -f1; }
