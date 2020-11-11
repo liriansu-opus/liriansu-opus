@@ -17,6 +17,7 @@ output*.xlsx
 nosetests.xml
 .coverage*
 
+.entc/
 .idea/
 .vscode/
 build/

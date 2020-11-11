@@ -86,3 +86,5 @@
     email = liriansu@gmail.com
 [github]
     user = LKI
+[url "git@pasta.zaihui.com.cn:"]
+    insteadOf = https://pasta.zaihui.com.cn/

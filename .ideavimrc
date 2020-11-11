@@ -9,3 +9,4 @@ nmap gt /^class.*TestCase<CR>W:action CopyReference<CR>
 nmap <A-l> :action NextTab<CR>
 nmap <A-h> :action PreviousTab<CR>
 
+set ideajoin
