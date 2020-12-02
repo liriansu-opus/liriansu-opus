@@ -1,20 +1,25 @@
 {
   "$schema": "https://aka.ms/terminal-profiles-schema",
   "defaultProfile": "{ef9560f4-baf0-4587-bd37-fd66c99a03bb}",
+  "alwaysShowTabs": false,
   "copyFormatting": false,
   "copyOnSelect": true,
   "initialCols": 200,
   "initialRows": 60,
+  "launchMode": "maximized",
+  "multiLinePasteWarning":false,
+  "wordDelimiters": "/\\()\"':,;<>~!@#$%^&*|+=[]{}~?│",
   "profiles": {
     "defaults": {
       "acrylicOpacity": 0.75,
       "closeOnExit": "always",
-      "colorScheme": "Tango Dark",
+      "colorScheme": "One Half Dark",
       "cursorShape": "filledBox",
       "fontFace": "Fira Code Retina",
       "fontSize": 10,
+      "fontWeight": "medium",
       "historySize": 9001,
-      "padding": "0, 0, 0, 0",
+      "padding": "8, 8, 8, 8",
       "scrollbarState": "hidden",
       "useAcrylic": true
     },
