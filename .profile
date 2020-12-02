@@ -44,9 +44,9 @@ alias qgit="git"
 # ackerr/lab aliases
 alias lb="lab browser"
 alias lc="lab clone"
-alias li="lab ci"
+alias li="lab ci -r o"
 alias lia="lab ci -b alpha-only -r o"
-alias lo="lab open -p"
+alias lo="lab open -r o -p"
 
 # go aliases
 alias gmt="go mod tidy"
@@ -73,6 +73,8 @@ alias jsonify="python -mjson.tool"
 # make aliases
 alias m="make"
 alias mb="make build"
+alias mf="make fmt"
+alias mm="make migrations"
 alias mt="make test"
 
 # docker aliases from tcnksm/docker-alias
