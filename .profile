@@ -127,6 +127,7 @@ alias kr="kubectl rollout"
 alias krr="kubectl rollout restart"
 alias krs="kubectl rollout status"
 alias kt="kubectl top"
+ktl() { stern --tail 200 --color=always $1 | grep -Ev ' (200|302) '; }
 kpy() { kex `kpo $1` -- python; }
 kpm() { kex `kpo $1` -- python manage.py shell; }
 kpvm() { kex `kpo $1` -- pipenv run python manage.py shell; }

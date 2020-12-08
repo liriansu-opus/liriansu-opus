@@ -8,7 +8,7 @@
   "initialRows": 60,
   "launchMode": "maximized",
   "multiLinePasteWarning":false,
-  "wordDelimiters": "\\()\"':,;<>~!@#$%^&*|+=[]{}~?│",
+  "wordDelimiters": "\\()\"',;<>~!@#$%^&*|+=[]{}~?│",
   "profiles": {
     "defaults": {
       "acrylicOpacity": 0.75,
