@@ -22,18 +22,18 @@ class Command:  # base command class
 
 
 class LKI(Command):
-    """ Lirian Su's useful configuration and shortcuts.
+    """Lirian Su's useful configuration and shortcuts.
     This command will helps you swim through windows and unix,
     git and vim, docker and k8s, and all the fancy.
 
-    See also: https://github.com/LKI/LKI """
+    See also: https://github.com/LKI/LKI"""
 
     def __init__(self):
         self._config = LKIConfig()
         self.op = Operation()
 
     def install(self):
-        """ install configuration to ~/.lki/
+        """install configuration to ~/.lki/
 
         Examples:
             lki install
@@ -75,7 +75,7 @@ class LKI(Command):
             sys.exit(1)
 
     def clone(self, url):
-        """ clone a git repository to workspace
+        """clone a git repository to workspace
 
         Examples:
             lki clone git@github.com:zaihui/hutils.git
@@ -131,7 +131,7 @@ class Operation(Command):
     """ collections of various operation commands """
 
     def boost_apt(self):
-        """ boost apt speed by changing apt's source
+        """boost apt speed by changing apt's source
 
         translate from https://raw.githubusercontent.com/ldsink/toolbox/master/ubuntu-set-aliyun-mirror.sh
         """

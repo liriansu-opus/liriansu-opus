@@ -11,7 +11,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        python-version: [ 3.5, 3.6, 3.7, 3.8 ]
+        python-version: [ 3.6, 3.7, 3.8 ]
         os: [ macos-latest, ubuntu-latest, windows-latest ]
     steps:
       - name: Checkout code
@@ -28,7 +28,7 @@ jobs:
         if: matrix.python-version == 3.8
         run: |
           pipenv install --deploy --system --dev
-          black -l 120 -t py35 -t py36 -t py37 -t py38 --check lki
+          black -l 120 -t py36 -t py37 -t py38 --check lki
       - name: Command Installation
         run: |
           python setup.py install

@@ -8,14 +8,13 @@
 *.sqlite3
 *.swp
 *~
+.coverage*
 20*.xls
 20*.xlsx
+nosetests.xml
 output*.xls
 output*.xlsx
 ~*
-
-nosetests.xml
-.coverage*
 
 .entc/
 .idea/
@@ -25,4 +24,3 @@ dist/
 htmlcov/
 node_modules/
 tmp/
-
