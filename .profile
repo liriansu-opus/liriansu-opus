@@ -24,6 +24,7 @@ update () {
   scoop cleanup '*'
   git -C ~/.vim pull --rebase
   git -C ~/.lki pull --rebase
+  python -m pip install -U pip setuptools wheel lki virtualenv pipenv
 }
 
 # brew aliases
