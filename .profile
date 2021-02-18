@@ -18,7 +18,7 @@ alias sp="scoop"
 alias st="stern --tail 200 --color=always"
 alias ta="tmux attach"
 alias vi="vim"
-alias ws='cd $(find $CODE -maxdepth 5 -type d -name ".git" | sed s/\.git$// | fzf)'
+alias ws='cd $(lab ws)'
 update () {
   scoop update '*'
   scoop cleanup '*'
