@@ -18,6 +18,7 @@ alias sp="scoop"
 alias st="stern --tail 200 --color=always"
 alias ta="tmux attach"
 alias vi="vim"
+alias wea="curl https://wttr.in/"
 alias ws='cd $(lab ws)'
 update () {
   scoop update '*'
