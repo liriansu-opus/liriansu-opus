@@ -15,6 +15,7 @@ nosetests.xml
 output*.xls
 output*.xlsx
 ~*
+play.go
 
 .entc/
 .idea/
