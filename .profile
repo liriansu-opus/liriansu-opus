@@ -133,7 +133,7 @@ ktl() { stern --tail 200 --color=always $1 | grep -Ev ' (200|201|202|204|301|302
 kpy() { kex `kpo $1` -- python; }
 kpm() { kex `kpo $1` -- python manage.py shell; }
 kpvm() { kex `kpo $1` -- pipenv run python manage.py shell; }
-kpo() { kg po | grep $1 | head -n1 | cut -d" " -f1; }
+kpo() { kg po | grep $1 | grep Running | head -n1 | cut -d" " -f1; }
 ksh() { kex `kpo $1` -- sh; }
 kbash() { kex `kpo $1` -- bash; }
 kcl() {
