@@ -12,6 +12,7 @@
   "profiles": {
     "defaults": {
       "acrylicOpacity": 0.75,
+      "bellStyle": "none",
       "closeOnExit": "always",
       "colorScheme": "One Half Dark",
       "cursorShape": "filledBox",
@@ -30,6 +31,7 @@
         "icon": "ms-appdata:///roaming/git-bash_32px.ico",
         "name": "Git Bash",
         "snapOnInput": true,
+        "historySize": 9001,
         "startingDirectory": "%USERPROFILE%"
       },
       {
