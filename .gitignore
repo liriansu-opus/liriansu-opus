@@ -8,6 +8,9 @@
 *.sqlite3
 *.swp
 *~
+
+/*.iml
+
 .coverage*
 20*.xls
 20*.xlsx
