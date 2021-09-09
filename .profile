@@ -37,6 +37,7 @@ alias bi="brew install"
 alias z="docker exec -i -t zeus zeus"
 
 # git aliases
+alias frd="git f && git rd"
 alias g="git"
 alias gc="git remote show | xargs -I{} git remote prune {} && git gc"
 alias it="git"
