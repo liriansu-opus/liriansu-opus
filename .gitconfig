@@ -86,3 +86,5 @@
     email = liriansu@gmail.com
 [github]
     user = LKI
+[credential "helperselector"]
+    selected = manager-core
