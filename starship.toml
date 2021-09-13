@@ -8,3 +8,7 @@ symbol = "Python "
 
 [java]
 disabled = true
+
+[nodejs]
+symbol = "Node "
+
