@@ -55,6 +55,7 @@ alias lo="lab open -r o -p"
 # go aliases
 alias gmt="go mod tidy"
 alias gfm="go fmt"
+alias gilo="go list -u -m -f '{{if not .Indirect}}{{.}}{{end}}' all"
 gguv() { go get -u -v github.com/$1; }
 
 # python/pip/pipenv aliases
@@ -79,6 +80,7 @@ alias m="make"
 alias mb="make build"
 alias mf="make fmt"
 alias mm="make migrations"
+alias ms="make ensure"
 alias mt="make test"
 
 # docker aliases from tcnksm/docker-alias
