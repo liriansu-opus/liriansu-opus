@@ -55,6 +55,7 @@ alias lo="lab open -r o -p"
 # go aliases
 alias gmt="go mod tidy"
 alias gfm="go fmt"
+alias gmu="go-mod-upgrade"  # https://github.com/oligot/go-mod-upgrade
 alias gilo="go list -u -m -f '{{if not .Indirect}}{{.}}{{end}}' all"
 gguv() { go get -u -v github.com/$1; }
 
