@@ -126,7 +126,6 @@ alias kex="kubectl exec -it"
 alias kg="kubectl get"
 alias kga="kubectl get all"
 alias kgns="kubectl get ns"
-alias kgp="kubectl get pods -o wide"
 alias kl="kubectl logs --tail=100 -f"
 alias km="kustomize"
 alias kp="kapp"
@@ -134,13 +133,20 @@ alias kr="kubectl rollout"
 alias krr="kubectl rollout restart"
 alias krs="kubectl rollout status"
 alias kt="kubectl top"
-ktl() { stern --tail 200 --color=always $1 | grep -Ev ' (200|201|202|204|301|302|304) '; }
-kpy() { kex `kpo $1` -- python; }
-kpm() { kex `kpo $1` -- python manage.py shell; }
-kpvm() { kex `kpo $1` -- pipenv run python manage.py shell; }
-kpo() { kg po | grep $1 | grep Running | head -n1 | cut -d" " -f1; }
-ksh() { kex `kpo $1` -- sh; }
 kbash() { kex `kpo $1` -- bash; }
+kpm() { kex `kpo $1` -- python manage.py shell; }
+kpo() { kg po | grep $1 | grep Running | head -n1 | cut -d" " -f1; }
+kpy() { kex `kpo $1` -- python; }
+ksh() { kex `kpo $1` -- sh; }
+ktl() { stern --tail 200 --color=always $1 | grep -Ev ' (200|201|202|204|301|302|304) '; }
+kgp() {
+  KEYWORD=${1}
+  if [[ -z "${KEYWORD}" ]]; then
+    kubectl get pods -o wide;
+  else
+    kubectl get pods -o wide | grep ${1};
+  fi
+}
 kcl() {
   CONTEXT=${1}
   if [[ -z "${CONTEXT}" ]]; then
