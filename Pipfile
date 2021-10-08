@@ -4,10 +4,11 @@ url = "https://mirrors.aliyun.com/pypi/simple"
 verify_ssl = true
 
 [dev-packages]
-black = {version = "==20.8b1", markers = "python_version == '3.8'"}
-pipenv = {version = ">=2018.11.26", markers = "python_version == '3.8'"}
+black = {version = "==21.9b0", markers = "python_version == '3.9'"}
+isort = {version = ">=5.9.3", markers = "python_version == '3.9'"}
+pipenv = {version = ">=2018.11.26", markers = "python_version == '3.9'"}
 secretstorage = {version = ">=3", markers = "sys_platform == 'linux'"}
-wheel = {version = ">=0.33.6", markers = "python_version == '3.8'"}
+wheel = {version = ">=0.33.6", markers = "python_version == '3.9'"}
 
 [packages]
 fire = ">=0.2.1"

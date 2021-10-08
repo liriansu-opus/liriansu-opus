@@ -7,13 +7,13 @@ from lki import error
 
 
 def check_executable(name):
-    """ check if executable exists. (raise exeception if not) """
+    """check if executable exists. (raise exeception if not)"""
     if not spawn.find_executable(name):
         raise error.LKIError("there is no {} executable".format(name))
 
 
 def check_file(path):
-    """ check if file exists. (raise exeception if not) """
+    """check if file exists. (raise exeception if not)"""
     if not os.path.exists(path):
         raise error.LKIError("there is no {} file".format(path))
 
@@ -60,7 +60,7 @@ def rm(path):
 
 
 def run(*commands):
-    """ run commands """
+    """run commands"""
     for command in commands:
         print("Executing {}".format(command))
         os.system(command)

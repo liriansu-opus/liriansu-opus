@@ -98,7 +98,7 @@ class LKI(Command):
         if not match:
             raise LKIError("lki can not understand git url: {}".format(url))
         domain, project, _ = match.groups()  # type: str
-        workspace = self._config.get("workspace", ".")
+        workspace = self._config.get("workspace", "~/code/src")
         path = os.path.join(workspace, domain, project)
         try:
             os.makedirs(os.path.dirname(path))
@@ -109,28 +109,28 @@ class LKI(Command):
             run("git -C {} config {} {}".format(path, key, value))
 
     def hook(self, force=False, path="{}/.lki/.pre-commit.sh".format(HOME)):
-        """ install git hook """
+        """install git hook"""
         link(path, ".git/hooks/pre-commit", force=force)
 
     def link(self, target, link_path, force=False):
-        """ link target to link_path """
+        """link target to link_path"""
         link(target, link_path, force=force)
 
     def set_workspace(self, path):
-        """ set your workspace, where lki clones repositories into """
+        """set your workspace, where lki clones repositories into"""
         if not os.path.isdir(path):
             raise LKIError("lki thinks this is not a directory: {}".format(path))
         self._config["workspace"] = path
 
     def set_git_config(self, domain, **kwargs):
-        """ set your domain specific configurations. user.name/user.email for example """
+        """set your domain specific configurations. user.name/user.email for example"""
         domain_config = self._config.get(domain, {})
         domain_config.update(**kwargs)
         self._config[domain] = domain_config
 
 
 class Operation(Command):
-    """ collections of various operation commands """
+    """collections of various operation commands"""
 
     def boost_apt(self):
         """boost apt speed by changing apt's source
@@ -150,6 +150,6 @@ class Operation(Command):
         )
 
     def update_apt(self):
-        """ perform apt update """
+        """perform apt update"""
         check_executable("apt")
         run("apt update", "apt upgrade --auto-remove -y")

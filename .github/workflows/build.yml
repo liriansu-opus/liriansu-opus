@@ -11,7 +11,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        python-version: [ 3.6, 3.7, 3.8 ]
+        python-version: [ 3.6, 3.7, 3.8, 3.9 ]
         os: [ macos-latest, ubuntu-latest, windows-latest ]
     steps:
       - name: Checkout code
@@ -25,10 +25,10 @@ jobs:
           python -m pip install -U pip pipenv
           pipenv install --deploy --system
       - name: Check code style
-        if: matrix.python-version == 3.8
+        if: matrix.python-version == 3.9
         run: |
-          pipenv install --deploy --system --dev
-          black -l 120 -t py36 -t py37 -t py38 --check lki
+          pipenv sync --system --dev
+          black -l 120 --check .
       - name: Command Installation
         run: |
           python setup.py install
@@ -42,4 +42,4 @@ jobs:
           source ~/.profile
           git yes
           lki clone LKI/LKI
-          test -d github.com/LKI/LKI || exit 1
+          test -d code/src/github.com/LKI/LKI || exit 1
