@@ -98,7 +98,7 @@ class LKI(Command):
         if not match:
             raise LKIError("lki can not understand git url: {}".format(url))
         domain, project, _ = match.groups()  # type: str
-        workspace = self._config.get("workspace", "~/code/src")
+        workspace = self._config.get("workspace", os.path.join(HOME, "code/src"))
         path = os.path.join(workspace, domain, project)
         try:
             os.makedirs(os.path.dirname(path))
