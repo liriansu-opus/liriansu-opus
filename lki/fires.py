@@ -6,7 +6,7 @@ import sys
 
 from lki.config import LKIConfig
 from lki.error import LKIError
-from lki.utils import check_executable, check_file, link, run
+from lki.utils import check_executable, check_file, is_windows, link, run
 
 REGEX_GIT_URLS = (
     re.compile(r"^git@([^:]+):(.*?)(.git)?$"),
@@ -123,6 +123,28 @@ class LKI(Command):
         domain_config = self._config.get(domain, {})
         domain_config.update(**kwargs)
         self._config[domain] = domain_config
+
+    def env(self, key=None, value=None):
+        """list/grep/set environment variable (windows only)"""
+        if not is_windows:
+            raise LKIError("lki env only support windows")
+        mute_keys = ("PS1", "_")
+        data = {k.lower(): v for k, v in os.environ.items() if k not in mute_keys}
+        if key is None:
+            for k, v in data.items():
+                print(k, "=", v)
+        elif value is None:
+            if key.lower() in data:
+                print(data[key.lower()])
+            else:
+                for k, v in data.items():
+                    if key.lower() in k:
+                        print(k, "=", v[:100])
+        else:
+            if not value:
+                value = "''"
+            print("Setting environment {} to {}".format(key, value))
+            run("SETX {} {}".format(key, value))
 
 
 class Operation(Command):
