@@ -45,8 +45,8 @@ class LKI(Command):
         else:
             run("git -C {} pull --rebase".format(repo_path))
 
-        def _link(src, dst=None, **kwargs):
-            target = os.path.join(HOME, dst or src)
+        def _link(src, dst=None):
+            target = os.path.expanduser(os.path.join(HOME, dst or src))
             if os.path.exists(target):
                 os.remove(target)
             link(os.path.join(repo_path, src), target, force=True)

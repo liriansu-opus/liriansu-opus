@@ -33,6 +33,7 @@ jobs:
         run: |
           python setup.py install
       - name: Config Installation
+        if: matrix.os != 'windows-latest'
         run: |
           lki install
           lki install
@@ -42,4 +43,4 @@ jobs:
           source ~/.profile
           git yes
           lki clone LKI/LKI
-          test -d code/src/github.com/LKI/LKI || exit 1
+          test -d ~/code/src/github.com/LKI/LKI || exit 1
