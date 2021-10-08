@@ -1,8 +1,6 @@
 set surround
 
 nmap go :action MoveEditorToOppositeTabGroup<CR>
-nmap gl :action NextTab<CR>
-nmap gh :action PreviousTab<CR>
 nmap gb :action Back<CR>
 nmap gr :action MoveTabRight<CR>
 nmap gt /^class.*TestCase<CR>W:action CopyReference<CR>
