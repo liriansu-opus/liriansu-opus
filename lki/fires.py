@@ -55,8 +55,10 @@ class LKI(Command):
             _link(".gitconfig")
             _link(".gitignore")
             _link(".ideavimrc")
+            _link(".inputrc")
             _link(".profile")
             _link(".tmux.conf")
+            _link("starship.toml", ".config/starship.toml")
             # TODO: implement `lki install --vim`
             # _link("dotvim/vimrc", ".vimrc")
             #
