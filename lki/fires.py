@@ -100,10 +100,6 @@ class LKI(Command):
         domain, project, _ = match.groups()  # type: str
         workspace = self._config.get("workspace", os.path.join(HOME, "code/src"))
         path = os.path.join(workspace, domain, project)
-        try:
-            os.makedirs(os.path.dirname(path))
-        except OSError:
-            pass
         run("git clone -o o {} {}".format(url, path))
         for key, value in self._config.get(domain, {}).items():
             run("git -C {} config {} {}".format(path, key, value))
