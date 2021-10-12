@@ -77,6 +77,8 @@
     pager = less --raw-control-chars
 [color]
     ui = true
+[init]
+    defaultBranch = master
 [merge]
     tool = vimdiff
 [push]
