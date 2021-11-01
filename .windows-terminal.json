@@ -1,73 +1,6 @@
 {
   "$schema": "https://aka.ms/terminal-profiles-schema",
-  "defaultProfile": "{ef9560f4-baf0-4587-bd37-fd66c99a03bb}",
-  "alwaysShowTabs": false,
-  "copyFormatting": false,
-  "copyOnSelect": true,
-  "initialCols": 200,
-  "initialRows": 60,
-  "launchMode": "maximized",
-  "multiLinePasteWarning":false,
-  "wordDelimiters": "\\()\"',;<>~!@#$%^&*|+=[]{}~?│",
-  "profiles": {
-    "defaults": {
-      "acrylicOpacity": 0.75,
-      "bellStyle": "none",
-      "closeOnExit": "always",
-      "colorScheme": "One Half Dark",
-      "cursorShape": "filledBox",
-      "fontFace": "Fira Code Retina",
-      "fontSize": 10,
-      "fontWeight": "medium",
-      "historySize": 9001,
-      "padding": "8, 8, 8, 8",
-      "scrollbarState": "hidden",
-      "useAcrylic": true
-    },
-    "list": [
-      {
-        "guid": "{ef9560f4-baf0-4587-bd37-fd66c99a03bb}",
-        "commandline": "\"C:\\Users\\lirian\\scoop\\apps\\git\\current\\bin\\bash.exe\" -i -l",
-        "icon": "ms-appdata:///roaming/git-bash_32px.ico",
-        "name": "Git Bash",
-        "snapOnInput": true,
-        "historySize": 9001,
-        "startingDirectory": "%USERPROFILE%"
-      },
-      {
-        "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
-        "name": "Powershell",
-        "commandline": "powershell.exe",
-        "hidden": false
-      },
-      {
-        "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
-        "name": "CMD",
-        "commandline": "cmd.exe",
-        "hidden": true
-      },
-      {
-        "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
-        "name": "WSL",
-        "source": "Windows.Terminal.Wsl",
-        "hidden": false
-      },
-      {
-        "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
-        "name": "Azure Cloud Shell",
-        "source": "Windows.Terminal.Azure",
-        "hidden": true
-      },
-      {
-          "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
-          "hidden": false,
-          "name": "Ubuntu-20.04",
-          "source": "Windows.Terminal.Wsl"
-      }
-    ]
-  },
-  "schemes": [],
-  "keybindings": [
+  "actions": [
     {
       "command": {
         "action": "splitPane",
@@ -84,5 +17,62 @@
       },
       "keys": "alt+shift+v"
     }
-  ]
+  ],
+  "alwaysShowTabs": false,
+  "copyFormatting": false,
+  "copyOnSelect": true,
+  "defaultProfile": "{ef9560f4-baf0-4587-bd37-fd66c99a03bb}",
+  "initialCols": 200,
+  "initialRows": 60,
+  "launchMode": "maximized",
+  "multiLinePasteWarning": false,
+  "profiles": {
+    "defaults": {
+      "acrylicOpacity": 0.75,
+      "bellStyle": "none",
+      "closeOnExit": "always",
+      "colorScheme": "One Half Dark",
+      "cursorShape": "filledBox",
+      "font": {
+        "face": "Fira Code Retina",
+        "size": 10,
+        "weight": "medium"
+      },
+      "historySize": 9001,
+      "padding": "8, 8, 8, 8",
+      "scrollbarState": "hidden",
+      "useAcrylic": true
+    },
+    "list": [
+      {
+        "commandline": "\"C:\\Users\\lirian\\scoop\\apps\\git\\current\\bin\\bash.exe\" -i -l",
+        "guid": "{ef9560f4-baf0-4587-bd37-fd66c99a03bb}",
+        "historySize": 9001,
+        "icon": "ms-appdata:///roaming/git-bash_32px.ico",
+        "name": "Git Bash",
+        "snapOnInput": true,
+        "startingDirectory": "%USERPROFILE%"
+      },
+      {
+        "commandline": "powershell.exe",
+        "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+        "hidden": false,
+        "name": "Powershell"
+      },
+      {
+        "commandline": "cmd.exe",
+        "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+        "hidden": true,
+        "name": "CMD"
+      },
+      {
+        "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
+        "hidden": true,
+        "name": "Azure Cloud Shell",
+        "source": "Windows.Terminal.Azure"
+      }
+    ]
+  },
+  "schemes": [],
+  "wordDelimiters": "\\()\"',;<>~!@#$%^&*|+=[]{}~?│"
 }
