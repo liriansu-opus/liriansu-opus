@@ -74,7 +74,7 @@
     excludesfile = ~/.gitignore  # global gitignore file
     filemode = false  # filemode is strange under windows
     ignorecase = false  # don't ignore case
-    pager = less --raw-control-chars
+    pager = less --raw-control-chars -x2,4
 [color]
     ui = true
 [init]
