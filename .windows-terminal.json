@@ -19,7 +19,7 @@
     }
   ],
   "alwaysShowTabs": false,
-  "copyFormatting": false,
+  "copyFormatting": "none",
   "copyOnSelect": true,
   "defaultProfile": "{ef9560f4-baf0-4587-bd37-fd66c99a03bb}",
   "initialCols": 200,
@@ -34,9 +34,9 @@
       "colorScheme": "One Half Dark",
       "cursorShape": "filledBox",
       "font": {
-        "face": "Fira Code Retina",
-        "size": 10,
-        "weight": "medium"
+        "face": "Fira Code",
+        "size": 12,
+        "weight": "normal"
       },
       "historySize": 9001,
       "padding": "8, 8, 8, 8",
@@ -72,9 +72,10 @@
         "source": "Windows.Terminal.Azure"
       },
       {
-          "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
-          "name": "Ubuntu-20.04",
-          "source": "Windows.Terminal.Wsl"
+        "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
+        "hidden": false,
+        "name": "Ubuntu-20.04",
+        "source": "Windows.Terminal.Wsl"
       }
     ]
   },
