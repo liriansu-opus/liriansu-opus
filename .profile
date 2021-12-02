@@ -19,7 +19,8 @@ alias sk="skaffold"
 alias sp="scoop"
 alias st="stern --tail 200 --color=always"
 alias ta="tmux attach"
-alias vi="vim"
+alias vi="nvim"
+alias vim="nvim"
 alias wea="curl https://wttr.in/"
 alias ws='cd $(lab ws 2>&1) && git fetch'
 update () {
