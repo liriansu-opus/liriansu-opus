@@ -13,6 +13,7 @@ alias conf="vim ~/.profile"
 alias dp="env KUBECONFIG='' dapr"
 alias la="ls -ah"
 alias ll="ls -lh"
+alias pt="poetry"
 alias reload="source ~/.profile"
 alias sk="skaffold"
 alias sp="scoop"
@@ -196,3 +197,4 @@ if command -v pyenv &> /dev/null;
 then
   eval "$(pyenv init -)"
 fi
+
