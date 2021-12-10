@@ -35,8 +35,8 @@
       "cursorShape": "filledBox",
       "font": {
         "face": "Fira Code",
-        "size": 12,
-        "weight": "normal"
+        "size": 11,
+        "weight": "light"
       },
       "historySize": 9001,
       "padding": "8, 8, 8, 8",
