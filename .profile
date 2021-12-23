@@ -128,7 +128,6 @@ alias kex="kubectl exec -it"
 alias kg="kubectl get"
 alias kga="kubectl get all"
 alias kgns="kubectl get ns"
-alias kl="kubectl logs --tail=100 -f"
 alias km="kustomize"
 alias kp="kapp"
 alias kgpa="kubectl get pods -o wide -A"
@@ -166,6 +165,15 @@ kns() {
   fi
   if [[ ! -z "${NAMESPACE}" ]]; then
     kubectl config set-context --current --namespace ${NAMESPACE} > /dev/null
+  fi
+}
+kl() {
+  POD=${1}
+  if [[ -z "${POD}" ]]; then
+    POD=$(kg po -o=name | fzf --height=50% --preview='kubectl describe {}' --preview-window=:70%)
+  fi
+  if [[ ! -z "${POD}" ]]; then
+    kubectl logs -f ${POD}
   fi
 }
 
