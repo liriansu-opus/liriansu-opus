@@ -13,6 +13,7 @@ alias conf="vim ~/.profile"
 alias dp="env KUBECONFIG='' dapr"
 alias la="ls -ah"
 alias ll="ls -lh"
+alias ln="lerna"
 alias pt="poetry"
 alias reload="source ~/.profile"
 alias sk="skaffold"
@@ -23,6 +24,7 @@ alias vi="nvim"
 alias vim="nvim"
 alias wea="curl https://wttr.in/"
 alias ws='cd $(lab ws 2>&1) && git fetch'
+alias yn="yarn"
 update () {
   scoop update '*'
   scoop cleanup '*'
