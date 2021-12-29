@@ -31,6 +31,7 @@ update () {
   git -C ~/.vim pull --rebase
   git -C ~/.lki pull --rebase
   python -m pip install -U pip setuptools wheel lki virtualenv pipenv black
+  go install github.com/oligot/go-mod-upgrade@latest
 }
 
 # brew aliases
