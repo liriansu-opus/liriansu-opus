@@ -172,11 +172,12 @@ kns() {
 }
 kl() {
   POD=${1}
+  shift
   if [[ -z "${POD}" ]]; then
     POD=$(kg po -o=name | fzf --height=50% --preview='kubectl describe {}' --preview-window=:70%)
   fi
   if [[ ! -z "${POD}" ]]; then
-    kubectl logs -f ${POD}
+    kubectl logs -f ${POD} $@
   fi
 }
 
