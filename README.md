@@ -21,7 +21,7 @@
 
 ## 快速安装
 
-首先，确保环境中有 Python 3.6+，然后使用 `pip` 快速安装：
+首先，确保环境中有 Python 3.7+，然后使用 `pip` 快速安装：
 
 ```
 pip install lki && lki install
