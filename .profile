@@ -34,12 +34,12 @@ update () {
   go install github.com/oligot/go-mod-upgrade@latest
 }
 
+# datarc aliases
+alias devpm="ssh -t dev -- docker exec -it datarc_beat_1 pipenv run python manage.py shell"
+
 # brew aliases
 alias bc="brew cask"
 alias bi="brew install"
-
-# zeus aliases
-alias z="docker exec -i -t zeus zeus"
 
 # git aliases
 alias frd="git f && git rd"
@@ -72,6 +72,7 @@ alias piiu="python -m pip install -U"
 alias pilo="python -m pip install -U pip black && python -m pip list --outdated"
 alias pip="python -m pip"
 alias pm="python manage.py"
+alias pmt="python manage.py test"
 alias ppm="pipenv run python manage.py"
 alias pr="pipenv run"
 alias psi="python setup.py install"
@@ -110,9 +111,7 @@ dkiv() { MSYS_NO_PATHCONV=1 dki -v $(pwd):/app --workdir /app $@; }
 dri() { docker rmi $(docker images -q); }
 drm() { docker rm $1; }
 drmf() { docker stop $1; docker rm $1; }
-dspm() { dsr python -W ignore::RuntimeWarning home/zaihui/server/ygg/manage.py $@; }
-dsr() { dki -v d:/Code/pasta.zaihui.com.cn/zaihui/server:/home/zaihui/server:ro docker-inter.zaihui.com.cn/zaihui/server/base:latest $@; }
-dst() { dspm test --failfast $@; }
+dsh() { docker exec -it $(docker ps -aqf "name=$1") sh; }
 dstop() { docker stop $(docker ps -a -q); }
 
 alias ts="dki soimort/translate-shell"

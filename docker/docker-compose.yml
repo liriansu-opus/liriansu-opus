@@ -1,20 +1,17 @@
-version: '3'
+version: "3"
 
 services:
-  zeus:
-    container_name: zeus
-    hostname: zeus
-    image: docker-outer.zaihui.com.cn/inf/common/zeus:latest
+  ssh:
+    container_name: datarc-ssh
+    hostname: datarc-ssh
+    image: alpine
     restart: always
 
-    environment:
-      - NAME=suziyue
     ports:
-      - 1080:1080
-      - 1082:1082
+      - "1080:1080"
+    command:
+      - sh
+      - -c
+      - apk add openssh && chmod 700 /root/.ssh && chmod 600 /root/.ssh/* && echo "Ready, Go!" && ssh -N -D 1080 gate
     volumes:
-      - ~/.ssh/id_rsa:/root/.ssh/id_rsa
-      - ~/.ssh/royal:/root/.ssh/royal
-      - ~/.ssh/holy:/root/.ssh/holy
-      - ~/.kube/:/root/.kube/
-      - ~/code/src:/src
+      - ~/.ssh:/root/.ssh
