@@ -35,7 +35,9 @@ update () {
 }
 
 # datarc aliases
-alias devpm="ssh -t dev -- docker exec -it datarc_beat_1 pipenv run python manage.py shell"
+sshpm() { ssh -t $1 -- docker exec -it datarc_beat_1 pipenv run python manage.py shell; }
+alias devpm="sshpm dev"
+alias rcpm="sshpm rc"
 
 # brew aliases
 alias bc="brew cask"
