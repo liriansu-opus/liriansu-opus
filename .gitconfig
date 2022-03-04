@@ -11,6 +11,7 @@
     cia = commit --all
     clone = clone -o o
     cm = commit --amend --no-edit --all --no-verify
+    cme = commit --amend --edit --allow-empty
     co = checkout
     crp = cherry-pick
     d = diff
