@@ -1,4 +1,4 @@
-version: "3"
+version: "3.5"
 
 services:
   ssh:
@@ -15,3 +15,15 @@ services:
       - apk add openssh && chmod 700 /root/.ssh && chmod 600 /root/.ssh/* && echo "Ready, Go!" && ssh -N -D 1080 gate
     volumes:
       - ~/.ssh:/root/.ssh
+
+  nginx:
+    container_name: datarc-nginx
+    hostname: datarc-nginx
+    image: nginx
+    restart: always
+
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx-conf:/etc/nginx/conf.d
