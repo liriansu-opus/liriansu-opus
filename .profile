@@ -54,7 +54,7 @@ alias qgit="git"
 
 # ackerr/lab aliases
 alias lb="lab browser"
-alias lc="lab clone"
+alias lc="lki clone"
 alias li="lab ci -r o"
 alias lia="lab ci -b alpha-only -r o"
 alias lo="lab open -r o -p"
