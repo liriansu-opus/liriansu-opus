@@ -79,7 +79,7 @@ alias ppm="pipenv run python manage.py"
 alias pr="pipenv run"
 alias psi="python setup.py install"
 alias pv="pipenv"
-alias pvs="pipenv shell && source ~/.profile"
+alias pvs="pipenv shell"
 alias pvsd="pipenv sync --dev"
 alias pvud="pipenv update --dev && pipenv clean"
 
