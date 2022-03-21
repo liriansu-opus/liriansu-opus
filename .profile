@@ -23,7 +23,7 @@ alias ta="tmux attach"
 alias vi="nvim"
 alias vim="nvim"
 alias wea="curl https://wttr.in/"
-alias ws='cd $(lab ws 2>&1) && git fetch'
+alias ws='cd $(find ~/code/src -type d -name .git | sed "s/\/.git//" | fzf) && git fetch'
 alias yn="yarn"
 update () {
   scoop update '*'
