@@ -1,7 +1,7 @@
 # enable vi mode
 set -o vi
 
-if [[ "${OS}" == "Windows_NT" ]]; then
+if [[ "${OS}" == "Windows_NT" || -z "${OS}" ]]; then
   alias ls="/bin/ls --color"
 fi
 
@@ -189,7 +189,7 @@ export PIPENV_VERBOSITY=-1
 export BASH_SILENCE_DEPRECATION_WARNING=1
 export EDITOR=vim
 export LANG=en_US.UTF-8
-export PATH=~/.lki/scripts:${PATH}
+export PATH=~/.lki/scripts:~/.pyenv/bin:${PATH}
 export DOCKER_REGISTRY=docker-inter.zaihui.com.cn
 export KUBECONFIG=~/.kube/config
 
