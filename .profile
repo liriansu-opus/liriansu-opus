@@ -203,9 +203,9 @@ mkdir -p ~/.bash_aliases
 python ~/.lki/scripts/git-to-bash.py > ~/.bash_aliases/git_aliases
 source ~/.bash_aliases/*_aliases
 
-if command -v starship &> /dev/null;
+if command -v oh-my-posh &> /dev/null;
 then
-  eval "$(starship init bash)"
+  eval "$(oh-my-posh init bash)"
 fi
 
 if command -v pyenv &> /dev/null;
