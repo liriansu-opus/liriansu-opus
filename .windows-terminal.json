@@ -34,7 +34,7 @@
       "colorScheme": "Nord",
       "cursorShape": "filledBox",
       "font": {
-        "face": "Fira Code",
+        "face": "FiraCode NF",
         "size": 11,
         "weight": "light"
       },
@@ -102,5 +102,6 @@
       "brightWhite": "#E5E9F0"
     }
   ],
+  "windowingBehavior": "useExisting",
   "wordDelimiters": "\\()\"',;<>~!@#$%^&*|+=[]{}~?\u2502"
 }

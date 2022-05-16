@@ -195,7 +195,7 @@ export DOCKER_REGISTRY=docker-inter.zaihui.com.cn
 export KUBECONFIG=~/.kube/config
 
 # ssh aliases
-alias gethost='cat ~/.ssh/*_config | grep -e "^Host" | grep --color'
+alias gethost='cat ~/.ssh/*config | grep -e "^Host" | grep --color'
 alias gsh='z gsh'
 
 # auto aliases  TODO: optimize speed
