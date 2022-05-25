@@ -23,6 +23,7 @@ play.go
 .entc/
 .idea/
 .vscode/
+.vs/
 build/
 dist/
 htmlcov/
