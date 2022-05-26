@@ -99,6 +99,7 @@ class LKI(Command):
         if not match:
             raise LKIError("lki can not understand git url: {}".format(url))
         domain, project, _ = match.groups()  # type: str
+        domain = domain.split(":")[0]
         workspace = self._config.get("workspace", os.path.join(HOME, "code/src"))
         path = os.path.join(workspace, domain, project)
         run("git clone -o o {} {}".format(url, path))
