@@ -11,6 +11,7 @@ from lki.utils import check_executable, check_file, is_windows, link, run
 REGEX_GIT_URLS = (
     re.compile(r"^git@([^:]+):(.*?)(.git)?$"),
     re.compile(r"^http[s]?://([^/]+)/(.*?)(.git)?$"),
+    re.compile(r"^ssh://git@([^/]+)/(.*?)(.git)?$"),
 )
 HOME = os.path.expanduser("~")
 IS_WIN32 = sys.platform == "win32"
@@ -86,7 +87,7 @@ class LKI(Command):
 
         """
         check_executable("git")
-        if not url.startswith("git@") and not url.startswith("http"):
+        if not url.startswith("git@") and not url.startswith("http") and not url.startswith("ssh:"):
             if url.count("/") == 1:
                 if os.path.exists("{}/.ssh/id_rsa".format(HOME)):
                     url = "git@github.com:{}.git".format(url)
