@@ -205,7 +205,7 @@ source ~/.bash_aliases/*_aliases
 
 if command -v oh-my-posh &> /dev/null;
 then
-  eval "$(oh-my-posh init bash)"
+  eval "$(oh-my-posh init bash --config ~/.lki/.oh-my-posh.json)"
 fi
 
 if command -v pyenv &> /dev/null;
