@@ -91,3 +91,5 @@
     user = LKI
 [credential "helperselector"]
     selected = manager-core
+[safe]
+    directory = C:/Users/lirian/.lki

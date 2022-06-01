@@ -26,8 +26,8 @@ alias wea="curl https://wttr.in/"
 alias ws='cd $(find ~/code/src -maxdepth 7 -type d -name .git | sed "s/\/.git//" | fzf) && git fetch'
 alias yn="yarn"
 update () {
-  scoop update '*'
-  scoop cleanup '*'
+  scoop update -a
+  scoop cleanup -a
   git -C ~/.vim pull --rebase
   git -C ~/.lki pull --rebase
   python -m pip install -U pip setuptools wheel lki virtualenv pipenv black
