@@ -72,10 +72,9 @@
         "source": "Windows.Terminal.Azure"
       },
       {
-        "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
-        "hidden": false,
-        "name": "Ubuntu-20.04",
-        "source": "Windows.Terminal.Wsl"
+        "guid": "{51855cb2-8cce-5362-8f54-464b92b32386}",
+        "name": "Ubuntu",
+        "source": "CanonicalGroupLimited.Ubuntu_79rhkp1fndgsc"
       }
     ]
   },
