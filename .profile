@@ -79,7 +79,7 @@ alias ppm="pipenv run python manage.py"
 alias pr="pipenv run"
 alias psi="python setup.py install"
 alias pv="pipenv"
-alias pvs="pipenv shell"
+alias pvs="pipenv shell --fancy"
 alias pvsd="pipenv sync --dev"
 alias pvud="pipenv update --dev && pipenv clean"
 
@@ -142,7 +142,7 @@ alias krs="kubectl rollout status"
 alias kt="kubectl top"
 kbash() { kex `kpo $1` -- bash; }
 kpm() { kex `kpo $1` -- python manage.py shell; }
-kpo() { kg po | grep $1 | grep Running | head -n1 | cut -d" " -f1; }
+kpo() { kg po | grep $1 | head -n1 | cut -d" " -f1; }
 kpy() { kex `kpo $1` -- python; }
 ksh() { kex `kpo $1` -- sh; }
 ktl() { stern --tail 200 --color=always $1 | grep -Ev ' (200|201|202|204|301|302|304) '; }
