@@ -60,7 +60,10 @@ class LKI(Command):
             _link(".profile")
             _link(".tmux.conf")
             if is_windows:
-                _link(".windows-terminal.json", "~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json")
+                _link(
+                    ".windows-terminal.json",
+                    "~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json",
+                )
             # TODO: implement `lki install --vim`
             # _link("dotvim/vimrc", ".vimrc")
             #
