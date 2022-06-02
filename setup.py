@@ -21,7 +21,7 @@ setuptools.setup(
     license="MIT License",
     install_requires=convert_deps_to_pip(Project(chdir=False).parsed_pipfile["packages"], r=False),
     packages=setuptools.find_packages(),
-    entry_points={"console_scripts": "lki = lki:entry"},
+    entry_points={"console_scripts": "lki = lki.cmdline:entry"},
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",

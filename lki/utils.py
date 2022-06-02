@@ -3,24 +3,26 @@ import distutils.spawn as spawn
 import os
 import sys
 
+import click
+
 from lki import error
 
 
 def check_executable(name):
     """check if executable exists. (raise exeception if not)"""
     if not spawn.find_executable(name):
-        raise error.LKIError("there is no {} executable".format(name))
+        raise error.LKIError(f"there is no {name} executable")
 
 
 def check_file(path):
     """check if file exists. (raise exeception if not)"""
     if not os.path.exists(path):
-        raise error.LKIError("there is no {} file".format(path))
+        raise error.LKIError(f"there is no {path} file")
 
 
 def full_path(*paths):
     def _f(p):
-        return os.path.abspath(os.path.expanduser(p))
+        return os.path.abspath(os.path.expanduser(str(p)))
 
     if len(paths) == 1:
         return _f(paths[0])
@@ -36,7 +38,7 @@ def is_superuser():
 is_windows = bool(sys.platform == "win32")
 
 
-def link(target, link_path, force=False):
+def make_link(target, link_path, force=False):
     error.LinkError.check(is_windows and not is_superuser(), "please run as admin to link files")
 
     target, link_path = full_path(target, link_path)
@@ -44,7 +46,7 @@ def link(target, link_path, force=False):
         if force:
             rm(link_path)
         else:
-            raise error.LinkError("{} exists, specify --force to override.".format(link_path))
+            raise error.LinkError(f"{link_path} exists, specify --force to override.")
 
     kwargs = {}
     if is_windows and os.path.isdir(target):
@@ -62,5 +64,5 @@ def rm(path):
 def run(*commands):
     """run commands"""
     for command in commands:
-        print("Executing {}".format(command))
+        click.echo(f"(Running)> {command}")
         os.system(command)
