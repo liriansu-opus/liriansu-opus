@@ -195,20 +195,28 @@ export KUBECONFIG=~/.kube/config
 
 # ssh aliases
 alias gethost='cat ~/.ssh/*config | grep -e "^Host" | grep --color'
-alias gsh='z gsh'
+alias gsh='z gsh'  # TODO: fix gsh alias
 
 # auto aliases  TODO: optimize speed
 mkdir -p ~/.bash_aliases
-python ~/.lki/scripts/git-to-bash.py > ~/.bash_aliases/git_aliases
+if command -v python &> /dev/null;
+then
+  python ~/.lki/scripts/git-to-bash.py > ~/.bash_aliases/git_aliases
+fi
 source ~/.bash_aliases/*_aliases
 
+## enable oh-my-posh
 if command -v oh-my-posh &> /dev/null;
 then
   eval "$(oh-my-posh init bash --config ~/.lki/.oh-my-posh.json)"
 fi
 
+## enable pyenv
 if command -v pyenv &> /dev/null;
 then
   eval "$(pyenv init --path)"
 fi
 
+## enable nvm
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
