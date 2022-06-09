@@ -40,7 +40,6 @@ jobs:
       - name: Config Verification
         if: matrix.os != 'windows-latest'
         run: |
-          source ~/.profile
           git yes
           lki clone LKI/LKI
           test -d ~/code/src/github.com/LKI/LKI || exit 1
