@@ -36,8 +36,8 @@
     pm = push o -o merge_request.create -o merge_request.target=master HEAD -f
     po = push o
     ps = push
-    pull = pull --rebase
     pua = push -u o HEAD:alpha-only -f
+    pull = pull --rebase
     puo = push -u o
     puod = push -u o -o merge_request.create -o merge_request.target=dev
     puof = push -u o -o merge_request.create -o merge_request.target=freeze
@@ -49,6 +49,7 @@
     rbc = rebase --continue
     rbi = rebase -i  # if there's only one git command you should learn, it'll be `git rebase`
     rd = rebase o/HEAD
+    rdi = rebase o/HEAD -i
     regret = reset HEAD^  # regret last commit, same with `git ag`
     rg = reset HEAD^
     rh = reset --hard
@@ -65,8 +66,8 @@
     sv = stash
     unchanged = update-index --assume-unchanged  # assume a file is unchanged, often use to change some local config
     unhide = update-index --no-assume-unchanged  # same with `git changed`
-    wp = commit -S --all --message 'feat: WIP' --allow-empty --no-verify  # commit with Work In Progress quickly
     wj = commit -S --all --message 'JIRA-123: WIP' --allow-empty --no-verify  # commit with Jira: Work In Progress quickly
+    wp = commit -S --all --message 'feat: WIP' --allow-empty --no-verify  # commit with Work In Progress quickly
     yes = log --oneline --since yesterday --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --no-merges  # see what's new since yesterday
 [core]
     autocrlf = false  # don't mess up crlf
@@ -94,3 +95,5 @@
     selected = manager-core
 [safe]
     directory = C:/Users/lirian/.lki
+[gpg]
+    program = C:/Users/lirian/scoop/apps/git/current/usr/bin/gpg.exe
