@@ -8,3 +8,6 @@ nmap <A-l> :action NextTab<CR>
 nmap <A-h> :action PreviousTab<CR>
 
 set ideajoin
+set hlsearch
+set incsearch
+set scrolloff=6
