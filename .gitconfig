@@ -97,3 +97,5 @@
     directory = C:/Users/lirian/.lki
 [gpg]
     program = C:/Users/lirian/scoop/apps/git/current/usr/bin/gpg.exe
+[advice]
+	skippedCherryPicks = false
