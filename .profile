@@ -23,7 +23,6 @@ alias ta="tmux attach"
 alias vi="nvim"
 alias vim="nvim"
 alias wea="curl https://wttr.in/"
-alias ws='cd $(find ~/code/src -maxdepth 5 -type d -name .git | sed "s/\/.git//" | fzf) && git fetch'
 alias yn="yarn"
 update () {
   scoop update -a
@@ -32,6 +31,14 @@ update () {
   git -C ~/.lki pull --rebase
   python -m pip install -U pip setuptools wheel lki virtualenv pipenv black
   go install github.com/oligot/go-mod-upgrade@latest
+}
+ws () {
+  WS=$(find ~/code/src -maxdepth 5 -type d -name .git | sed "s/\/.git//" | fzf)
+  cd ${WS}
+  git fetch
+  if test -f Pipfile; then
+    pipenv shell --fancy;
+  fi
 }
 
 # datarc aliases
