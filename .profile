@@ -37,7 +37,9 @@ ws () {
   cd ${WS}
   git fetch
   if test -f Pipfile; then
-    pipenv shell --fancy;
+    if command -v pipenv &> /dev/null; then
+      pipenv shell --fancy;
+    fi
   fi
 }
 
