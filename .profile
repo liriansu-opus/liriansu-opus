@@ -35,7 +35,6 @@ update () {
 ws () {
   WS=$(find ~/code/src -maxdepth 5 -type d -name .git | sed "s/\/.git//" | fzf)
   cd ${WS}
-  git fetch
   if test -f Pipfile; then
     if command -v pipenv &> /dev/null; then
       pipenv shell --fancy;
