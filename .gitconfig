@@ -8,7 +8,6 @@
     cb = checkout -b
     changed = update-index --no-assume-unchanged  # revert op of `git unchanged`
     ci = commit -S
-    cia = commit -S --all
     clone = clone -o o
     cm = commit -S --amend --no-edit --all --no-verify
     cme = commit -S --amend --edit --allow-empty
@@ -30,28 +29,22 @@
     mgf = merge --ff-only
     p = push
     pa = push --all
-    pd = push o -o merge_request.create -o merge_request.target=dev HEAD -f
+    pd = push o HEAD -f
     pf = push -f
     pl = pull --rebase
-    pm = push o -o merge_request.create -o merge_request.target=master HEAD -f
     po = push o
     ps = push
     pua = push -u o HEAD:alpha-only -f
     pull = pull --rebase
     puo = push -u o
-    puod = push -u o -o merge_request.create -o merge_request.target=dev
-    puof = push -u o -o merge_request.create -o merge_request.target=freeze
-    puom = push -u o -o merge_request.create -o merge_request.target=master
     puz = push -u z
-    puzd = push -u z -o merge_request.create -o merge_request.target=dev
-    puzm = push -u z -o merge_request.create -o merge_request.target=master
     rb = rebase
     rbc = rebase --continue
     rbi = rebase -i  # if there's only one git command you should learn, it'll be `git rebase`
     rd = rebase o/HEAD
     rdi = rebase o/HEAD -i
     regret = reset HEAD^  # regret last commit, same with `git ag`
-    rg = reset HEAD^
+    rg = reset HEAD^  # regret
     rh = reset --hard
     rhd = reset --hard o/HEAD
     rp = remote prune
