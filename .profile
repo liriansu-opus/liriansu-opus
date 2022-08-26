@@ -203,8 +203,21 @@ export DOCKER_REGISTRY=docker-inter.zaihui.com.cn
 export KUBECONFIG=~/.kube/config
 
 # ssh aliases
-alias gethost='cat ~/.ssh/*config | grep -e "^Host" | grep --color'
-alias gsh='z gsh'  # TODO: fix gsh alias
+gethost () {
+  KEYWORD=${1}
+  shift
+  if [[ -z "${KEYWORD}" ]]; then
+    cat ~/.ssh/*config | grep -e "^Host" | cut -c6- | sort $@;
+  else
+    cat ~/.ssh/*config | grep -e "^Host" | cut -c6- | grep --color ${KEYWORD} $@;
+  fi
+}
+gsh () {
+  KEYWORD=${1}
+  shift
+  HOST=$(gethost ${KEYWORD} | fzf -1 -0 | cut -d" " -f1)
+  ssh ${HOST} $@;
+}
 
 # auto aliases  TODO: optimize speed
 mkdir -p ~/.bash_aliases
