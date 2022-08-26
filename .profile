@@ -1,3 +1,6 @@
+#!/bin/bash
+# Shell Style Guide: https://google.github.io/styleguide/shellguide.html
+
 # enable vi mode
 set -o vi
 
@@ -8,7 +11,7 @@ fi
 # general aliases
 alias ..="cd .."
 alias bv="bumpversion"
-alias cnpm="npm --registry=https://registry.npm.taobao.org --cache=${HOME}/.npm/.cache/cnpm --disturl=https://npm.taobao.org/dist --userconfig=${HOME}/.cnpmrc"
+alias cnpm="npm --registry=https://registry.npm.taobao.org --cache=\${HOME}/.npm/.cache/cnpm --disturl=https://npm.taobao.org/dist --userconfig=\${HOME}/.cnpmrc"
 alias conf="vim ~/.profile"
 alias dp="env KUBECONFIG='' dapr"
 alias la="ls -ah"
@@ -34,7 +37,7 @@ update () {
 }
 ws () {
   WS=$(find ~/code/src -maxdepth 5 -type d -name .git | sed "s/\/.git//" | fzf)
-  cd ${WS}
+  cd "${WS}" || exit
   if test -f Pipfile; then
     if command -v pipenv &> /dev/null; then
       pipenv shell --fancy;
@@ -43,7 +46,7 @@ ws () {
 }
 
 # datarc aliases
-sshpm() { ssh -t $1 -- docker exec -it datarc_beat_1 pipenv run python manage.py shell; }
+sshpm() { ssh -t "${1}" -- docker exec -it datarc_beat_1 pipenv run python manage.py shell; }
 alias devpm="sshpm dev"
 alias rcpm="sshpm rc"
 
@@ -71,7 +74,7 @@ alias gmt="go mod tidy"
 alias gfm="go fmt"
 alias gmu="go-mod-upgrade"  # https://github.com/oligot/go-mod-upgrade
 alias gilo="go list -u -m -f '{{if not .Indirect}}{{.}}{{end}}' all"
-gguv() { go get -u -v github.com/$1; }
+gguv() { go get -u -v github.com/"${1}"; }
 
 # python/pip/pipenv aliases
 alias pf="pipenv run fab"
@@ -115,14 +118,14 @@ alias dps="docker ps"
 alias drminone="docker images | grep none | tr -s ' ' | cut -d' ' -f3 | xargs -I{} docker rmi {}"
 alias dspf="docker system prune -f"
 dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort; }
-dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
-dbu() { docker build -t=$1 .; }
-dkiv() { MSYS_NO_PATHCONV=1 dki -v $(pwd):/app --workdir /app $@; }
-dri() { docker rmi $(docker images -q); }
-drm() { docker rm $1; }
-drmf() { docker stop $1; docker rm $1; }
-dsh() { docker exec -it $(docker ps -aqf "name=$1") sh; }
-dstop() { docker stop $(docker ps -a -q); }
+dbash() { docker exec -it "$(docker ps -aqf "name=${1}")" bash; }
+dbu() { docker build -t="${1}" .; }
+dkiv() { MSYS_NO_PATHCONV=1 dki -v "$(pwd)":/app --workdir /app "$@"; }
+dri() { docker rmi "$(docker images -q)"; }
+drm() { docker rm "${1}"; }
+drmf() { docker stop "${1}"; docker rm "${1}"; }
+dsh() { docker exec -it "$(docker ps -aqf "name=${1}")" sh; }
+dstop() { docker stop "$(docker ps -a -q)"; }
 
 alias ts="dki soimort/translate-shell"
 alias tz="ts :zh"
@@ -147,37 +150,37 @@ alias kr="kubectl rollout"
 alias krr="kubectl rollout restart"
 alias krs="kubectl rollout status"
 alias kt="kubectl top"
-kbash() { kex `kpo $1` -- bash; }
-kpm() { kex `kpo $1` -- python manage.py shell; }
-kppm() { kex `kpo $1` -- pipenv run python manage.py shell; }
-kpo() { kg po | grep $1 | head -n1 | cut -d" " -f1; }
-kpy() { kex `kpo $1` -- python; }
-ksh() { kex `kpo $1` -- sh; }
-ktl() { stern --tail 200 --color=always $1 | grep -Ev ' (200|201|202|204|301|302|304) '; }
+kbash() { kex "$(kpo "${1}")" -- bash; }
+kpm() { kex "$(kpo "${1}")" -- python manage.py shell; }
+kppm() { kex "$(kpo "${1}")" -- pipenv run python manage.py shell; }
+kpo() { kg po | grep "${1}" | head -n1 | cut -d" " -f1; }
+kpy() { kex "$(kpo "${1}")" -- python; }
+ksh() { kex "$(kpo "${1}")" -- sh; }
+ktl() { stern --tail 200 --color=always "${1}" | grep -Ev ' (200|201|202|204|301|302|304) '; }
 kgp() {
   KEYWORD=${1}
   if [[ -z "${KEYWORD}" ]]; then
     kubectl get pods -o wide;
   else
-    kubectl get pods -o wide | grep ${1};
+    kubectl get pods -o wide | grep "${1}";
   fi
 }
 kcl() {
   CONTEXT=${1}
   if [[ -z "${CONTEXT}" ]]; then
-    CURRENT=`kc current-context`
+    CURRENT=$(kc current-context)
     CONTEXT=$(kc get-contexts -o=name | fzf --height=20 --preview='kubectl config use-context {} && kubectl get ns' --preview-window=:75%)
     CONTEXT=${CONTEXT:-${CURRENT}}
   fi
-  kubectl config use-context ${CONTEXT} > /dev/null
+  kubectl config use-context "${CONTEXT}" > /dev/null
 }
 kns() {
   NAMESPACE=${1}
   if [[ -z "${NAMESPACE}" ]]; then
     NAMESPACE=$(kg ns -o=name | sed 's/namespace\///' | fzf --height=50% --preview='kubectl get all -n {}' --preview-window=:70%)
   fi
-  if [[ ! -z "${NAMESPACE}" ]]; then
-    kubectl config set-context --current --namespace ${NAMESPACE} > /dev/null
+  if [[ -n "${NAMESPACE}" ]]; then
+    kubectl config set-context --current --namespace "${NAMESPACE}" > /dev/null
   fi
 }
 kl() {
@@ -186,8 +189,8 @@ kl() {
   if [[ -z "${POD}" ]]; then
     POD=$(kg po -o=name | fzf --height=50% --preview='kubectl describe {}' --preview-window=:70%)
   fi
-  if [[ ! -z "${POD}" ]]; then
-    kubectl logs -f ${POD} $@
+  if [[ -n "${POD}" ]]; then
+    kubectl logs -f "${POD}" "$@"
   fi
 }
 
@@ -207,38 +210,36 @@ gethost () {
   KEYWORD=${1}
   shift
   if [[ -z "${KEYWORD}" ]]; then
-    cat ~/.ssh/*config | grep -e "^Host" | cut -c6- | sort $@;
+    cat ~/.ssh/*config | grep -e "^Host" | cut -c6- | sort "$@";
   else
-    cat ~/.ssh/*config | grep -e "^Host" | cut -c6- | grep --color ${KEYWORD} $@;
+    cat ~/.ssh/*config | grep -e "^Host" | cut -c6- | grep --color "${KEYWORD}" "$@";
   fi
 }
 gsh () {
   KEYWORD=${1}
   shift
-  HOST=$(gethost ${KEYWORD} | fzf -1 -0 | cut -d" " -f1)
-  ssh ${HOST} $@;
+  HOST=$(gethost "${KEYWORD}" | fzf -1 -0 | cut -d" " -f1)
+  ssh "${HOST}" "$@";
 }
 
 # auto aliases  TODO: optimize speed
 mkdir -p ~/.bash_aliases
-if command -v python &> /dev/null;
-then
+if command -v python &> /dev/null; then
   python ~/.lki/scripts/git-to-bash.py > ~/.bash_aliases/git_aliases
 fi
 source ~/.bash_aliases/*_aliases
 
 ## enable oh-my-posh
-if command -v oh-my-posh &> /dev/null;
-then
+if command -v oh-my-posh &> /dev/null; then
   eval "$(oh-my-posh init bash --config ~/.lki/.oh-my-posh.json)"
 fi
 
 ## enable pyenv
-if command -v pyenv &> /dev/null;
-then
+if command -v pyenv &> /dev/null; then
   eval "$(pyenv init --path)"
 fi
 
 ## enable nvm
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+export NVM_DIR
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
