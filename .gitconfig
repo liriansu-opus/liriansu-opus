@@ -91,4 +91,4 @@
 [gpg]
     program = C:/Users/lirian/scoop/apps/git/current/usr/bin/gpg.exe
 [advice]
-    skppedCherryPicks = false
+    skippedCherryPicks = false
