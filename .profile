@@ -57,7 +57,7 @@ alias bi="brew install"
 # git aliases
 alias frd="git f && git rd"
 alias g="git"
-alias gbad="git branch --list | grep -Ev '^\* ' | fzf -m -1 | xargs -I {} git branch -D {}"
+alias gbad="git branch --list | grep -Ev '^\* ' | fzf -m -1 -0 | xargs -I {} git branch -D {}"
 alias gc="git remote show | xargs -I{} git remote prune {} && git gc"
 alias it="git"
 alias lg="git logg"
