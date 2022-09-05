@@ -9,6 +9,10 @@ import lki
 with io.open("README.md", "r", encoding="utf-8") as f:
     long_description = f.read()
 
+requirement_file: str = convert_deps_to_pip(Project(chdir=False).parsed_pipfile["packages"])
+with io.open(requirement_file, "r", encoding="utf-8") as f:
+    install_requires = f.readlines()
+
 setuptools.setup(
     name="lki",
     version=lki.__version__,
@@ -19,7 +23,7 @@ setuptools.setup(
     author_email="liriansu@gmail.com",
     url="https://github.com/LKI/LKI",
     license="MIT License",
-    install_requires=convert_deps_to_pip(Project(chdir=False).parsed_pipfile["packages"], r=False),
+    install_requires=install_requires,
     packages=setuptools.find_packages(),
     entry_points={"console_scripts": "lki = lki.cmdline:entry"},
     classifiers=[
