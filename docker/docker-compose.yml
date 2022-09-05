@@ -6,13 +6,26 @@ services:
     hostname: datarc-ssh
     image: alpine
     restart: always
-
     ports:
       - "1080:1080"
     command:
       - sh
       - -c
       - apk add openssh && chmod 700 /root/.ssh && chmod 600 /root/.ssh/* && echo "Ready, Go!" && ssh -N -D 0.0.0.0:1080 gate
+    volumes:
+      - ~/.ssh:/root/.ssh
+
+  ssh-cloud:
+    container_name: datarc-cloud
+    hostname: datarc-cloud
+    image: alpine
+    restart: always
+    ports:
+      - "1081:1080"
+    command:
+      - sh
+      - -c
+      - apk add openssh && chmod 700 /root/.ssh && chmod 600 /root/.ssh/* && echo "Ready, Go!" && ssh -N -D 0.0.0.0:1080 tgate
     volumes:
       - ~/.ssh:/root/.ssh
 
