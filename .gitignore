@@ -12,13 +12,14 @@
 /*.iml
 
 .coverage*
+.eslintcache
 20*.xls
 20*.xlsx
 nosetests.xml
 output*.xls
 output*.xlsx
-~*
 play.go
+~*
 
 .entc/
 .idea/
