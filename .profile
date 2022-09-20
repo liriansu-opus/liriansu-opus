@@ -219,7 +219,9 @@ gsh () {
   KEYWORD=${1}
   shift
   HOST=$(gethost "${KEYWORD}" | fzf -1 -0 | cut -d" " -f1)
-  ssh "${HOST}" "$@";
+  if [[ -n "${HOST}" ]]; then
+    ssh "${HOST}" "$@";
+  fi
 }
 
 # auto aliases  TODO: optimize speed
