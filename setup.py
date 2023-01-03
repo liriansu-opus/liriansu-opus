@@ -9,9 +9,7 @@ import lki
 with io.open("README.md", "r", encoding="utf-8") as f:
     long_description = f.read()
 
-requirement_file: str = convert_deps_to_pip(Project(chdir=False).parsed_pipfile["packages"])
-with io.open(requirement_file, "r", encoding="utf-8") as f:
-    install_requires = f.readlines()
+install_requires: list[str] = convert_deps_to_pip(Project(chdir=False).parsed_pipfile["packages"])
 
 setuptools.setup(
     name="lki",
