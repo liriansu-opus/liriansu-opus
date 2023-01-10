@@ -10,7 +10,7 @@
     ci = commit -S
     clone = clone -o o
     cm = commit -S --amend --no-edit --all --no-verify
-    cme = commit -S --amend --edit --allow-empty
+    cme = commit -S --amend --edit --all --allow-empty
     co = checkout
     crp = cherry-pick
     d = diff
