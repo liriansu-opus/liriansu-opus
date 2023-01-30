@@ -99,6 +99,7 @@ alias jsonify="python -mjson.tool"
 alias m="make"
 alias mb="make build"
 alias mf="make fmt"
+alias ml="make lint"
 alias mm="make migrations"
 alias ms="make ensure"
 alias mt="make test"
@@ -220,7 +221,7 @@ gsh () {
   shift
   HOST=$(gethost "${KEYWORD}" | fzf -1 -0 | cut -d" " -f1)
   if [[ -n "${HOST}" ]]; then
-    ssh "${HOST}" "$@";
+    ssh -t "${HOST}" "$@";
   fi
 }
 
