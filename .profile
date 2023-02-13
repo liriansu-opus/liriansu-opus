@@ -27,6 +27,7 @@ alias vi="nvim"
 alias vim="nvim"
 alias wea="curl https://wttr.in/"
 alias yn="yarn"
+alias wpsclear="rm -rf ~/AppData/Roaming/kingsoft/wps/jsaddons/*"
 update () {
   scoop update -a
   scoop cleanup -a
@@ -106,7 +107,7 @@ alias mt="make test"
 
 # docker aliases from tcnksm/docker-alias
 alias d="docker"
-alias dc="docker-compose"
+alias dc="docker compose"
 alias dex="docker exec -i -t"
 alias di="docker images"
 alias dip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
