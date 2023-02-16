@@ -4,13 +4,13 @@
     b = branch
     bd = branch -D
     br = branch
-    ca = commit -S --all
+    ca = commit --all
     cb = checkout -b
     changed = update-index --no-assume-unchanged  # revert op of `git unchanged`
-    ci = commit -S
+    ci = commit
     clone = clone -o o
-    cm = commit -S --amend --no-edit --all --no-verify
-    cme = commit -S --amend --edit --all --allow-empty
+    cm = commit --amend --no-edit --all --no-verify
+    cme = commit --amend --edit --all --allow-empty
     co = checkout
     crp = cherry-pick
     d = diff
@@ -59,8 +59,8 @@
     sv = stash
     unchanged = update-index --assume-unchanged  # assume a file is unchanged, often use to change some local config
     unhide = update-index --no-assume-unchanged  # same with `git changed`
-    wj = commit -S --all --message 'JIRA-123: WIP' --allow-empty --no-verify  # commit with Jira: Work In Progress quickly
-    wp = commit -S --all --message 'feat: WIP' --allow-empty --no-verify  # commit with Work In Progress quickly
+    wj = commit --all --message 'JIRA-123: WIP' --allow-empty --no-verify  # commit with Jira: Work In Progress quickly
+    wp = commit --all --message 'feat: WIP' --allow-empty --no-verify  # commit with Work In Progress quickly
     yes = log --oneline --since yesterday --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --no-merges  # see what's new since yesterday
 [core]
     autocrlf = false  # don't mess up crlf
@@ -83,13 +83,15 @@
     name = Lirian Su
     email = liriansu@gmail.com
     signingkey = D7D3E9BB905FE002
+[gpg]
+    program = C:/Users/lirian/scoop/apps/git/current/usr/bin/gpg.exe
+[commit]
+    gpgsign = true
 [github]
     user = LKI
 [credential "helperselector"]
     selected = manager-core
 [safe]
     directory = C:/Users/lirian/.lki
-[gpg]
-    program = C:/Users/lirian/scoop/apps/git/current/usr/bin/gpg.exe
 [advice]
     skippedCherryPicks = false
