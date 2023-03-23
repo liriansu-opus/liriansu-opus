@@ -11,7 +11,7 @@
 
 /*.iml
 
-.coverage*
+.coverage
 .eslintcache
 liriansu.py
 20*.xls

@@ -204,7 +204,6 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 export EDITOR=vim
 export LANG=en_US.UTF-8
 export PATH=~/.lki/scripts:~/.pyenv/bin:${PATH}
-export DOCKER_REGISTRY=docker-inter.zaihui.com.cn
 export KUBECONFIG=~/.kube/config
 
 # ssh aliases
