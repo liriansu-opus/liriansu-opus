@@ -59,7 +59,7 @@
             "threshold": 0
           },
           "style": "diamond",
-          "template": " \ufa1e{{ .FormattedMs }}\u2800",
+          "template": " {{ .FormattedMs }}\u2800",
           "trailing_diamond": "\ue0b4",
           "type": "executiontime"
         }
