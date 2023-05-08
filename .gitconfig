@@ -34,6 +34,7 @@
     pl = pull --rebase
     po = push o
     ps = push
+    pt = push --tags
     pua = push -u o HEAD:alpha-only -f
     pull = pull --rebase
     puo = push -u o
