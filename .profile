@@ -69,6 +69,7 @@ alias qgit="git"
 alias lb="lab browser"
 alias lc="lki clone"
 alias lo="lab open -r o"
+alias lop="lab open -r o --subpage pulls"
 
 # go aliases
 alias gmt="go mod tidy"
