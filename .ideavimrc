@@ -1,11 +1,12 @@
+Plug 'tpope/vim-surround'
+
 set surround
 
-nmap go :action MoveEditorToOppositeTabGroup<CR>
-nmap gb :action Back<CR>
-nmap gr :action MoveTabRight<CR>
-nmap gt /^class.*TestCase<CR>W:action CopyReference<CR>
-nmap <A-l> :action NextTab<CR>
 nmap <A-h> :action PreviousTab<CR>
+nmap <A-l> :action NextTab<CR>
+nmap Q gq
+nmap go :action MoveEditorToOppositeTabGroup<CR>
+nmap gr :action MoveTabRight<CR>
 
 set ideajoin
 set hlsearch
