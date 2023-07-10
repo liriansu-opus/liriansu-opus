@@ -11,7 +11,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        python-version: [ 3.7, 3.8, 3.9, '3.10' ]
+        python-version: [ '3.7', '3.8', '3.9', '3.10', '3.11' ]
         os: [ macos-latest, ubuntu-latest, windows-latest ]
     steps:
       - name: Checkout code
@@ -25,7 +25,7 @@ jobs:
           python -m pip install -U pip pipenv
           pipenv install --deploy --system
       - name: Check code style
-        if: matrix.python-version == 3.9
+        if: matrix.python-version == '3.11'
         run: |
           pipenv sync --system --dev
           black -l 120 --check .
