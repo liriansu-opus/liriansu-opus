@@ -11,7 +11,7 @@ services:
       - -c
       - apk add openssh && cp /root/ssh /root/.ssh -rf && chmod 700 /root/.ssh && chmod 600 /root/.ssh/* && echo "Ready, Go!" && ssh -N -D 0.0.0.0:1080 gate
     volumes:
-      - ~/.ssh:/root/ssh:ro
+      - ~/OneDrive/code/ssh:/root/ssh:ro
 
   nginx:
     container_name: datarc-nginx
