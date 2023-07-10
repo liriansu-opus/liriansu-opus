@@ -6,7 +6,6 @@ verify_ssl = true
 [dev-packages]
 black = {version = ">=22.1", markers = "python_version == '3.11'"}
 isort = {version = ">=5.9.3", markers = "python_version == '3.11'"}
-pipenv = ">=2022.12.19"
 secretstorage = {version = ">=3", markers = "sys_platform == 'linux'"}
 
 [packages]

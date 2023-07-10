@@ -1,15 +1,11 @@
 import io
 
 import setuptools
-from pipenv.project import Project
-from pipenv.utils.dependencies import convert_deps_to_pip
 
 import lki
 
 with io.open("README.md", "r", encoding="utf-8") as f:
     long_description = f.read()
-
-install_requires: list[str] = convert_deps_to_pip(Project(chdir=False).parsed_pipfile["packages"])
 
 setuptools.setup(
     name="lki",
@@ -21,7 +17,7 @@ setuptools.setup(
     author_email="liriansu@gmail.com",
     url="https://github.com/LKI/LKI",
     license="MIT License",
-    install_requires=install_requires,
+    install_requires=["click>=8.1.3"],
     packages=setuptools.find_packages(),
     entry_points={"console_scripts": "lki = lki.cmdline:entry"},
     classifiers=[
