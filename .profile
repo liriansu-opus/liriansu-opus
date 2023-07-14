@@ -45,6 +45,17 @@ ws () {
     fi
   fi
 }
+ggv() {
+  PATTERN="${1}"
+  shift
+  if [[ -z "${PATTERN}" ]]; then
+    exit 0
+  fi
+  FILES=$(git grep "${PATTERN}" | cut -d':' -f1 | sort | uniq | fzf -m -1 -0)
+  if [[ -n "${FILES}" ]]; then
+    vim $FILES
+  fi
+}
 
 # datarc aliases
 sshpm() { ssh -t "${1}" -- docker exec -it datarc_beat_1 pipenv run python manage.py shell; }
