@@ -33,7 +33,7 @@ update () {
   scoop cleanup -a
   git -C ~/.vim pull --rebase
   git -C ~/.lki pull --rebase
-  python -m pip install -U pip setuptools wheel lki virtualenv pipenv black
+  python -m pip install -U pip setuptools wheel lki virtualenv pipenv black pynvim
   go install github.com/oligot/go-mod-upgrade@latest
 }
 ws () {
