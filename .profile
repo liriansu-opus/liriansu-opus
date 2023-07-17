@@ -41,7 +41,9 @@ ws () {
   cd "${WS}" || exit
   if test -f Pipfile; then
     if command -v pipenv &> /dev/null; then
-      pipenv shell --fancy;
+      if [[ ! -z "${VIRTUAL_ENV}" ]]; then
+        pipenv shell --fancy;
+      fi
     fi
   fi
 }
