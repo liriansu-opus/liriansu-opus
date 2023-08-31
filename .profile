@@ -11,7 +11,6 @@ fi
 # general aliases
 alias ..="cd .."
 alias bv="bumpversion"
-alias cnpm="npm --registry=https://registry.npm.taobao.org --cache=\${HOME}/.npm/.cache/cnpm --disturl=https://npm.taobao.org/dist --userconfig=\${HOME}/.cnpmrc"
 alias conf="vim ~/.profile"
 alias dp="env KUBECONFIG='' dapr"
 alias la="ls -ah"
@@ -83,6 +82,10 @@ alias lb="lab browser"
 alias lc="lki clone"
 alias lo="lab open -r o"
 alias lop="lab open -r o --subpage pulls"
+
+# node aliases
+alias cnpm="npm --registry=https://registry.npm.taobao.org --cache=\${HOME}/.npm/.cache/cnpm --disturl=https://npm.taobao.org/dist --userconfig=\${HOME}/.cnpmrc"
+alias nr="npm run"
 
 # go aliases
 alias gmt="go mod tidy"
