@@ -34,6 +34,7 @@ update () {
   git -C ~/.lki pull --rebase
   python -m pip install -U pip setuptools wheel lki virtualenv pipenv black pynvim
   go install github.com/oligot/go-mod-upgrade@latest
+  npm i -g npm
 }
 ws () {
   WS=$(find ~/code/src -maxdepth 5 -type d -name .git | sed "s/\/.git//" | fzf)
