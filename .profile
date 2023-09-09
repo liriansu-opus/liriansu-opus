@@ -4,9 +4,9 @@
 # enable vi mode
 set -o vi
 
-if [[ "${OS}" == "Windows_NT" || -z "${OS}" ]]; then
-  alias ls="/bin/ls --color"
-fi
+# helper functions
+checkCMD () { command -v $@ &> /dev/null; }
+checkRun () { checkCMD $1 && bash -c "$@"; }
 
 # general aliases
 alias ..="cd .."
@@ -22,22 +22,31 @@ alias sk="skaffold"
 alias sp="scoop"
 alias st="stern --tail 200 --color=always"
 alias ta="tmux attach"
-alias vi="nvim"
-alias vim="nvim"
 alias wea="curl https://wttr.in/"
 alias yn="yarn"
-alias wpsclear="rm -rf ~/AppData/Roaming/kingsoft/wps/jsaddons/*"
+
+# conditional aliases
+if checkCMD nvim; then
+  alias vi="nvim"
+  alias vim="nvim"
+fi
+if [[ "${OS}" == "Windows_NT" || -z "${OS}" ]]; then
+  alias ls="/bin/ls --color"
+fi
+
+# general functions
 update () {
-  scoop update -a
-  scoop cleanup -a
+  checkRun scoop update -a
+  checkRun scoop cleanup -a
   git -C ~/.vim pull --rebase
   git -C ~/.lki pull --rebase
-  python -m pip install -U pip setuptools wheel lki virtualenv pipenv black pynvim
-  go install github.com/oligot/go-mod-upgrade@latest
-  npm i -g npm
+  checkRun python -m pip install -U pip setuptools wheel lki virtualenv pipenv black pynvim
+  checkRun go install github.com/oligot/go-mod-upgrade@latest
+  checkRun npm i -g npm
+  checkRun brew update
 }
 ws () {
-  WS=$(find ~/code/src -maxdepth 5 -type d -name .git | sed "s/\/.git//" | fzf)
+  WS=$(find ~/code/src -maxdepth 5 -type d -name .git | sed "s/\/.git//" | fzf -1 -0)
   cd "${WS}" || exit
   if test -f Pipfile; then
     if command -v pipenv &> /dev/null; then
@@ -65,8 +74,10 @@ alias devpm="sshpm dev"
 alias rcpm="sshpm rc"
 
 # brew aliases
-alias bc="brew cask"
 alias bi="brew install"
+alias bic="brew install --cask"
+alias br="brew"
+alias bs="brew search"
 
 # git aliases
 alias frd="git f && git rd"
@@ -86,6 +97,7 @@ alias lop="lab open -r o --subpage pulls"
 
 # node aliases
 alias cnpm="npm --registry=https://registry.npm.taobao.org --cache=\${HOME}/.npm/.cache/cnpm --disturl=https://npm.taobao.org/dist --userconfig=\${HOME}/.cnpmrc"
+alias nd="npm run dev"
 alias nr="npm run"
 
 # go aliases
@@ -245,22 +257,25 @@ gsh () {
 
 # auto aliases  TODO: optimize speed
 mkdir -p ~/.bash_aliases
-if command -v python &> /dev/null; then
-  python ~/.lki/scripts/git-to-bash.py > ~/.bash_aliases/git_aliases
+if checkCMD python3; then
+  python3 ~/.lki/scripts/git-to-bash.py > ~/.bash_aliases/git_aliases
+  source ~/.bash_aliases/*_aliases
 fi
-source ~/.bash_aliases/*_aliases
 
 ## enable oh-my-posh
-if command -v oh-my-posh &> /dev/null; then
-  eval "$(oh-my-posh init bash --config ~/.lki/.oh-my-posh.json)"
+if checkCMD oh-my-posh; then
+  eval "$(oh-my-posh init bash | sed 's|\[\[ -v MC_SID \]\]|[[ -n "$MC_SID" ]]|')"
 fi
 
 ## enable pyenv
-if command -v pyenv &> /dev/null; then
+if checkCMD pyenv; then
   eval "$(pyenv init --path)"
 fi
 
 ## enable nvm
-NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-export NVM_DIR
+if [ -d /opt/homebrew/opt/nvm ]; then
+  export NVM_DIR=/opt/homebrew/opt/nvm
+else
+  export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+fi
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
