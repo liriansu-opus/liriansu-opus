@@ -6,7 +6,7 @@ set -o vi
 
 # helper functions
 checkCMD () { command -v $@ &> /dev/null; }
-checkRun () { checkCMD $1 && bash -c "$@"; }
+checkRun () { checkCMD $1 && $@; }
 
 # general aliases
 alias ..="cd .."
