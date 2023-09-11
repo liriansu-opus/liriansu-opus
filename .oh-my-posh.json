@@ -25,11 +25,11 @@
           "powerline_symbol": "\ue0b0",
           "properties": {
             "folder_icon": " \uf07b ",
-            "home_icon": "\uf7dd",
+            "home_icon": " ~",
             "style": "folder"
           },
           "style": "powerline",
-          "template": " \uf07b\uf553{{ .Path }} ",
+          "template": " \uf07b{{ .Path }} ",
           "type": "path"
         },
         {
@@ -224,9 +224,9 @@
           "invert_powerline": true,
           "leading_diamond": "\ue0b2",
           "properties": {
-            "charged_icon": "\uf58e ",
-            "charging_icon": "\uf1e6 ",
-            "discharging_icon": "\ue234 "
+            "charged_icon": "🔋 ",
+            "charging_icon": "🔌 ",
+            "discharging_icon": "🪫 "
           },
           "style": "diamond",
           "template": " {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }}\uf295 <#262626>\ue0b2</>",
@@ -238,10 +238,10 @@
           "invert_powerline": true,
           "leading_diamond": "\ue0b2",
           "properties": {
-            "time_format": "_2,15:04"
+            "time_format": "1-_2 15:04"
           },
           "style": "diamond",
-          "template": " \uf5ef {{ .CurrentDate | date .Format }} ",
+          "template": " ⌚️ {{ .CurrentDate | date .Format }} ",
           "trailing_diamond": "\ue0b4",
           "type": "time"
         }
@@ -265,7 +265,7 @@
             "always_enabled": true
           },
           "style": "plain",
-          "template": "\ue285\ufb00 ",
+          "template": "\ue285 ",
           "type": "exit"
         }
       ],

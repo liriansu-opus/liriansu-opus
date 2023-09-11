@@ -44,6 +44,7 @@ update () {
   checkRun go install github.com/oligot/go-mod-upgrade@latest
   checkRun npm i -g npm
   checkRun brew update
+  checkRun brew upgrade
 }
 ws () {
   WS=$(find ~/code/src -maxdepth 5 -type d -name .git | sed "s/\/.git//" | fzf -1 -0)
@@ -264,7 +265,7 @@ fi
 
 ## enable oh-my-posh
 if checkCMD oh-my-posh; then
-  eval "$(oh-my-posh init bash | sed 's|\[\[ -v MC_SID \]\]|[[ -n "$MC_SID" ]]|')"
+  eval "$(oh-my-posh init bash --config ~/.lki/.oh-my-posh.json | sed 's|\[\[ -v MC_SID \]\]|[[ -n "$MC_SID" ]]|')"
 fi
 
 ## enable pyenv
