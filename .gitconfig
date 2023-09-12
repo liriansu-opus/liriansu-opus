@@ -9,7 +9,7 @@
     changed = update-index --no-assume-unchanged  # revert op of `git unchanged`
     ci = commit
     clone = clone -o o
-    cm = commit --amend --no-edit --all --no-verify
+    cm = commit --amend --no-edit --all
     cme = commit --amend --edit --all --allow-empty
     co = checkout
     crp = cherry-pick
