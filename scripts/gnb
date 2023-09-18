@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# git new branch with naming convention
+
+git checkout -b lirian--`date "+%m%d"`-$1
