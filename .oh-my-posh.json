@@ -88,7 +88,7 @@
           "foreground": "#FFE873",
           "leading_diamond": "\ue0b6",
           "style": "diamond",
-          "template": "\ue235 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}",
+          "template": "\ue235 {{ if .Error }}Python{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}",
           "trailing_diamond": "\ue0b4 ",
           "type": "python"
         },
@@ -97,7 +97,7 @@
           "foreground": "#ec2729",
           "leading_diamond": "\ue0b6",
           "style": "diamond",
-          "template": "\ue738 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}",
+          "template": "\ue738 {{ if .Error }}Java{{ else }}{{ .Full }}{{ end }}",
           "trailing_diamond": "\ue0b4 ",
           "type": "java"
         },
@@ -115,7 +115,7 @@
           "foreground": "#06aad5",
           "leading_diamond": "\ue0b6",
           "style": "diamond",
-          "template": "\ufcd1 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}",
+          "template": "\ufcd1 {{ if .Error }}Go{{ else }}{{ .Full }}{{ end }}",
           "trailing_diamond": "\ue0b4 ",
           "type": "go"
         },
@@ -124,7 +124,7 @@
           "foreground": "#925837",
           "leading_diamond": "\ue0b6",
           "style": "diamond",
-          "template": "\ue7a8 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}",
+          "template": "\ue7a8 {{ if .Error }}Rust{{ else }}{{ .Full }}{{ end }}",
           "trailing_diamond": "\ue0b4 ",
           "type": "rust"
         },
@@ -133,7 +133,7 @@
           "foreground": "#055b9c",
           "leading_diamond": " \ue0b6",
           "style": "diamond",
-          "template": "\ue798 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}",
+          "template": "\ue798 {{ if .Error }}Dart{{ else }}{{ .Full }}{{ end }}",
           "trailing_diamond": "\ue0b4 ",
           "type": "dart"
         },
@@ -142,7 +142,7 @@
           "foreground": "#ce092f",
           "leading_diamond": " \ue0b6",
           "style": "diamond",
-          "template": "\ue753 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}",
+          "template": "\ue753 {{ if .Error }}Angular{{ else }}{{ .Full }}{{ end }}",
           "trailing_diamond": "\ue0b4 ",
           "type": "angular"
         },
@@ -151,7 +151,7 @@
           "foreground": "#ffffff",
           "leading_diamond": " \ue0b6",
           "style": "diamond",
-          "template": "{{ if .Error }}{{ .Error }}{{ else }}Nx {{ .Full }}{{ end }}",
+          "template": "{{ if .Error }}NX{{ else }}Nx {{ .Full }}{{ end }}",
           "trailing_diamond": "\ue0b4 ",
           "type": "nx"
         },
@@ -160,7 +160,7 @@
           "foreground": "#359a25",
           "leading_diamond": " \ue0b6",
           "style": "diamond",
-          "template": "<#ca3c34>\ue624</> {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}",
+          "template": "<#ca3c34>\ue624</> {{ if .Error }}Julia{{ else }}{{ .Full }}{{ end }}",
           "trailing_diamond": "\ue0b4 ",
           "type": "julia"
         },
@@ -169,7 +169,7 @@
           "foreground": "#9c1006",
           "leading_diamond": "\ue0b6",
           "style": "diamond",
-          "template": "\ue791 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}",
+          "template": "\ue791 {{ if .Error }}Ruby{{ else }}{{ .Full }}{{ end }}",
           "trailing_diamond": "\ue0b4 ",
           "type": "ruby"
         },
@@ -178,7 +178,7 @@
           "foreground": "#5398c2",
           "leading_diamond": "\ue0b6",
           "style": "diamond",
-          "template": "\uf104<#f5bf45>\uf0e7</>\uf105 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}",
+          "template": "\uf104<#f5bf45>\uf0e7</>\uf105 {{ if .Error }}azfunc{{ else }}{{ .Full }}{{ end }}",
           "trailing_diamond": "\ue0b4 ",
           "type": "azfunc"
         },
