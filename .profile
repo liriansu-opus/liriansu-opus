@@ -21,6 +21,7 @@ alias sk="skaffold"
 alias sp="scoop"
 alias st="stern --tail 200 --color=always"
 alias ta="tmux attach"
+alias tf="terraform"
 alias wea="curl https://wttr.in/"
 alias yn="yarn"
 
@@ -235,6 +236,7 @@ export EDITOR=vim
 export LANG=en_US.UTF-8
 export PATH=~/.lki/scripts:~/.pyenv/bin:${PATH}
 export KUBECONFIG=~/.kube/config
+export GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/application_default_credentials.json
 
 # ssh aliases
 gethost () {
