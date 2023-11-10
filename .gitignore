@@ -8,6 +8,7 @@
 *.pyc
 *.sqlite3
 *.swp
+*.zip
 *~
 
 /*.iml
