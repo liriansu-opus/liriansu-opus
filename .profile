@@ -264,7 +264,7 @@ gsh () {
 gcsh () {
   HOST=$(gcloud compute instances list | fzf -1 -0 | awk '{print $4}')
   if [[ -n "${HOST}" ]]; then
-    ssh -t "${HOST}.gcp" -- "$@";
+    ssh -J gateway -t "root@${HOST}" -- "$@";
   fi
 }
 
