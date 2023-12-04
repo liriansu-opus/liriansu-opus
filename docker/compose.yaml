@@ -1,7 +1,7 @@
 services:
   ssh:
-    container_name: datarc-ssh
-    hostname: datarc-ssh
+    container_name: lki-ssh
+    hostname: lki-ssh
     image: alpine
     restart: always
     ports:
@@ -14,8 +14,8 @@ services:
       - ~/OneDrive/code/ssh:/root/ssh:ro
 
   nginx:
-    container_name: datarc-nginx
-    hostname: datarc-nginx
+    container_name: lki-nginx
+    hostname: lki-nginx
     image: nginx
     restart: always
 
