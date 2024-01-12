@@ -261,12 +261,6 @@ gsh () {
     ssh -t "${HOST}" "$@";
   fi
 }
-gcsh () {
-  HOST=$(gcloud compute instances list | fzf -1 -0 | awk '{print $4}')
-  if [[ -n "${HOST}" ]]; then
-    ssh -J gateway -t "root@${HOST}" -- "$@";
-  fi
-}
 
 # auto aliases  TODO: optimize speed
 mkdir -p ~/.bash_aliases
