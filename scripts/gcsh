@@ -2,22 +2,21 @@
 set -e
 
 pushd ~/.ssh
-
-echo "Refreshing gcloud instances list"
-
-# Define the output file for the SSH config
 SSH_CONFIG_FILE="gcloud_config"
+echo "Sync all gcloud vm into ~/.ssh/${SSH_CONFIG_FILE}"
 
 # Begin with an empty file
-touch "$SSH_CONFIG_FILE"
-> "$SSH_CONFIG_FILE"
+touch "${SSH_CONFIG_FILE}"
+chmod 600 "${SSH_CONFIG_FILE}"
+> "${SSH_CONFIG_FILE}"
 
 # Use gcloud to get the list and parse it
 gcloud compute instances list | while read -r line; do
-# Skip header line
-if [[ $line == NAME* ]]; then
-    continue
-fi
+
+    # Skip header line
+    if [[ $line == NAME* ]]; then
+        continue
+    fi
 
     # Extract the necessary fields
     read -ra fields <<< "$line"
@@ -28,7 +27,7 @@ fi
     # Check if the name and zone are not empty
     if [[ -n $name && -n $zone ]]; then
         # Append the config to the file
-        cat <<EOF >> "$SSH_CONFIG_FILE"
+        cat <<EOF >> "${SSH_CONFIG_FILE}"
 Host $name $ip
     HostName $name.$zone
     User root
@@ -38,9 +37,9 @@ EOF
     fi
 done
 
-chmod 600 "$SSH_CONFIG_FILE"
-echo "SSH config has been generated in $SSH_CONFIG_FILE"
+echo "SSH config has been generated in ${SSH_CONFIG_FILE}"
 
+# Use fzf to select ssh destination
 HOST=$(cat ~/.ssh/*config | grep -e "^Host" | cut -c6- | grep "${KEYWORD}" | fzf -1 -0 | cut -d" " -f1)
 if [[ -n "${HOST}" ]]; then
     ssh -t "${HOST}" "$@";
