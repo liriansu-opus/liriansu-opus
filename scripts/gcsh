@@ -11,7 +11,7 @@ chmod 600 "${SSH_CONFIG_FILE}"
 > "${SSH_CONFIG_FILE}"
 
 # Use gcloud to get the list and parse it
-gcloud compute instances list | while read -r line; do
+gcloud compute instances list --filter="status=RUNNING" | while read -r line; do
 
     # Skip header line
     if [[ $line == NAME* ]]; then
@@ -38,9 +38,3 @@ EOF
 done
 
 echo "SSH config has been generated in ${SSH_CONFIG_FILE}"
-
-# Use fzf to select ssh destination
-HOST=$(cat ~/.ssh/*config | grep -e "^Host" | cut -c6- | grep "${KEYWORD}" | fzf -1 -0 | cut -d" " -f1)
-if [[ -n "${HOST}" ]]; then
-    ssh -t "${HOST}" "$@";
-fi
