@@ -242,9 +242,8 @@ export PIPENV_VERBOSITY=-1
 export BASH_SILENCE_DEPRECATION_WARNING=1
 export EDITOR=vim
 export LANG=en_US.UTF-8
-export PATH=~/.lki/scripts:~/.pyenv/bin:${PATH}
+export PATH=~/.lki/scripts:~/.pyenv/bin:~/.local/bin:${PATH}
 export KUBECONFIG=~/.kube/config
-export GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/application_default_credentials.json
 
 # ssh aliases
 gethost () {
