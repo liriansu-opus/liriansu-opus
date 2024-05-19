@@ -26,6 +26,8 @@ play.go
 
 .entc/
 .idea/
+.nx/cache/
+.nx/installation/
 .venv/
 .vs/
 .vscode/
