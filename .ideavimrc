@@ -2,8 +2,6 @@ Plug 'tpope/vim-surround'
 
 set surround
 
-nmap <A-h> :action PreviousTab<CR>
-nmap <A-l> :action NextTab<CR>
 nmap Q gq
 nmap go :action MoveEditorToOppositeTabGroup<CR>
 nmap gr :action MoveTabRight<CR>
