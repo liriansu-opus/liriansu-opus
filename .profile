@@ -243,7 +243,7 @@ export PIPENV_VERBOSITY=-1
 export BASH_SILENCE_DEPRECATION_WARNING=1
 export EDITOR=vim
 export LANG=en_US.UTF-8
-export PATH=~/.lki/scripts:~/.pyenv/bin:~/.local/bin:${PATH}
+export PATH=~/.lki/scripts:~/.pyenv/bin:~/.local/bin:~/.temporalio/bin:${PATH}
 export KUBECONFIG=~/.kube/config
 
 # ssh aliases
