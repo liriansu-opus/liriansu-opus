@@ -106,9 +106,9 @@ alias lo="lab open -r o"
 alias lop="lab open -r o --subpage pulls"
 
 # node aliases
-alias cnpm="npm --registry=https://registry.npm.taobao.org --cache=\${HOME}/.npm/.cache/cnpm --disturl=https://npm.taobao.org/dist --userconfig=\${HOME}/.cnpmrc"
 alias nd="npm run dev"
 alias nr="npm run"
+alias nci="npm clean-install"
 
 # go aliases
 alias gmt="go mod tidy"
@@ -257,6 +257,15 @@ gethost () {
   fi
 }
 gsh () {
+  KEYWORD=${1}
+  shift
+  HOSTLINE=$(gcloud compute instances list --filter="${KEYWORD}" | grep RUNNING | fzf -1 -0)
+  if [[ -n "${HOSTLINE}" ]]; then
+    read -r NAME ZONE NOTHING <<< "${HOSTLINE}"
+    gcloud compute ssh ${NAME} --zone=${ZONE} --tunnel-through-iap -- -t sudo -i;
+  fi
+}
+csh () {
   KEYWORD=${1}
   shift
   HOST=$(gethost "${KEYWORD}" | fzf -1 -0 | cut -d" " -f1)
