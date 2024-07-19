@@ -298,22 +298,3 @@ else
   export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 fi
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" || true
-
-## enable ssh-agent
-if checkCMD ssh-agent; then
-  SSH_ENV=~/.ssh/agent.env
-  agent_load_env () { test -f "${SSH_ENV}" && . "${SSH_ENV}" >| /dev/null ; }
-  agent_start () {
-      (umask 077; ssh-agent >| "${SSH_ENV}")
-      . "${SSH_ENV}" >| /dev/null ; }
-  agent_load_env
-  # agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2=agent not running
-  agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
-  if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
-      agent_start
-      ssh-add ~/.ssh/opus
-  elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
-      ssh-add ~/.ssh/opus
-  fi
-  unset SSH_ENV
-fi
