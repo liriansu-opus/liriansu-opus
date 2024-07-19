@@ -12,15 +12,3 @@ services:
       - apk add openssh && cp /root/ssh /root/.ssh -rf && chmod 700 /root/.ssh && chmod 600 /root/.ssh/* && echo "Ready, Go!" && ssh -N -D 0.0.0.0:1080 gate
     volumes:
       - ~/OneDrive/code/ssh:/root/ssh:ro
-
-  nginx:
-    container_name: lki-nginx
-    hostname: lki-nginx
-    image: nginx
-    restart: always
-
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./nginx-conf:/etc/nginx/conf.d
