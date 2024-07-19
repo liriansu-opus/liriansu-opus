@@ -1,7 +1,8 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    "actions": [
+    "actions": 
+    [
         {
             "command": 
             {
@@ -45,6 +46,7 @@
             "cursorShape": "filledBox",
             "font": 
             {
+                "cellHeight": "1",
                 "face": "FiraCode Nerd Font",
                 "size": 14.0,
                 "weight": "light"
