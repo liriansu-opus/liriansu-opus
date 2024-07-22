@@ -25,7 +25,7 @@
     "alwaysShowTabs": false,
     "copyFormatting": "none",
     "copyOnSelect": true,
-    "defaultProfile": "{ef9560f4-baf0-4587-bd37-fd66c99a03bb}",
+    "defaultProfile": "{51855cb2-8cce-5362-8f54-464b92b32386}",
     "initialCols": 200,
     "initialRows": 60,
     "launchMode": "maximized",
@@ -78,12 +78,6 @@
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
                 "hidden": true,
                 "name": "CMD"
-            },
-            {
-                "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
-                "hidden": true,
-                "name": "Azure Cloud Shell",
-                "source": "Windows.Terminal.Azure"
             },
             {
                 "guid": "{51855cb2-8cce-5362-8f54-464b92b32386}",
