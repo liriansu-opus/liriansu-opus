@@ -9,6 +9,6 @@ services:
     command:
       - sh
       - -c
-      - apk add openssh && cp /root/ssh /root/.ssh -rf && chmod 700 /root/.ssh && chmod 600 /root/.ssh/* && echo "Ready, Go!" && ssh -N -D 0.0.0.0:1080 gate
+      - apk add openssh && cp /root/ssh /root/.ssh -rf && chmod 700 /root/.ssh && chmod 600 /root/.ssh/* && echo "Ready, Go!" && ssh -N -L 7233:10.218.0.3:7233 -D 0.0.0.0:1080 gate
     volumes:
       - ~/OneDrive/code/ssh:/root/ssh:ro
