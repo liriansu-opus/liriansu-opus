@@ -28,6 +28,7 @@ play.go
 .idea/
 .nx/cache/
 .nx/installation/
+.nx/workspace-data/
 .venv/
 .vs/
 .vscode/
