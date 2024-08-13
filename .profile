@@ -110,6 +110,9 @@ alias nd="npm run dev"
 alias nr="npm run"
 alias nci="npm clean-install"
 
+# nx aliases
+alias nxd="nx dev"
+
 # go aliases
 alias gmt="go mod tidy"
 alias gfm="go fmt"
