@@ -262,7 +262,7 @@ gethost () {
 gsh () {
   KEYWORD=${1}
   shift
-  HOSTLINE=$(gcloud compute instances list --filter="${KEYWORD}" | grep RUNNING | fzf -1 -0)
+  HOSTLINE=$(gcloud compute instances list --filter="name:${KEYWORD}" | grep RUNNING | fzf -1 -0)
   if [[ -n "${HOSTLINE}" ]]; then
     read -r NAME ZONE NOTHING <<< "${HOSTLINE}"
     gcloud compute ssh ${NAME} --zone=${ZONE} --tunnel-through-iap -- -t sudo -i;
