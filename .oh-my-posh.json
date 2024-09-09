@@ -5,24 +5,12 @@
       "alignment": "left",
       "segments": [
         {
-          "foreground": "#E36464",
-          "style": "plain",
-          "template": "{{ .UserName }}@{{ .HostName }} ",
-          "type": "session"
-        },
-        {
-          "foreground": "#62ED8B",
-          "style": "plain",
-          "template": "\u279c",
-          "type": "text"
-        },
-        {
           "foreground": "#56B6C2",
           "properties": {
             "style": "folder"
           },
           "style": "plain",
-          "template": " {{ .Path }}",
+          "template": "{{ .Path }}",
           "type": "path"
         },
         {
@@ -41,17 +29,6 @@
           "style": "plain",
           "template": " {{ .UpstreamIcon }}({{ .HEAD }}{{ .BranchStatus }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}<#ef5350> \uf046 {{ .Staging.String }}</>{{ end }})",
           "type": "git"
-        },
-        {
-          "foreground": "#3C873A",
-          "properties": {
-            "fetch_package_manager": true,
-            "npm_icon": " <#cc3a3a>\ue5fa</> ",
-            "yarn_icon": " <#348cba>\uf61a</>"
-          },
-          "style": "plain",
-          "template": " \ue718({{ if .PackageManagerIcon }}{{ .PackageManagerIcon }}{{ end }}{{ .Full }})",
-          "type": "node"
         },
         {
           "foreground": "#FFE873",
