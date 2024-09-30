@@ -88,6 +88,7 @@ alias gbad="git branch --list | grep -Ev '^\* ' | fzf -m -1 -0 | xargs -I {} git
 alias ghb="gh browse"
 alias ghpc="gpd && gh pr create -f && ghpr"
 alias ghpr="gh pr view -w"
+alias gof="git log --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --color=always | head -n 1000 | fzf --ansi --no-sort --preview 'git show {1} --color=always' --preview-window=:wrap | cut -d' ' -f1"
 alias it="git"
 alias lg="git logg"
 alias lgs="git logs"
