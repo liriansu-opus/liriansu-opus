@@ -243,12 +243,13 @@ kl() {
 # --- --- --- #
 
 # set path
-export PIPENV_VERBOSITY=-1
 export BASH_SILENCE_DEPRECATION_WARNING=1
 export EDITOR=vim
-export LANG=en_US.UTF-8
-export PATH=~/.lki/scripts:~/.pyenv/bin:~/.local/bin:~/.temporalio/bin:${PATH}
 export KUBECONFIG=~/.kube/config
+export LANG=en_US.UTF-8
+export LD_LIBRARY_PATH=/usr/lib/wsl/lib:${LD_LIBRARY_PATH}
+export PATH=~/.lki/scripts:~/.pyenv/bin:~/.local/bin:~/.temporalio/bin:${PATH}
+export PIPENV_VERBOSITY=-1
 
 # ssh aliases
 gethost () {
