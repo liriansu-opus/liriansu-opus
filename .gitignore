@@ -15,9 +15,9 @@
 
 .coverage
 .eslintcache
-liriansu.py
 20*.xls
 20*.xlsx
+lirian*
 nosetests.xml
 output*.xls
 output*.xlsx
