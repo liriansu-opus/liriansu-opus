@@ -1,4 +1,3 @@
-#!/bin/bash
 # Shell Style Guide: https://google.github.io/styleguide/shellguide.html
 
 # enable vi mode
