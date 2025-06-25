@@ -302,17 +302,15 @@ else
 fi
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" || true
 
-# === Auto-configure proxy in WSL2 if Windows host proxy is available ===
-# Detect Windows host IP address (WSL2's default gateway)
-WIN_HOST=$(ip route | awk '/default/ {print $3}')
-PROXY_PORT=3067
-# Default: assume proxy is not enabled
-export WSL_PROXY_ENABLED=0
-# Check if 'nc' (netcat) is available and proxy port is reachable
-if command -v nc >/dev/null && nc -z -w1 $WIN_HOST $PROXY_PORT; then
-  export http_proxy="http://${WIN_HOST}:${PROXY_PORT}"
-  export https_proxy="http://${WIN_HOST}:${PROXY_PORT}"
-  export all_proxy="socks5://${WIN_HOST}:${PROXY_PORT}"
-  export WSL_PROXY_ENABLED=1
-  echo "wsl: set all_proxy to socks5://${WIN_HOST}:${PROXY_PORT}"
+# --- WSL2 Proxy Auto Config ---
+if grep -qi microsoft /proc/version; then
+  HOST=$(ip route | awk '/default/ {print $3}')
+  PORT=3067
+  nc -z -w1 $HOST $PORT 2>/dev/null && {
+    export http_proxy="http://$HOST:$PORT"
+    export https_proxy="http://$HOST:$PORT"
+    export all_proxy="socks5://$HOST:$PORT"
+    export WSL_PROXY_ENABLED=1
+    echo "wsl: proxy enabled at $HOST:$PORT"
+  } || export WSL_PROXY_ENABLED=0
 fi
