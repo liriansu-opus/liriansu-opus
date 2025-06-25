@@ -301,3 +301,18 @@ else
   export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 fi
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" || true
+
+# === Auto-configure proxy in WSL2 if Windows host proxy is available ===
+# Detect Windows host IP address (WSL2's default gateway)
+WIN_HOST=$(ip route | awk '/default/ {print $3}')
+PROXY_PORT=3067
+# Default: assume proxy is not enabled
+export WSL_PROXY_ENABLED=0
+# Check if 'nc' (netcat) is available and proxy port is reachable
+if command -v nc >/dev/null && nc -z -w1 $WIN_HOST $PROXY_PORT; then
+  export http_proxy="http://${WIN_HOST}:${PROXY_PORT}"
+  export https_proxy="http://${WIN_HOST}:${PROXY_PORT}"
+  export all_proxy="socks5://${WIN_HOST}:${PROXY_PORT}"
+  export WSL_PROXY_ENABLED=1
+  echo "wsl: set all_proxy to socks5://${WIN_HOST}:${PROXY_PORT}"
+fi
