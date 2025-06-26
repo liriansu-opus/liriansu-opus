@@ -311,6 +311,5 @@ if grep -qi microsoft /proc/version; then
     export https_proxy="http://$HOST:$PORT"
     export all_proxy="socks5://$HOST:$PORT"
     export WSL_PROXY_ENABLED=1
-    echo "wsl: proxy enabled at $HOST:$PORT"
   } || export WSL_PROXY_ENABLED=0
 fi
