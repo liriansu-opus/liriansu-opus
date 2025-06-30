@@ -49,7 +49,6 @@
     rhd = reset --hard origin/HEAD
     rp = remote prune
     rpo = remote prune origin
-    rroo = remote rename origin o
     rs = reset
     save = stash
     slog = log --graph --decorate --oneline --all --simplify-by-decoration
