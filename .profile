@@ -248,6 +248,7 @@ export LANG=en_US.UTF-8
 export LD_LIBRARY_PATH=/usr/lib/wsl/lib:${LD_LIBRARY_PATH}
 export PATH=~/.lki/scripts:~/.pyenv/bin:~/.local/bin:~/.temporalio/bin:${PATH}
 export PIPENV_VERBOSITY=-1
+export UV_NATIVE_TLS=true
 
 # ssh aliases
 gethost () {
