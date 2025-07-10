@@ -304,7 +304,7 @@ fi
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" || true
 
 # --- WSL2 Proxy Auto Config ---
-if grep -qi microsoft /proc/version; then
+if grep -qi microsoft /proc/version 2&>/dev/null; then
   HOST=$(ip route | awk '/default/ {print $3}')
   PORT=3067
   nc -z -w1 $HOST $PORT 2>/dev/null && {
