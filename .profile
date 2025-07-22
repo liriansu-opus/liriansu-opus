@@ -311,6 +311,7 @@ if grep -qi microsoft /proc/version 2&>/dev/null; then
     export http_proxy="http://$HOST:$PORT"
     export https_proxy="http://$HOST:$PORT"
     export all_proxy="socks5://$HOST:$PORT"
+    export no_proxy=localhost,127.0.0.1
     export WSL_PROXY_ENABLED=1
   } || export WSL_PROXY_ENABLED=0
 fi
