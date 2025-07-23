@@ -38,9 +38,10 @@ fi
 update () {
   checkRun scoop update -a
   checkRun scoop cleanup -a
+  checkRun scoop cache rm -a
   git -C ~/.vim pull --rebase
   git -C ~/.lki pull --rebase
-  checkRun python -m pip install -U pip setuptools wheel lki virtualenv pipenv black pynvim
+  checkRun python -m pip install -U pip setuptools wheel lki virtualenv pipenv pynvim
   checkRun go install github.com/oligot/go-mod-upgrade@latest
   checkRun npm i -g npm
   checkRun brew update
