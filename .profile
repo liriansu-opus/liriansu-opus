@@ -293,7 +293,7 @@ fi
 
 ## enable pyenv
 if checkCMD pyenv; then
-  eval "$(pyenv init --path)"
+  eval "$(pyenv init -)"
 fi
 
 ## enable nvm
