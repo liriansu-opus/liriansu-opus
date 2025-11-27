@@ -309,10 +309,10 @@ if grep -qi microsoft /proc/version 2&>/dev/null; then
   HOST=$(ip route | awk '/default/ {print $3}')
   PORT=3067
   nc -z -w1 $HOST $PORT 2>/dev/null && {
-    export http_proxy="http://$HOST:$PORT"
-    export https_proxy="http://$HOST:$PORT"
-    export all_proxy="socks5://$HOST:$PORT"
-    export no_proxy=localhost,127.0.0.1
+    export HTTP_PROXY="http://$HOST:$PORT"
+    export HTTPS_PROXY="http://$HOST:$PORT"
+    export ALL_PROXY="socks5://$HOST:$PORT"
+    export NO_PROXY=localhost,127.0.0.1
     export WSL_PROXY_ENABLED=1
   } || export WSL_PROXY_ENABLED=0
 fi
