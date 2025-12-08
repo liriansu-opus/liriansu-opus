@@ -16,7 +16,7 @@
     dfl = diff --name-status  # diff and list name
     dfs = diff --staged
     dl = diff HEAD^
-    f = fetch origin --tags
+    f = fetch origin --tags --prune
     g = grep -in  # ignore case, line number
     hide = update-index --assume-unchanged  # same with `git unchanged`
     last = log -1 HEAD
