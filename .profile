@@ -84,7 +84,7 @@ alias bs="brew search"
 # git aliases
 alias frd="git f && git rd"
 alias g="git"
-alias gbad="git branch --list | grep -Ev '^\* ' | fzf -m -1 -0 | xargs -I {} git branch -D {}"
+alias gbad="git branch --list | grep -Ev '^\* ' | fzf -m -1 -0 | xargs -I {} git branch -D {} && git worktree list | grep 'detached HEAD' | xargs -I {} git worktree remove {} --force"
 alias gcr="gf && gbr -r | grep -E '(lirian|codex)' | sed 's#origin/##' | awk '{\$1=\$1};1' | fzf | xargs -I{} bash -c 'git checkout {} && git reset --hard origin/{}'"
 alias ghb="gh browse"
 alias ghpc="gpd && gh pr create -f && ghpr"
