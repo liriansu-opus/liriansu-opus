@@ -10,6 +10,7 @@ checkRun () { checkCMD $1 && $@; }
 # general aliases
 alias ..="cd .."
 alias bv="bumpversion"
+alias cc="claude"
 alias conf="vim ~/.profile"
 alias dp="env KUBECONFIG='' dapr"
 alias gdate="date"
