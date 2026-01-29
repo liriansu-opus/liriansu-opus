@@ -124,7 +124,7 @@ def env(key, value):
         if not value:
             value = "''"
         click.echo(f"Setting environment {key} to {value}")
-        run("SETX {} {}".format(key, value))
+        run(f"SETX {key} {value}")
 
 
 @entry.command()
@@ -146,7 +146,7 @@ def clone(url):
             else:
                 url = f"https://github.com/{url}.git"
         else:
-            url = "https://{}".format(url)
+            url = f"https://{url}"
     match = next((m for m in (e.search(url) for e in REGEX_GIT_URLS) if m), None)
     if not match:
         click.echo(f"lki can not understand git url: {url}", err=True)
@@ -167,7 +167,7 @@ def boost():
     check_executable("apt")
     check_file("/etc/apt/sources.list")
     backup_file = datetime.datetime.now().strftime("/etc/apt/sources.list.%Y%m%d%H%M%S.bak")
-    print("Backing up at {}".format(backup_file))
+    print(f"Backing up at {backup_file}")
     shutil.copyfile("/etc/apt/sources.list", backup_file)
     run(
         r'sed -i -E "s/deb (ht|f)tp(s?)\:\/\/[0-9a-zA-Z]'

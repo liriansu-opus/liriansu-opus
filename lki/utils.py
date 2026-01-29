@@ -1,6 +1,6 @@
 import ctypes
-import distutils.spawn as spawn
 import os
+import shutil
 import sys
 
 import click
@@ -10,7 +10,7 @@ from lki import error
 
 def check_executable(name):
     """check if executable exists. (raise exeception if not)"""
-    if not spawn.find_executable(name):
+    if not shutil.which(name):
         raise error.LKIError(f"there is no {name} executable")
 
 

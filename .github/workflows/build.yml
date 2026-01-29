@@ -11,27 +11,26 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        python-version: [ '3.7', '3.8', '3.9', '3.10', '3.11' ]
+        python-version: [ '3.12', '3.13', '3.14' ]
         os: [ macos-latest, ubuntu-latest, windows-latest ]
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Set up python ${{ matrix.python-version }}
-        uses: actions/setup-python@v1
+        uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install requirements
+      - name: Install package
         run: |
-          python -m pip install -U pip pipenv
-          pipenv install --deploy --system
+          uv pip install --system -e .
       - name: Check code style
-        if: matrix.python-version == '3.11'
+        if: matrix.python-version == '3.12'
         run: |
-          pipenv sync --system --dev
-          black -l 120 --check .
-      - name: Command Installation
-        run: |
-          python setup.py install
+          uv pip install --system ruff
+          ruff check .
+          ruff format --check .
       - name: Config Installation
         if: matrix.os != 'windows-latest'
         run: |

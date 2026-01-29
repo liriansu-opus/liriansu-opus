@@ -1,12 +1,22 @@
 ensure:
-	pipenv sync --dev
-	pipenv clean
-	pipenv run python -m pip install -U pip setuptools
+	uv pip install --system -e ".[dev]"
 
 fmt:
-	@isort .
-	@black -l 120 .
+	@ruff check --fix .
+	@ruff format .
 
 lint:
-	isort --check .
-	black -l 120 --check .
+	ruff check .
+	ruff format --check .
+
+build:
+	python -m build
+
+test-install:
+	python -m venv /tmp/test-lki
+	/tmp/test-lki/bin/pip install dist/*.whl
+	/tmp/test-lki/bin/lki --help
+	rm -rf /tmp/test-lki
+
+clean:
+	rm -rf dist/ build/ *.egg-info/
