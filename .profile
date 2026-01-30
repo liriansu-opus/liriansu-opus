@@ -23,6 +23,7 @@ alias sp="scoop"
 alias st="stern --tail 200 --color=always"
 alias ta="tmux attach"
 alias tf="terraform"
+alias vk="npx vibe-kanban"
 alias wea="curl https://wttr.in/"
 alias yn="yarn"
 
