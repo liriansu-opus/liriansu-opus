@@ -11,6 +11,7 @@ checkRun () { checkCMD $1 && $@; }
 alias ..="cd .."
 alias bv="bumpversion"
 alias cc="claude"
+alias ccusage="npx -y ccusage@latest --since='20260101'"
 alias conf="vim ~/.profile"
 alias dp="env KUBECONFIG='' dapr"
 alias gdate="date"
