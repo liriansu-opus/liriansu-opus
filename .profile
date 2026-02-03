@@ -24,7 +24,7 @@ alias st="stern --tail 200 --color=always"
 alias ta="tmux attach"
 alias tf="terraform"
 alias tsl="tailscale"
-alias vk="HOST=0.0.0.0 PORT=20080 npx vibe-kanban"
+alias vk="HOST=0.0.0.0 PORT=20080 npx -y vibe-kanban@0.0.166"
 alias wea="curl https://wttr.in/"
 alias yn="yarn"
 
