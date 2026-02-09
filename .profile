@@ -100,6 +100,7 @@ alias it="git"
 alias lg="git logg"
 alias lgs="git logs"
 alias qgit="git"
+gwta() { git fetch origin/main && mkdir -p ~/code/src/worktrees && git worktree add -b $1 ~/code/src/worktrees/{} origin/main }
 
 # gcloud aliases
 alias gc="gcloud"
