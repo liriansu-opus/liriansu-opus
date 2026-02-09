@@ -54,7 +54,7 @@ update () {
   checkRun brew upgrade
 }
 ws () {
-  WS=$(find ~/code/src -maxdepth 5 -type d -name .git | sed "s/\/.git//" | fzf -1 -0)
+  WS=$(find ~/code/src -maxdepth 4 -name .git | sed "s/\/.git//" | fzf -1 -0)
   cd "${WS}" || exit
   if test -f Pipfile; then
     if command -v pipenv &> /dev/null; then
@@ -100,7 +100,7 @@ alias it="git"
 alias lg="git logg"
 alias lgs="git logs"
 alias qgit="git"
-gwta() { git fetch origin/main && mkdir -p ~/code/src/worktrees && git worktree add -b $1 ~/code/src/worktrees/$1 origin/main; }
+gwta() { git fetch origin main && mkdir -p ~/code/src/worktrees && git worktree add -b lirian/$1 ~/code/src/worktrees/$1 origin/main; }
 
 # gcloud aliases
 alias gc="gcloud"
