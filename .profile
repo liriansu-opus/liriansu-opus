@@ -91,7 +91,7 @@ alias bs="brew search"
 # git aliases
 alias frd="git f && git rd"
 alias g="git"
-alias gbad="git branch --list | grep -Ev '^\* ' | fzf -m -1 -0 | xargs -I {} git branch -D {} && git worktree list | grep 'detached HEAD' | xargs -I {} git worktree remove {} --force"
+alias gbad="git branch --list | grep -Ev '^[*+] ' | fzf -m -1 -0 | xargs -I {} git branch -D {} && git worktree list | grep 'detached HEAD' | xargs -I {} git worktree remove {} --force"
 alias gcr="gf && gbr -r | grep -E 'lirian[-/]' | sed 's#origin/##' | awk '{\$1=\$1};1' | fzf | xargs -I{} bash -c 'git checkout {} && git reset --hard origin/{}'"
 alias ghb="gh browse"
 alias ghpc="gpd && gco main && gpl && gco - && gh pr create -f && ghpr"
@@ -102,6 +102,25 @@ alias lg="git logg"
 alias lgs="git logs"
 alias qgit="git"
 gwta() { git fetch origin main && mkdir -p ~/code/src/worktrees && git worktree add -b lirian/$1 ~/code/src/worktrees/$1 origin/main; }
+gwtd() {
+  local selected WT_PATH WT_BRANCH
+
+  selected="$(git worktree list --porcelain | awk '
+    /^worktree / { path = substr($0, 10) }
+    /^branch / {
+      branch = substr($0, 8)
+      sub("^refs/heads/", "", branch)
+      print path "\t" branch
+    }
+  ' | fzf -1 -0 --delimiter=$'\t' --with-nth=2,1 --prompt='worktree> ')"
+
+  [ -z "${selected}" ] && return 0
+
+  WT_PATH="${selected%%$'\t'*}"
+  WT_BRANCH="${selected#*$'\t'}"
+
+  git worktree remove "${WT_PATH}" --force && git branch -D "${WT_BRANCH}"
+}
 
 # gcloud aliases
 alias gc="gcloud"
