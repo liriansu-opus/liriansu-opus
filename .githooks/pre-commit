@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Regenerate git_aliases.bash when .gitconfig is staged
+
+if git diff --cached --name-only | grep -q '^\.gitconfig$'; then
+  awk -F' *= *' '/^\[alias\]/{f=1;next} /^\[/{f=0} f && /=/{gsub(/^ +/,"",$1); print "alias g"$1"=\"git "$1"\""}' .gitconfig \
+    > scripts/git_aliases.bash
+  git add scripts/git_aliases.bash
+fi
