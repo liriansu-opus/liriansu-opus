@@ -1,11 +1,32 @@
 #!/usr/bin/env bash
 # find crlf in current folder
 
-set -e
+set -euo pipefail
 
-if [[ $1 == '--fix' ]];
-then
-  grep -IUrl --color $'\r' ${1:-.} | grep -v '.git/' | xargs -I{} dos2unix {}
+FIX=false
+TARGET="."
+
+if [[ "${1:-}" == "--fix" ]]; then
+  FIX=true
+  shift
+fi
+
+if [[ $# -gt 0 ]]; then
+  TARGET="$1"
+fi
+
+mapfile -t FILES < <(grep -IUrl --color $'\r' "${TARGET}" | grep -v '.git/' || true)
+
+if [[ "${FIX}" == "true" ]]; then
+  if ! command -v dos2unix >/dev/null 2>&1; then
+    echo "dos2unix is required when using --fix" >&2
+    exit 1
+  fi
+  for file in "${FILES[@]}"; do
+    dos2unix "${file}"
+  done
 else
-  grep -IUrl --color $'\r' ${1:-.} | grep -v '.git/'
+  if [[ ${#FILES[@]} -gt 0 ]]; then
+    printf "%s\n" "${FILES[@]}"
+  fi
 fi

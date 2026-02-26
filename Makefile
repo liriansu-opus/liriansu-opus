@@ -1,19 +1,26 @@
+PYTHON ?= python3
+VENV ?= .venv
+VENV_PYTHON := $(VENV)/bin/python
+VENV_RUFF := $(VENV)/bin/ruff
+
 ensure:
-	uv pip install --system -e ".[dev]"
+	$(PYTHON) -m venv $(VENV)
+	$(VENV_PYTHON) -m pip install -U pip
+	$(VENV_PYTHON) -m pip install -e ".[dev]"
 
-fmt:
-	@ruff check --fix .
-	@ruff format .
+fmt: ensure
+	$(VENV_RUFF) check --fix .
+	$(VENV_RUFF) format .
 
-lint:
-	ruff check .
-	ruff format --check .
+lint: ensure
+	$(VENV_RUFF) check .
+	$(VENV_RUFF) format --check .
 
-build:
-	python -m build
+build: ensure
+	$(VENV_PYTHON) -m build
 
-test-install:
-	python -m venv /tmp/test-lki
+test-install: build
+	$(PYTHON) -m venv /tmp/test-lki
 	/tmp/test-lki/bin/pip install dist/*.whl
 	/tmp/test-lki/bin/lki --help
 	rm -rf /tmp/test-lki

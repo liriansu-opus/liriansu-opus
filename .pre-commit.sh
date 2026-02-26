@@ -1,68 +1,26 @@
 #!/usr/bin/env bash
-# this pre-commit hook will run several checkings
-# go for a coffee if it's committing
-#
-# Install (*nix):
-#   ln -sf ~/.pre-commit.sh .git/hooks/pre-commit
-# Install (Windows):
-#   mklink .git\hooks\pre-commit C:\Users\liriansu\.pre-commit.sh
-set -e
+set -euo pipefail
 
-# /dev/null not work on Windows
-VENV="`pipenv --venv 2>&1 || true`"
+mapfile -t PYTHON_FILES < <(git diff --cached --name-only --diff-filter=ACMR | grep --color=never -E '\.py$' || true)
 
-if [[ ${VENV} =~ "Aborted" ]];
-then
-  exit 0;
-fi
-
-# get changed (modified + staged) python files
-PYTHON_FILES="`git diff --name-only --diff-filter=AMR HEAD | grep --color=never '.py$' || true`"
-
-# do nothing if no python file
-if [[ ! "${PYTHON_FILES}" ]];
-then
+# Do nothing if no staged python file.
+if [[ ${#PYTHON_FILES[@]} -eq 0 ]]; then
   exit 0
 fi
 
-if [[ ! -z "`pipenv run pip list | grep '^isort ' | grep ' 5.'`" ]];
-then
-  echo 'Running isort...'
-  pipenv run isort -q ${PYTHON_FILES}
-  git add ${PYTHON_FILES}
+if command -v uv >/dev/null 2>&1; then
+  RUN=(uv run)
 else
-  if [[ ! -z "`pipenv run pip list | grep '^isort '`" ]];
-  then
-    echo 'Running isort...'
-    pipenv run isort -q -up -y ${PYTHON_FILES}
-    git add ${PYTHON_FILES}
-  fi
+  RUN=()
 fi
 
-if [[ ! -z "`pipenv run pip list | grep '^black '`" ]];
-then
-  echo 'Running black...'
-  pipenv run black -q -l 120 ${PYTHON_FILES}
-  git add ${PYTHON_FILES}
-fi
+echo "Running ruff check --fix..."
+"${RUN[@]}" ruff check --fix "${PYTHON_FILES[@]}"
 
-if [[ ! -z "`pipenv run pip list | grep '^flake8 '`" ]];
-then
-  echo 'Running flake8...'
-  pipenv run flake8 ${PYTHON_FILES}
-fi
+echo "Running ruff format..."
+"${RUN[@]}" ruff format "${PYTHON_FILES[@]}"
 
-PYLINT_FILES="`git diff --name-only --diff-filter=AMR HEAD | grep --color=never '.py$' | grep -v migrations || true`"
+git add "${PYTHON_FILES[@]}"
 
-# do nothing if no pylint file
-if [ ! "${PYLINT_FILES}" ]; then
-  exit 0
-fi
-
-if [[ ! -z "`pipenv run pip list | grep '^pylint '`" ]];
-then
-  echo 'Running pylint...'
-  pipenv run pylint -j 1 ${PYLINT_FILES}
-fi
-
-exit 0
+echo "Running ruff check..."
+"${RUN[@]}" ruff check "${PYTHON_FILES[@]}"

@@ -36,7 +36,7 @@ pip install lki && lki install
 
 ## Usage Guide
 
-> [~/.gitconfig](/.gitconfig) contains numerous git aliases:
+> [~/.gitconfig](./.gitconfig) contains numerous git aliases:
 
 ``` bash
 # View git configuration
@@ -56,7 +56,7 @@ $ git pd    # push dev with gitlab merge request created
 $ git yes   # show what happened yesterday
 ```
 
-> [~/.profile](/.profile) contains numerous bash aliases:
+> [~/.profile](./.profile) contains numerous bash aliases:
 ``` bash
 # View bash configuration
 $ cat ~/.profile
@@ -99,13 +99,13 @@ or if you think a certain command isn't user-friendly enough,
 feel free to [submit an Issue directly in the project.][issue]
 
 
-[badge-build]: https://github.com/LKI/LKI/workflows/Build/badge.svg
+[badge-build]: https://github.com/LKI/LKI/actions/workflows/build.yml/badge.svg
 [badge-pypi]: https://img.shields.io/pypi/v/lki.svg
 [badge-version]: https://img.shields.io/pypi/pyversions/LKI.svg
 [dotvim]: https://github.com/LKI/dotvim
 [github]: https://github.com/LKI/LKI
 [issue]: https://github.com/LKI/LKI/issues/new
-[license]: https://github.com/LKI/LKI/blob/master/LICENSE
+[license]: https://github.com/LKI/LKI/blob/HEAD/LICENSE
 [me]: https://www.liriansu.com/about
-[pypi]: https://pypi.python.org/pypi/lki
+[pypi]: https://pypi.org/project/lki/
 [win-env]: https://www.liriansu.com/windows-dev-env
