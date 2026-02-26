@@ -319,11 +319,12 @@ else
   export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 fi
 if [ -s "$NVM_DIR/nvm.sh" ]; then
-  __load_nvm() { unset -f nvm node npm npx; \. "$NVM_DIR/nvm.sh"; }
-  nvm()  { __load_nvm; nvm  "$@"; }
-  node() { __load_nvm; node "$@"; }
-  npm()  { __load_nvm; npm  "$@"; }
-  npx()  { __load_nvm; npx  "$@"; }
+  # Eagerly add default node bin to PATH (all global bins available immediately)
+  DEFAULT_NODE_VER=$(cat "$NVM_DIR/alias/default" 2>/dev/null)
+  DEFAULT_NODE_PATH="$NVM_DIR/versions/node/v${DEFAULT_NODE_VER}/bin"
+  [ -d "$DEFAULT_NODE_PATH" ] && export PATH="$DEFAULT_NODE_PATH:$PATH"
+  # Only lazy-load nvm itself (for switching versions)
+  nvm() { unset -f nvm; \. "$NVM_DIR/nvm.sh"; nvm "$@"; }
 fi
 
 # --- WSL2 Proxy Auto Config ---
