@@ -55,15 +55,10 @@ update () {
   checkRun brew upgrade
 }
 ws () {
-  WS=$(find ~/code/src -maxdepth 4 -name .git | sed "s/\/.git//" | fzf -1 -0)
-  cd "${WS}" || exit
-  if test -f Pipfile; then
-    if command -v pipenv &> /dev/null; then
-      if [[ ! -z "${VIRTUAL_ENV}" ]]; then
-        pipenv shell --fancy;
-      fi
-    fi
-  fi
+  WS=$(find ~/code/src -maxdepth 4 -name .git | sed "s/\/.git$//" | sort | fzf --exact --filter "$*" | fzf -1 -0)
+  [ -z "${WS}" ] && return 0
+  cd "${WS}" || return 1
+  test -f Pipfile && command -v pipenv &> /dev/null && [[ -n "${VIRTUAL_ENV}" ]] && pipenv shell --fancy
 }
 ggv() {
   PATTERN="${1}"
