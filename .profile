@@ -4,8 +4,20 @@
 set -o vi
 
 # helper functions
-checkCMD () { command -v $@ &> /dev/null; }
-checkRun () { checkCMD $1 && $@; }
+checkCMD () { command -v "$1" > /dev/null 2>&1; }
+checkRun () { checkCMD "$1" && "$@"; }
+path_prepend () {
+  case ":${PATH}:" in
+    *":$1:"*) ;;
+    *) PATH="$1${PATH:+:${PATH}}" ;;
+  esac
+}
+ld_library_path_prepend () {
+  case ":${LD_LIBRARY_PATH:-}:" in
+    *":$1:"*) ;;
+    *) LD_LIBRARY_PATH="$1${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}" ;;
+  esac
+}
 
 # general aliases
 alias ..="cd .."
@@ -58,17 +70,18 @@ ws () {
   WS=$(find ~/code/src -maxdepth 4 -name .git | sed "s/\/.git$//" | sort | fzf --exact --filter "$*" | fzf -1 -0)
   [ -z "${WS}" ] && return 0
   cd "${WS}" || return 1
-  test -f Pipfile && command -v pipenv &> /dev/null && [[ -n "${VIRTUAL_ENV}" ]] && pipenv shell --fancy
 }
 ggv() {
+  local PATTERN
+  local -a FILES
   PATTERN="${1}"
   shift
   if [[ -z "${PATTERN}" ]]; then
-    exit 0
+    return 0
   fi
-  FILES=$(git grep "${PATTERN}" | cut -d':' -f1 | sort | uniq | fzf -m -1 -0)
-  if [[ -n "${FILES}" ]]; then
-    vim $FILES
+  mapfile -t FILES < <(git grep -- "${PATTERN}" | cut -d':' -f1 | sort -u | fzf -m -1 -0)
+  if (( ${#FILES[@]} > 0 )); then
+    vim -- "${FILES[@]}"
   fi
 }
 
@@ -229,7 +242,7 @@ kcl() {
   CONTEXT=${1}
   if [[ -z "${CONTEXT}" ]]; then
     CURRENT=$(kc current-context)
-    CONTEXT=$(kc get-contexts -o=name | fzf --height=20 --preview='kubectl config use-context {} && kubectl get ns' --preview-window=:75%)
+    CONTEXT=$(kc get-contexts -o=name | fzf --height=20 --preview='kubectl --context {} get ns' --preview-window=:75%)
     CONTEXT=${CONTEXT:-${CURRENT}}
   fi
   kubectl config use-context "${CONTEXT}" > /dev/null
@@ -259,10 +272,15 @@ kl() {
 # set path
 export BASH_SILENCE_DEPRECATION_WARNING=1
 export EDITOR=vim
-export KUBECONFIG=~/.kube/config
-export LANG=en_US.UTF-8
-export LD_LIBRARY_PATH=/usr/lib/wsl/lib:${LD_LIBRARY_PATH}
-export PATH=~/.lki/scripts:~/.pyenv/bin:~/.local/bin:~/.temporalio/bin:${PATH}
+export KUBECONFIG="${HOME}/.kube/config"
+export LANG="en_US.UTF-8"
+ld_library_path_prepend "/usr/lib/wsl/lib"
+path_prepend "${HOME}/.lki/scripts"
+path_prepend "${HOME}/.pyenv/bin"
+path_prepend "${HOME}/.local/bin"
+path_prepend "${HOME}/.temporalio/bin"
+export LD_LIBRARY_PATH
+export PATH
 export PIPENV_VERBOSITY=-1
 export UV_NATIVE_TLS=true
 
@@ -317,20 +335,33 @@ if [ -s "$NVM_DIR/nvm.sh" ]; then
   # Eagerly add default node bin to PATH (all global bins available immediately)
   DEFAULT_NODE_VER=$(cat "$NVM_DIR/alias/default" 2>/dev/null)
   DEFAULT_NODE_PATH="$NVM_DIR/versions/node/v${DEFAULT_NODE_VER}/bin"
-  [ -d "$DEFAULT_NODE_PATH" ] && export PATH="$DEFAULT_NODE_PATH:$PATH"
+  [ -d "$DEFAULT_NODE_PATH" ] && path_prepend "$DEFAULT_NODE_PATH"
   # Only lazy-load nvm itself (for switching versions)
   nvm() { unset -f nvm; \. "$NVM_DIR/nvm.sh"; nvm "$@"; }
 fi
 
 # --- WSL2 Proxy Auto Config ---
-if grep -qi microsoft /proc/version 2&>/dev/null; then
-  HOST=$(ip route | awk '/default/ {print $3}')
-  PORT=3067
-  nc -z -w1 $HOST $PORT 2>/dev/null && {
-    export HTTP_PROXY="http://$HOST:$PORT"
-    export HTTPS_PROXY="http://$HOST:$PORT"
-    export ALL_PROXY="socks5://$HOST:$PORT"
+if grep -qi microsoft /proc/version 2>/dev/null; then
+  WSL_HOST=$(ip route | awk '/default/ {print $3}')
+  WSL_PROXY_PORT=3067
+  WSL_PROXY_UP=0
+
+  if [[ -n "${WSL_HOST}" ]]; then
+    if checkCMD timeout; then
+      timeout 0.2 bash -c ">/dev/tcp/${WSL_HOST}/${WSL_PROXY_PORT}" 2>/dev/null && WSL_PROXY_UP=1
+    else
+      nc -z -w1 "${WSL_HOST}" "${WSL_PROXY_PORT}" 2>/dev/null && WSL_PROXY_UP=1
+    fi
+  fi
+
+  if [[ "${WSL_PROXY_UP}" -eq 1 ]]; then
+    export HTTP_PROXY="http://${WSL_HOST}:${WSL_PROXY_PORT}"
+    export HTTPS_PROXY="http://${WSL_HOST}:${WSL_PROXY_PORT}"
+    export ALL_PROXY="socks5://${WSL_HOST}:${WSL_PROXY_PORT}"
     export NO_PROXY=localhost,127.0.0.1
     export WSL_PROXY_ENABLED=1
-  } || export WSL_PROXY_ENABLED=0
+  else
+    unset HTTP_PROXY HTTPS_PROXY ALL_PROXY
+    export WSL_PROXY_ENABLED=0
+  fi
 fi
