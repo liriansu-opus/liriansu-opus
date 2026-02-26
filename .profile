@@ -215,9 +215,10 @@ alias kex="kubectl exec -it"
 alias kg="kubectl get"
 alias kga="kubectl get all"
 alias kgns="kubectl get ns"
+alias kgp="kubectl get pods"
+alias kgpa="kubectl get pods -A"
 alias km="kustomize"
 alias kp="kapp"
-alias kgpa="kubectl get pods -o wide -A"
 alias kr="kubectl rollout"
 alias krr="kubectl rollout restart"
 alias krs="kubectl rollout status"
@@ -229,14 +230,6 @@ kpo() { kg po | grep "${1}" | head -n1 | cut -d" " -f1; }
 kpy() { kex "$(kpo "${1}")" -- python; }
 ksh() { kex "$(kpo "${1}")" -- sh; }
 ktl() { stern --tail 200 --color=always "${1}" | grep -Ev ' (200|201|202|204|301|302|304) '; }
-kgp() {
-  KEYWORD=${1}
-  if [[ -z "${KEYWORD}" ]]; then
-    kubectl get pods -o wide;
-  else
-    kubectl get pods -o wide | grep "${1}";
-  fi
-}
 kcl() {
   CONTEXT=${1}
   if [[ -z "${CONTEXT}" ]]; then
