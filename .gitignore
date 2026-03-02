@@ -1,14 +1,15 @@
 *.DS_Store
 *.bak
 *.db
-*.pb
 *.egg-info*
 *.exe
 *.log
 *.log.*
+*.pb
 *.pyc
 *.sqlite3
 *.swp
+*.tsbuildinfo
 *.zip
 *~
 
