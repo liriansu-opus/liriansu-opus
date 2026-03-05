@@ -316,19 +316,33 @@ if checkCMD pyenv; then
   eval "$(pyenv init -)"
 fi
 
-## enable nvm (lazy load)
+## enable nvm
 if [ -d /opt/homebrew/opt/nvm ]; then
   export NVM_DIR=/opt/homebrew/opt/nvm
 else
   export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 fi
-if [ -s "$NVM_DIR/nvm.sh" ]; then
-  # Eagerly add default node bin to PATH (all global bins available immediately)
-  DEFAULT_NODE_VER=$(cat "$NVM_DIR/alias/default" 2>/dev/null)
-  DEFAULT_NODE_PATH="$NVM_DIR/versions/node/v${DEFAULT_NODE_VER}/bin"
-  [ -d "$DEFAULT_NODE_PATH" ] && path_prepend "$DEFAULT_NODE_PATH"
-  # Only lazy-load nvm itself (for switching versions)
-  nvm() { unset -f nvm; \. "$NVM_DIR/nvm.sh"; nvm "$@"; }
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" || true
+
+## auto-switch node version on cd
+_nvm_auto_use() {
+  local nvmrc_path
+  nvmrc_path="$(nvm_find_nvmrc 2>/dev/null)"
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version
+    nvmrc_node_version=$(nvm version "$(cat "$nvmrc_path")")
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$(nvm version)" ]; then
+      nvm use
+    fi
+  elif [ -n "$(PWD=$OLDPWD nvm_find_nvmrc 2>/dev/null)" ] && [ "$(nvm version)" != "$(nvm version default)" ]; then
+    nvm use default
+  fi
+}
+if checkCMD nvm; then
+  _nvm_auto_use
+  cd() { builtin cd "$@" && { type _nvm_auto_use >/dev/null 2>&1 && _nvm_auto_use || true; }; }
 fi
 
 # --- WSL2 Proxy Auto Config ---
