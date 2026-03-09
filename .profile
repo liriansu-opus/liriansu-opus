@@ -273,6 +273,7 @@ kl() {
 # set path
 export BASH_SILENCE_DEPRECATION_WARNING=1
 export EDITOR=vim
+export KUBE_EDITOR=nvim
 export KUBECONFIG="${HOME}/.kube/config"
 export LANG="en_US.UTF-8"
 ld_library_path_prepend "/usr/lib/wsl/lib"
