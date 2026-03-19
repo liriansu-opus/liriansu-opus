@@ -243,7 +243,7 @@ kcl() {
   CONTEXT=${1}
   if [[ -z "${CONTEXT}" ]]; then
     CURRENT=$(kc current-context)
-    CONTEXT=$(kc get-contexts -o=name | fzf --height=20 --preview='kubectl --context {} get ns' --preview-window=:75%)
+    CONTEXT=$(kc get-contexts -o=name | fzf --height=20 --preview='kubectl --context {} get ns' --preview-window=:50%)
     CONTEXT=${CONTEXT:-${CURRENT}}
   fi
   kubectl config use-context "${CONTEXT}" > /dev/null
@@ -311,6 +311,11 @@ source ~/.lki/scripts/git_aliases.bash
 ## enable oh-my-posh
 if checkCMD oh-my-posh; then
   eval "$(oh-my-posh init bash --config ~/.lki/.oh-my-posh.json | sed 's|\[\[ -v MC_SID \]\]|[[ -n "$MC_SID" ]]|')"
+fi
+
+## enable direnv
+if checkCMD direnv; then
+  eval "$(direnv hook bash)"
 fi
 
 ## enable pyenv
