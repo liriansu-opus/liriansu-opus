@@ -1,4 +1,5 @@
-font-family = Cascadia Code NF
-font-style = Light
-font-size = 15
 copy-on-select = clipboard
+font-family = Cascadia Code NF
+font-size = 15
+font-style = Light
+term = xterm-256color
