@@ -2,4 +2,5 @@ copy-on-select = clipboard
 font-family = Cascadia Code NF
 font-size = 15
 font-style = Light
+macos-option-as-alt = true
 term = xterm-256color
