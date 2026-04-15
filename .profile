@@ -68,7 +68,7 @@ update () {
   checkRun brew upgrade
 }
 ws () {
-  WS=$(find ~/code/src -maxdepth 4 -name .git | sed "s/\/.git$//" | sort | fzf --exact --filter "$*" | fzf -1 -0)
+  WS=$(find -L ~/code/src -maxdepth 4 -name .git | sed "s/\/.git$//" | sort | fzf --exact --filter "$*" | fzf -1 -0)
   [ -z "${WS}" ] && return 0
   cd "${WS}" || return 1
 }
