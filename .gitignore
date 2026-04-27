@@ -34,6 +34,7 @@ play.go
 .venv/
 .vs/
 .vscode/
+.worktrees/
 build/
 dist/
 htmlcov/
