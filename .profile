@@ -112,23 +112,25 @@ alias lgs="git logs"
 alias qgit="git"
 gwta() { git fetch origin main && mkdir -p ~/code/src/worktrees && git worktree add -b lirian/$1 ~/code/src/worktrees/$1 origin/main; }
 gwtd() {
-  local selected WT_PATH WT_BRANCH
+  local selected line WT_PATH WT_BRANCH
 
   selected="$(git worktree list --porcelain | awk '
     /^worktree / { path = substr($0, 10) }
     /^branch / {
       branch = substr($0, 8)
       sub("^refs/heads/", "", branch)
+      if (branch == "main" || branch == "master") next
       print path "\t" branch
     }
-  ' | fzf -1 -0 --delimiter=$'\t' --with-nth=2,1 --prompt='worktree> ')"
+  ' | fzf -m -1 -0 --delimiter=$'\t' --with-nth=2,1 --prompt='worktree> ')"
 
   [ -z "${selected}" ] && return 0
 
-  WT_PATH="${selected%%$'\t'*}"
-  WT_BRANCH="${selected#*$'\t'}"
-
-  git worktree remove "${WT_PATH}" --force && git branch -D "${WT_BRANCH}"
+  while IFS= read -r line; do
+    WT_PATH="${line%%$'\t'*}"
+    WT_BRANCH="${line#*$'\t'}"
+    git worktree remove "${WT_PATH}" --force && git branch -D "${WT_BRANCH}"
+  done <<< "${selected}"
 }
 
 # gcloud aliases
