@@ -32,13 +32,15 @@ scheduled_tasks.lock
 .nx/cache/
 .nx/installation/
 .nx/workspace-data/
+.superpowers/
 .venv/
 .vs/
 .vscode/
 .worktrees/
 build/
 dist/
+docs/superpowers/
 htmlcov/
 node_modules/
 tmp/
-docs/superpowers/
+worktrees/
