@@ -18,6 +18,13 @@
     "paneFlash": true,
     "dockBadge": true,
     "showInMenuBar": true
+  },
+
+  // Sidebar: collapse the working-directory path to just the last folder name
+  // (e.g. "my-project" instead of "code/src/github.com/my-org/...") —
+  // the sidebar is narrow.
+  "sidebar": {
+    "pathLastSegmentOnly": true
   }
 
   /* Recommended for a parallel-agent workflow — merge these keys into the
