@@ -36,6 +36,7 @@ def is_superuser():
 
 
 is_windows = bool(sys.platform == "win32")
+is_macos = bool(sys.platform == "darwin")
 
 
 def make_link(target, link_path, force=False):

@@ -7,7 +7,7 @@ import sys
 
 import click
 
-from lki.utils import check_executable, check_file, is_windows, make_link, run
+from lki.utils import check_executable, check_file, is_macos, is_windows, make_link, run
 
 REGEX_GIT_URLS = (
     re.compile(r"^git@([^:]+):(.*?)(.git)?$"),
@@ -57,8 +57,11 @@ def install():
         _link(".inputrc")
         _link(".profile")
         _link(".tmux.conf")
-        _link("ghostty/config.ghostty", ".config/ghostty/config")
-        _link("cmux/cmux.json", ".config/cmux/cmux.json")
+        if is_macos:
+            # ghostty + cmux are the macOS terminal stack; on WSL/Linux the
+            # terminal is configured elsewhere, so linking them is just noise.
+            _link("ghostty/config.ghostty", ".config/ghostty/config")
+            _link("cmux/cmux.json", ".config/cmux/cmux.json")
         _link("claude/settings.json", ".claude/settings.json")
         _link("claude/CLAUDE.md", ".claude/CLAUDE.md")
         _link("claude/RTK.md", ".claude/RTK.md")
