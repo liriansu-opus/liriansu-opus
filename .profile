@@ -299,7 +299,7 @@ path_prepend "${HOME}/.temporalio/bin"
 export LD_LIBRARY_PATH
 export PATH
 export PIPENV_VERBOSITY=-1
-export UV_NATIVE_TLS=true
+export UV_SYSTEM_CERTS=true
 
 # ssh aliases
 gethost () {
@@ -392,6 +392,6 @@ if grep -qi microsoft /proc/version 2>/dev/null; then
     export WSL_PROXY_ENABLED=0
   fi
 fi
-. "$HOME/.cargo/env"
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
 [ -f ~/.config/ghnoise/ghnoise.sh ] && source ~/.config/ghnoise/ghnoise.sh  # gh notification de-noiser
