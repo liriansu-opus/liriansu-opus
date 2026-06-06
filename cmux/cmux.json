@@ -17,7 +17,18 @@
     "unreadPaneRing": true,
     "paneFlash": true,
     "dockBadge": true,
-    "showInMenuBar": true
+    "showInMenuBar": true,
+    // Per-session sound de-dupe: same agent session (surfaceId) won't crow
+    // twice within the window; different sessions ring independently. Only the
+    // sound is suppressed — visuals (pane ring / sidebar / badge) stay.
+    // Tune the window via CMUX_SOUND_DEDUPE_WINDOW (default 15s).
+    "hooks": [
+      {
+        "id": "dedupe-sound-per-session",
+        "command": "/usr/bin/python3 /Users/lirian/.lki/cmux/hooks/dedupe-sound.py",
+        "timeoutSeconds": 5
+      }
+    ]
   },
 
   // Sidebar: collapse the working-directory path to just the last folder name
