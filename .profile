@@ -392,3 +392,6 @@ if grep -qi microsoft /proc/version 2>/dev/null; then
     export WSL_PROXY_ENABLED=0
   fi
 fi
+. "$HOME/.cargo/env"
+
+[ -f ~/.config/ghnoise/ghnoise.sh ] && source ~/.config/ghnoise/ghnoise.sh  # gh notification de-noiser
