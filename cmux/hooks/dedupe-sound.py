@@ -30,12 +30,13 @@ worst case is "it still crows" — never a swallowed notification.
 
 Tunables (env): CMUX_SOUND_DEDUPE_WINDOW (seconds, default 20).
 """
-import sys
-import os
+
 import json
-import time
+import os
 import shutil
 import subprocess
+import sys
+import time
 from datetime import datetime
 
 WINDOW = float(os.environ.get("CMUX_SOUND_DEDUPE_WINDOW", "20"))
@@ -58,14 +59,12 @@ def _unread_for(key):
         cmux = shutil.which("cmux") or CMUX_FALLBACK
         out = subprocess.run(
             [cmux, "list-notifications", "--json"],
-            capture_output=True, text=True, timeout=2,
+            capture_output=True,
+            text=True,
+            timeout=2,
         ).stdout
         data = json.loads(out) if out.strip() else []
-    return [
-        n for n in data
-        if not n.get("is_read")
-        and (n.get("surface_id") == key or n.get("workspace_id") == key)
-    ]
+    return [n for n in data if not n.get("is_read") and (n.get("surface_id") == key or n.get("workspace_id") == key)]
 
 
 def main():
@@ -88,10 +87,7 @@ def main():
             sys.stdout.write(json.dumps(policy))
             return
 
-        key = (
-            notif.get("surfaceId") or notif.get("surface_id")
-            or notif.get("workspaceId") or notif.get("workspace_id")
-        )
+        key = notif.get("surfaceId") or notif.get("surface_id") or notif.get("workspaceId") or notif.get("workspace_id")
         if not key:
             sys.stdout.write(raw)
             return
@@ -111,10 +107,7 @@ def main():
             suppress = True  # (1) rolling: session is actively firing -> already crowed
         else:
             try:  # (2) reset-on-view: a still-unread prior alert means "not looked at yet"
-                pending = [
-                    n for n in _unread_for(key)
-                    if now - _iso_epoch(n.get("created_at", "")) > SELF_EXCLUDE
-                ]
+                pending = [n for n in _unread_for(key) if now - _iso_epoch(n.get("created_at", "")) > SELF_EXCLUDE]
                 if pending:
                     suppress = True
             except Exception:
