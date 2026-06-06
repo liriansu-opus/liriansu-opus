@@ -1,4 +1,3 @@
-tap "homebrew/cask", "/Users/lirian/play/homebrew-cask"
 tap "homebrew/core"
 tap "manaflow-ai/cmux"
 tap "nguyenphutrong/tap"
