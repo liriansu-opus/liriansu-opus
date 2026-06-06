@@ -1,0 +1,43 @@
+{
+  "$schema": "https://raw.githubusercontent.com/manaflow-ai/cmux/main/web/data/cmux.schema.json",
+  "schemaVersion": 1,
+
+  // This file is managed in ~/.lki/cmux/cmux.json and symlinked to
+  // ~/.config/cmux/cmux.json (wired into `lki install`).
+  // Terminal behavior (font / theme / transparency / keybinds) lives in the
+  // Ghostty config (~/.config/ghostty/config) — cmux inherits it; don't duplicate here.
+  // After editing, run `cmux reload-config` (or press Cmd+Shift+,) — no restart needed.
+  // Full option list: open the $schema URL above.
+
+  // Notification sound: rooster crow on agent notifications (native cmux,
+  // replaces the old afplay Claude hook).
+  "notifications": {
+    "sound": "custom_file",
+    "customSoundFilePath": "/Users/lirian/.claude/sounds/rooster.mp3",
+    "unreadPaneRing": true,
+    "paneFlash": true,
+    "dockBadge": true,
+    "showInMenuBar": true
+  }
+
+  /* Recommended for a parallel-agent workflow — merge these keys into the
+     object above (mind the commas) to enable:
+
+  "terminal": {
+    "autoResumeAgentSessions": true,
+    "agentHibernation": { "enabled": true, "idleSeconds": 1800, "maxLiveTerminals": 12 }
+  },
+  "app": {
+    "newWorkspacePlacement": "afterCurrent",
+    "forkConversationDefaultDestination": "right",
+    "reorderOnNotification": true
+  },
+  "workspaceColors": { "indicatorStyle": "leftRail" },
+  "sidebar": {
+    "showBranchDirectory": true,
+    "showPullRequests": true,
+    "showPorts": true,
+    "watchGitStatus": true
+  }
+  */
+}

@@ -42,6 +42,7 @@ def install():
 
     def _link(src, dst=None):
         target = HOME.joinpath(dst or src)
+        target.parent.mkdir(parents=True, exist_ok=True)
         if os.path.exists(target):
             os.remove(target)
         make_link(repo_path.joinpath(src), target, force=True)
@@ -53,6 +54,8 @@ def install():
         _link(".inputrc")
         _link(".profile")
         _link(".tmux.conf")
+        _link("ghostty/config.ghostty", ".config/ghostty/config")
+        _link("cmux/cmux.json", ".config/cmux/cmux.json")
         if is_windows:
             _link(
                 ".windows-terminal.json",
