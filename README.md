@@ -34,6 +34,11 @@ pip install lki && lki install
 > If you encounter any issues, please [report them as an Issue][issue].
 
 
+## macOS Packages
+
+On a new Mac, after installing [Homebrew](https://brew.sh), restore every tap, formula, and cask from the committed [Brewfile](./Brewfile) with `brew bundle --file ~/.lki/Brewfile`. After installing new packages, refresh the list with `brew bundle dump --file ~/.lki/Brewfile --force`.
+
+
 ## Usage Guide
 
 > [~/.gitconfig](./.gitconfig) contains numerous git aliases:

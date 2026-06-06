@@ -56,6 +56,9 @@ def install():
         _link(".tmux.conf")
         _link("ghostty/config.ghostty", ".config/ghostty/config")
         _link("cmux/cmux.json", ".config/cmux/cmux.json")
+        _link("claude/settings.json", ".claude/settings.json")
+        _link("claude/CLAUDE.md", ".claude/CLAUDE.md")
+        _link("claude/RTK.md", ".claude/RTK.md")
         if is_windows:
             _link(
                 ".windows-terminal.json",
