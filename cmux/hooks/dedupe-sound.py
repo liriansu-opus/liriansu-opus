@@ -6,8 +6,15 @@ write on stdout becomes the effective policy. We only ever touch effects.sound;
 every visual (pane ring, sidebar, badge, banner) is left untouched.
 
 Goal: a session should crow ONCE, then stay silent until you actually deal with
-it — not nag every few seconds. Two mechanisms, OR'd, keyed per agent session
-(surfaceId, falling back to workspaceId):
+it — not nag every few seconds. Three mechanisms, OR'd:
+
+  0. Actively-viewing: if cmux is frontmost (context.appFocused) AND the alert
+     targets the panel you're focused on (context.focusedPanel), you already see
+     it — stay silent. Other (background) sessions still crow, even while cmux is
+     frontmost. No dedup anchor is rolled here, so the next alert crows the moment
+     you look away. This is the only mechanism that needs no session key.
+
+The other two are keyed per agent session (surfaceId, falling back to workspaceId):
 
   1. Rolling window: while a session keeps firing within WINDOW seconds of its
      last alert, the anchor rolls forward, so a busy/looping session crows once
@@ -70,6 +77,17 @@ def main():
         if not isinstance(effects, dict) or not effects.get("sound", False):
             sys.stdout.write(raw)
             return
+
+        # (0) Actively-viewing: if cmux is frontmost AND this notification targets
+        # the panel I'm focused on, I already see it — stay silent. No dedup anchor
+        # is rolled, so the moment I look away the next alert crows normally.
+        # Visuals (ring/badge/flash) are untouched, as always.
+        context = policy.get("context") or {}
+        if context.get("appFocused") and context.get("focusedPanel"):
+            effects["sound"] = False
+            sys.stdout.write(json.dumps(policy))
+            return
+
         key = (
             notif.get("surfaceId") or notif.get("surface_id")
             or notif.get("workspaceId") or notif.get("workspace_id")

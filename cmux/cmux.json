@@ -21,10 +21,11 @@
     // Per-session sound de-dupe (~/.lki/cmux/hooks/dedupe-sound.py): a session
     // crows ONCE, then stays silent while it keeps firing (rolling window) AND
     // until you actually view it (an unread notification = "not looked at yet").
-    // Different sessions ring independently; only the sound is suppressed —
-    // visuals (pane ring / sidebar / badge) stay. Re-arms after the session is
-    // quiet for a full window or you focus it. Tune via
-    // CMUX_SOUND_DEDUPE_WINDOW (default 20s).
+    // Also silent if you're actively viewing the firing session (cmux frontmost
+    // + that pane focused) — background sessions still crow. Different sessions
+    // ring independently; only the sound is suppressed — visuals (pane ring /
+    // sidebar / badge) stay. Re-arms after the session is quiet for a full window
+    // or you focus it. Tune via CMUX_SOUND_DEDUPE_WINDOW (default 20s).
     "hooks": [
       {
         "id": "dedupe-sound-per-session",
