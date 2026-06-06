@@ -25,6 +25,7 @@ output*.xls
 output*.xlsx
 play.go
 scheduled_tasks.lock
+uv.lock
 ~*
 
 .entc/

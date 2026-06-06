@@ -40,6 +40,9 @@ def install():
     else:
         run(f"git -C {repo_path} pull --rebase")
 
+    # Wire the tracked .githooks/ so the pre-commit hook works on any fresh clone.
+    run(f"git -C {repo_path} config core.hooksPath .githooks")
+
     def _link(src, dst=None):
         target = HOME.joinpath(dst or src)
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -92,18 +95,6 @@ def link(target, link_path, force):
         lki link /usr/bin/python3 /usr/bin/python
     """
     make_link(target, link_path, force=force)
-
-
-@entry.command()
-@click.argument("path", default=str(HOME.joinpath(".lki", ".pre-commit")))
-@click.option("-f", "--force", is_flag=True, default=False)
-def hook(path, force):
-    """install git hook
-
-    Examples:
-        lki hook -f
-    """
-    make_link(path, ".git/hooks/pre-commit", force=force)
 
 
 @entry.command()
