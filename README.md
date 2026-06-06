@@ -84,7 +84,7 @@ $ dspm test  # run django test for zaihui/server project
 $ stp  # exec bash into k8s cluster
 ```
 
-> For Vim configuration, see another project [LKI/dotvim][dotvim]
+> For Vim configuration, see another project [liriansu-opus/dotvim][dotvim]
 
 There's much more functionality in this project,
 but the margin here is too small to contain it all. XD
@@ -104,13 +104,13 @@ or if you think a certain command isn't user-friendly enough,
 feel free to [submit an Issue directly in the project.][issue]
 
 
-[badge-build]: https://github.com/LKI/LKI/actions/workflows/build.yml/badge.svg
+[badge-build]: https://github.com/liriansu-opus/liriansu-opus/actions/workflows/build.yml/badge.svg
 [badge-pypi]: https://img.shields.io/pypi/v/lki.svg
-[badge-version]: https://img.shields.io/pypi/pyversions/LKI.svg
-[dotvim]: https://github.com/LKI/dotvim
-[github]: https://github.com/LKI/LKI
-[issue]: https://github.com/LKI/LKI/issues/new
-[license]: https://github.com/LKI/LKI/blob/HEAD/LICENSE
+[badge-version]: https://img.shields.io/pypi/pyversions/lki.svg
+[dotvim]: https://github.com/liriansu-opus/dotvim
+[github]: https://github.com/liriansu-opus/liriansu-opus
+[issue]: https://github.com/liriansu-opus/liriansu-opus/issues/new
+[license]: https://github.com/liriansu-opus/liriansu-opus/blob/HEAD/LICENSE
 [me]: https://www.liriansu.com/about
 [pypi]: https://pypi.org/project/lki/
 [win-env]: https://www.liriansu.com/windows-dev-env

@@ -37,8 +37,8 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/LKI/LKI"
-Repository = "https://github.com/LKI/LKI"
+Homepage = "https://github.com/liriansu-opus/liriansu-opus"
+Repository = "https://github.com/liriansu-opus/liriansu-opus"
 
 [tool.setuptools]
 packages = ["lki"]

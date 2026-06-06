@@ -40,5 +40,5 @@ jobs:
         if: matrix.os != 'windows-latest'
         run: |
           git yes
-          lki clone LKI/LKI
-          test -d ~/code/src/github.com/LKI/LKI || exit 1
+          lki clone liriansu-opus/liriansu-opus
+          test -d ~/code/src/github.com/liriansu-opus/liriansu-opus || exit 1

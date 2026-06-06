@@ -86,7 +86,7 @@
 [commit]
     gpgsign = true
 [github]
-    user = LKI
+    user = liriansu-opus
 [safe]
     directory = C:/Users/lirian/.lki
 [advice]

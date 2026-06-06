@@ -23,7 +23,7 @@ def entry():
     This command will helps you swim through windows and unix,
     git and vim, docker and k8s, and all the fancy.
 
-    See also: https://github.com/LKI/LKI"""
+    See also: https://github.com/liriansu-opus/liriansu-opus"""
 
 
 @entry.command()
@@ -36,7 +36,7 @@ def install():
     check_executable("git")
     repo_path = HOME.joinpath(".lki")
     if not repo_path.exists():
-        run(f"git clone -o o --recursive https://github.com/LKI/LKI.git {repo_path}")
+        run(f"git clone -o o --recursive https://github.com/liriansu-opus/liriansu-opus.git {repo_path}")
     else:
         run(f"git -C {repo_path} pull --rebase")
 
