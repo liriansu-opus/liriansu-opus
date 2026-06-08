@@ -69,8 +69,12 @@ def install():
         _link(".profile")
         _link(".tmux.conf")
         if is_macos:
-            # cmux is the macOS terminal stack; on WSL/Linux the terminal is
-            # configured elsewhere, so linking it is just noise.
+            # cmux is the macOS terminal; it embeds libghostty and reads
+            # ~/.config/ghostty/config for terminal appearance (font / theme /
+            # keybinds), so config.ghostty is cmux's appearance config — NOT a
+            # standalone ghostty app (don't drop it). On WSL/Linux the terminal
+            # is configured elsewhere, so linking these is just noise.
+            _link("ghostty/config.ghostty", ".config/ghostty/config")
             _link("cmux/cmux.json", ".config/cmux/cmux.json")
         _link("claude/settings.json", ".claude/settings.json")
         _link("claude/CLAUDE.md", ".claude/CLAUDE.md")

@@ -1,0 +1,10 @@
+# cmux's terminal-appearance config. cmux embeds libghostty and reads this
+# from ~/.config/ghostty/config (hardcoded path) for font / theme / keybinds —
+# cmux has no native terminal-font keys of its own. This is NOT config for a
+# standalone ghostty app, so don't delete it just because ghostty isn't used.
+copy-on-select = clipboard
+font-family = Cascadia Code NF
+font-size = 15
+font-style = Light
+macos-option-as-alt = true
+term = xterm-256color
