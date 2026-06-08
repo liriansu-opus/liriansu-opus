@@ -88,6 +88,7 @@
 [github]
     user = liriansu-opus
 [safe]
-    directory = C:/Users/lirian/.lki
+    directory = C:/Users/lirian/.lki  # Windows
+    directory = /Users/lirian/.lki  # macOS / Unix
 [advice]
     skippedCherryPicks = false
