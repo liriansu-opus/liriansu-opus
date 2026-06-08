@@ -70,9 +70,8 @@ def install():
         _link(".profile")
         _link(".tmux.conf")
         if is_macos:
-            # ghostty + cmux are the macOS terminal stack; on WSL/Linux the
-            # terminal is configured elsewhere, so linking them is just noise.
-            _link("ghostty/config.ghostty", ".config/ghostty/config")
+            # cmux is the macOS terminal stack; on WSL/Linux the terminal is
+            # configured elsewhere, so linking it is just noise.
             _link("cmux/cmux.json", ".config/cmux/cmux.json")
         _link("claude/settings.json", ".claude/settings.json")
         _link("claude/CLAUDE.md", ".claude/CLAUDE.md")
