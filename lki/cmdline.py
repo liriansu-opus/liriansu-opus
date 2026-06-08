@@ -65,7 +65,6 @@ def install():
     try:
         _link(".gitconfig")
         _link(".gitignore")
-        _link(".ideavimrc")
         _link(".inputrc")
         _link(".profile")
         _link(".tmux.conf")

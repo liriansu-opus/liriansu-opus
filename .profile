@@ -29,14 +29,11 @@ alias ccusage="npx -y ccusage@latest"
 alias conf="vim ~/.profile"
 alias cx="codex --yolo"
 alias cxusage="npx -y @ccusage/codex@latest"
-alias dp="env KUBECONFIG='' dapr"
 alias gdate="date"
 alias gi="gemini --yolo"
 alias la="ls -ah"
 alias ll="ls -lh"
-alias pt="poetry"
 alias reload="source ~/.profile"
-alias sk="skaffold"
 alias sp="scoop"
 alias st="stern --tail 200 --color=always"
 alias ta="tmux attach"
@@ -86,11 +83,6 @@ ggv() {
     vim -- "${FILES[@]}"
   fi
 }
-
-# datarc aliases
-sshpm() { ssh -t "${1}" -- docker exec -it datarc_beat_1 pipenv run python manage.py shell; }
-alias devpm="sshpm dev"
-alias rcpm="sshpm rc"
 
 # brew aliases
 alias bi="brew install"
@@ -150,11 +142,8 @@ gwtd() {
 alias gc="gcloud"
 alias gcp="gcloud projects"
 
-# ackerr/lab aliases
-alias lb="lab browser"
+# lki aliases
 alias lc="lki clone"
-alias lo="lab open -r o"
-alias lop="lab open -r o --subpage pulls"
 
 # node aliases
 alias nd="npm run dev"
@@ -241,8 +230,6 @@ alias kga="kubectl get all"
 alias kgns="kubectl get ns"
 alias kgp="kubectl get pods"
 alias kgpa="kubectl get pods -A"
-alias km="kustomize"
-alias kp="kapp"
 alias kr="kubectl rollout"
 alias krr="kubectl rollout restart"
 alias krs="kubectl rollout status"
