@@ -20,11 +20,8 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install build tools
-        run: |
-          uv pip install --system build
       - name: Build distribution packages
-        run: python -m build
+        run: uv build
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@v1.13.0
         with:

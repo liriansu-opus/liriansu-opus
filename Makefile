@@ -1,29 +1,29 @@
-PYTHON ?= python3
-VENV ?= .venv
-VENV_PYTHON := $(VENV)/bin/python
-VENV_RUFF := $(VENV)/bin/ruff
-
 ensure:
-	$(PYTHON) -m venv $(VENV)
-	$(VENV_PYTHON) -m pip install -U pip
-	$(VENV_PYTHON) -m pip install -e ".[dev]"
+	uv sync --extra dev
 
 fmt: ensure
-	$(VENV_RUFF) check --fix .
-	$(VENV_RUFF) format .
+	uv run ruff check --fix .
+	uv run ruff format .
 
 lint: ensure
-	$(VENV_RUFF) check .
-	$(VENV_RUFF) format --check .
+	uv run ruff check .
+	uv run ruff format --check .
 
 build: ensure
-	$(VENV_PYTHON) -m build
+	uv build
+
+# Single source of truth for the version is pyproject.toml; uv rewrites it.
+bump-patch:
+	uv version --bump patch
+
+bump-minor:
+	uv version --bump minor
 
 test-install: build
-	$(PYTHON) -m venv /tmp/test-lki
-	/tmp/test-lki/bin/pip install dist/*.whl
+	uv venv /tmp/test-lki
+	uv pip install --python /tmp/test-lki dist/*.whl
 	/tmp/test-lki/bin/lki --help
 	rm -rf /tmp/test-lki
 
 clean:
-	rm -rf dist/ build/ *.egg-info/
+	rm -rf dist/ build/ *.egg-info/ .ruff_cache/

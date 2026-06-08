@@ -1,6 +1,7 @@
 import ctypes
 import os
 import shutil
+import subprocess
 import sys
 
 import click
@@ -63,7 +64,9 @@ def rm(path):
 
 
 def run(*commands):
-    """run commands"""
+    """Run shell commands in order, aborting on the first one that fails."""
     for command in commands:
         click.echo(f"(Running)> {command}")
-        os.system(command)
+        result = subprocess.run(command, shell=True)  # noqa: S602 - trusted, self-authored commands
+        if result.returncode != 0:
+            raise error.LKIError(f"command failed (exit {result.returncode}): {command}")

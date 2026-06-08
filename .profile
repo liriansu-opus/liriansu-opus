@@ -21,7 +21,7 @@ ld_library_path_prepend () {
 
 # general aliases
 alias ..="cd .."
-alias bv="bumpversion"
+alias bv="uv version --bump"
 alias cc="claude"
 alias cca="claude agents"
 alias ccc="CLAUDE_CODE_USE_VERTEX=1 CLOUD_ML_REGION=global claude"

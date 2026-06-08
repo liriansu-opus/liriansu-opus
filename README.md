@@ -59,21 +59,19 @@ $ git yes   # show what happened yesterday
 $ cat ~/.profile
 
 # Common abbreviations
-$ please visudo  # `sudo visudo`
-$ g st  # `git status`
+$ g st           # `git status`
+$ reload         # re-source ~/.profile after an edit
 $ pv sync --dev  # `pipenv sync --dev`
 
 # Compound subcommand abbreviations
 $ dpa  # `docker ps -a`
 $ kgp  # `kubectl get pods`
 $ gcm  # `git cm`
-$ gsh  # ssh through gate
 
-# Personal shortcuts that you might not need
-# I'm just showing you what commands I commonly run
-$ svl  # go into my blog repo
-$ dspm test  # run django test for zaihui/server project
-$ stp  # exec bash into k8s cluster
+# fzf-powered helpers that I reach for constantly
+$ ws <keyword>    # jump into a matching repo under ~/code/src
+$ csh <host>      # ssh into a matching host from ~/.ssh/*config
+$ kbash <pod>     # exec bash into a matching k8s pod
 ```
 
 > For Vim configuration, see another project [liriansu-opus/dotvim][dotvim]

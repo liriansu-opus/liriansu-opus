@@ -7,6 +7,7 @@ import sys
 
 import click
 
+from lki import error
 from lki.utils import check_executable, check_file, is_macos, is_windows, make_link, run
 
 REGEX_GIT_URLS = (
@@ -17,7 +18,18 @@ REGEX_GIT_URLS = (
 HOME = pathlib.Path("~").expanduser()
 
 
-@click.group()
+class LKIGroup(click.Group):
+    """Render an LKIError as a friendly one-line message instead of a traceback."""
+
+    def invoke(self, ctx):
+        try:
+            return super().invoke(ctx)
+        except error.LKIError as ex:
+            click.echo(f"Error: {ex}", err=True)
+            ctx.exit(1)
+
+
+@click.group(cls=LKIGroup)
 def entry():
     """Lirian Su's useful configuration and shortcuts.
     This command will helps you swim through windows and unix,
