@@ -33,6 +33,7 @@ uv.lock
 .nx/cache/
 .nx/installation/
 .nx/workspace-data/
+.skylos/
 .superpowers/
 .venv/
 .vs/
