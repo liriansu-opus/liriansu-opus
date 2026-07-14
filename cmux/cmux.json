@@ -55,11 +55,11 @@
     ]
   },
 
-  // Links: don't trap them in cmux's embedded browser — let the OS default
-  // browser (Chrome) handle them. openTerminalLinksInCmuxBrowser covers
-  // Cmd-clicked links; interceptTerminalOpenCommand... covers shell `open <url>`.
+  // Links: keep Cmd-clicked terminal links inside cmux's embedded browser.
+  // interceptTerminalOpenCommand... still leaves shell `open <url>` to the OS
+  // default browser.
   "browser": {
-    "openTerminalLinksInCmuxBrowser": false,
+    "openTerminalLinksInCmuxBrowser": true,
     "interceptTerminalOpenCommandInCmuxBrowser": false
   },
 
