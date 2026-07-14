@@ -39,10 +39,12 @@ uv.lock
 .vs/
 .vscode/
 .worktrees/
+codex-worktrees/
 build/
 dist/
 docs/superpowers/
 htmlcov/
 node_modules/
+.pnpm-store/
 tmp/
 worktrees/
