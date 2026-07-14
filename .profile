@@ -22,6 +22,7 @@ ld_library_path_prepend () {
 # general aliases
 alias ..="cd .."
 alias bv="uv version --bump"
+alias cbo="cmux browser open"
 alias cc="claude"
 alias cca="claude agents"
 alias ccc="CLAUDE_CODE_USE_VERTEX=1 CLOUD_ML_REGION=global claude"
@@ -93,11 +94,39 @@ alias bs="brew search"
 # git aliases
 alias frd="git f && git rd"
 alias g="git"
-alias gbad="git branch --list | grep -Ev '^[*+] ' | fzf -m -1 -0 | xargs -I {} git branch -D {} && git worktree list | grep 'detached HEAD' | xargs -I {} git worktree remove {} --force"
+gbad() {
+  local selected branch wt status
+
+  status=0
+  selected="$(git branch --list | grep -Ev '^[*+] ' | fzf -m -1 -0)" || return $?
+  if [ -n "${selected}" ]; then
+    while IFS= read -r branch; do
+      branch="${branch#"${branch%%[![:space:]]*}"}"
+      [ -z "${branch}" ] && continue
+      git branch -D "${branch}" || status=1
+    done <<< "${selected}"
+  fi
+
+  while IFS= read -r wt; do
+    [ -z "${wt}" ] && continue
+    if [ -n "$(git -C "${wt}" status --porcelain=v1)" ]; then
+      printf 'gbad: skipping dirty detached worktree: %s\n' "${wt}" >&2
+      status=1
+      continue
+    fi
+    git worktree remove "${wt}" || status=1
+  done < <(git worktree list --porcelain | awk '
+    /^worktree / { path = substr($0, 10) }
+    /^detached$/ { print path }
+  ')
+
+  return "${status}"
+}
 alias gcr="gf && gbr -r | grep -E 'lirian[-/]' | sed 's#origin/##' | awk '{\$1=\$1};1' | fzf | xargs -I{} bash -c 'git checkout {} && git reset --hard origin/{}'"
 alias ghb="gh browse"
 alias ghpc="gpd && gh pr create -f && ghpr"
 alias ghpr="gh pr view -w"
+ghlgtm() { gh pr review "${1}" --approve --body "lgtm"; }
 alias gof="git log --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --color=always | head -n 1000 | fzf --ansi --no-sort --preview 'git show {1} --color=always' --preview-window=:wrap | cut -d' ' -f1"
 alias it="git"
 alias lg="git logg"
