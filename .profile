@@ -411,3 +411,9 @@ fi
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
 [ -f ~/.config/ghnoise/ghnoise.sh ] && source ~/.config/ghnoise/ghnoise.sh  # gh notification de-noiser
+
+# cmux per-workspace CPU monitor: its control socket only accepts processes
+# started inside cmux, so each cmux shell makes sure the monitor is alive.
+if [ -n "${CMUX_WORKSPACE_ID:-}" ] && [ -x "$HOME/.lki/cmux/ensure-cpu-monitor.sh" ]; then
+  "$HOME/.lki/cmux/ensure-cpu-monitor.sh" || true
+fi
