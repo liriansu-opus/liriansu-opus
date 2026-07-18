@@ -2,13 +2,12 @@
 
 # Writing style
 
-- **Never hard-wrap Markdown.** Write each paragraph as a single long line; only break at real paragraph / list / heading boundaries. Applies to PR descriptions, docs (README, design docs, ONBOARDING), and any `.md` output. Renderers reflow automatically — hard wraps create diff noise, awkward copy-paste, and ugly mid-sentence breaks after edits. (Does not apply to plain source-code comments or commit message bodies.)
+- Never hard-wrap Markdown prose; break only at paragraphs, lists, or headings. Source comments and commit-message bodies are exempt.
 
-# Superpowers planning workflow — no mid-flow approval gates
+# Superpowers workflow
 
-- When using the superpowers **brainstorming / writing-plans / executing-plans / subagent-driven-development** skills, do NOT stop to get my approval of the design, spec, or plan, and do NOT pause at per-section or per-batch review checkpoints — treat those skills' approval gates (including brainstorming's `<HARD-GATE>`, its "User Review Gate", writing-plans' "Execution Handoff" choice, and executing-plans' batch checkpoints) as overridden. I don't need to read the long plan. Instead: if the task is genuinely ambiguous, ask all clarifying questions in ONE batched message up front; otherwise state your assumptions and proceed. Then write the spec/plan, auto-pick the recommended execution path (subagent-driven when subagents are available) without asking, and execute every task end-to-end. Stop only at the very end and present the finished result so I can test and approve it — the final review is the ONLY approval gate I want. (Genuine blockers — missing dependency, repeated verification failure, a destructive/irreversible action — still stop and ask, as those skills already require.)
+- For superpowers brainstorming, planning, and execution skills, skip design, plan, handoff, section, and batch approval gates. Ask genuine ambiguities once up front; otherwise state assumptions, choose the recommended path, prefer subagent-driven execution when available, and execute end-to-end. Stop only for genuine blockers or final review.
 
-# Memory discipline — save sparingly
+# Memory discipline
 
-The built-in auto-memory feature nudges constant saving; resist it. The MEMORY.md index is reloaded EVERY turn, so every line is a permanent per-turn token tax. Only save a memory when ALL hold: the fact is durable, cross-session, and non-obvious; it's about me / my preferences / a hard policy or recurring gotcha (the `user` / `feedback` / `reference` kinds). NEVER auto-save project snapshots, task/ticket state, or one-off investigations — those go to Linear or repo docs, not memory. When unsure, don't save — ask me first. Keep each memory to ONE fact (≤~300 tokens); if it's growing into a document, it's in the wrong place.
-
+Save only durable, cross-session, non-obvious user preferences, policies, or recurring gotchas. Never save project snapshots, task or ticket state, or one-off investigations; use Linear or repo docs. Keep one fact per memory (at most about 300 tokens); when unsure, ask first.
