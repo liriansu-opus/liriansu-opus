@@ -34,18 +34,17 @@
     "agentPermissionPrompt": true,
     "agentTurnComplete": "whenIdle",
     "agentIdleReminder": true,
-    // Per-session sound de-dupe (~/.lki/cmux/hooks/dedupe-sound.py): a session
-    // crows at most ONCE until dealt with. Three mechanisms, OR'd:
+    // Per-session sound de-dupe (~/.lki/cmux/hooks/dedupe-sound.py): a busy
+    // session crows once, then stays silent until a full quiet window. Two mechanisms:
     //   0. actively-viewing — cmux frontmost + that pane focused → silent
     //      (cmux never suppresses sound for the focused pane natively: cmux#942);
     //   1. rolling window — re-fires within CMUX_SOUND_DEDUPE_WINDOW (20s) stay
     //      silent, re-arms after a full quiet window;
-    //   2. reset-on-view — a still-unread prior alert (cmux list-notifications)
-    //      means "not looked at yet" → silent; focusing the workspace clears
-    //      unread and re-arms the next crow.
-    // Category gating above picks WHICH events deserve a crow; this hook keeps
-    // it to ONE crow per session per attention episode. Only sound is
-    // suppressed — visuals (pane ring / sidebar / badge) stay. Fail-open.
+    // The hook intentionally does not call `cmux list-notifications`: reconnecting
+    // from inside notification-policy evaluation can feed socket/main-thread work
+    // back into sidebar layout. Category gating above picks WHICH events deserve
+    // a crow; this hook suppresses rapid repeats. Only sound is suppressed —
+    // visuals (pane ring / sidebar / badge) stay. Fail-open.
     "hooks": [
       {
         "id": "dedupe-sound-per-session",

@@ -5,8 +5,8 @@ cmux pipes a notification "policy" JSON to this hook on stdin; whatever JSON we
 write on stdout becomes the effective policy. We only ever touch effects.sound;
 every visual (pane ring, sidebar, badge, banner) is left untouched.
 
-Goal: a session should crow ONCE, then stay silent until you actually deal with
-it — not nag every few seconds. Three mechanisms, OR'd:
+Goal: a busy session should crow once, then stay silent until it has been quiet
+for a full rolling window — not nag every few seconds. Two mechanisms are OR'd:
 
   0. Actively-viewing: if cmux is frontmost (context.appFocused) AND the alert
      targets the panel you're focused on (context.focusedPanel), you already see
@@ -14,18 +14,18 @@ it — not nag every few seconds. Three mechanisms, OR'd:
      frontmost. No dedup anchor is rolled here, so the next alert crows the moment
      you look away. This is the only mechanism that needs no session key.
 
-The other two are keyed per agent session (surfaceId, falling back to workspaceId):
+The rolling window is keyed per agent session (surfaceId, falling back to
+workspaceId):
 
   1. Rolling window: while a session keeps firing within WINDOW seconds of its
      last alert, the anchor rolls forward, so a busy/looping session crows once
      and stays silent until it goes quiet for a full WINDOW (then re-arms).
 
-  2. Reset-on-view: if the session still has an UNREAD notification older than a
-     couple seconds (i.e. you were already alerted and haven't looked), stay
-     silent. Focusing the workspace makes cmux clear/read its notifications, which
-     re-arms the next crow. This is queried live via `cmux list-notifications`.
+The hook deliberately does not call the cmux CLI. Notification policy evaluation
+already runs inside cmux; reconnecting with `cmux list-notifications` from that
+hook can feed socket/main-thread work back into notification and sidebar layout.
 
-Fail-open by design: any parse/IO/query error leaves the policy unchanged, so the
+Fail-open by design: any parse/IO error leaves the policy unchanged, so the
 worst case is "it still crows" — never a swallowed notification.
 
 Tunables (env): CMUX_SOUND_DEDUPE_WINDOW (seconds, default 20).
@@ -33,38 +33,11 @@ Tunables (env): CMUX_SOUND_DEDUPE_WINDOW (seconds, default 20).
 
 import json
 import os
-import shutil
-import subprocess
 import sys
 import time
-from datetime import datetime
 
 WINDOW = float(os.environ.get("CMUX_SOUND_DEDUPE_WINDOW", "20"))
-SELF_EXCLUDE = 2.0  # ignore unread newer than this — it's the current alert itself
 STATE_DIR = os.path.join(os.environ.get("TMPDIR", "/tmp"), "cmux-sound-dedupe")
-CMUX_FALLBACK = "/Applications/cmux.app/Contents/Resources/bin/cmux"
-
-
-def _iso_epoch(ts):
-    return datetime.fromisoformat(ts.replace("Z", "+00:00")).timestamp()
-
-
-def _unread_for(key):
-    """Live unread notifications whose surface/workspace matches key."""
-    test = os.environ.get("CMUX_SOUND_DEDUPE_TEST_JSON")  # for offline unit tests
-    if test:
-        with open(test) as f:
-            data = json.load(f)
-    else:
-        cmux = shutil.which("cmux") or CMUX_FALLBACK
-        out = subprocess.run(
-            [cmux, "list-notifications", "--json"],
-            capture_output=True,
-            text=True,
-            timeout=2,
-        ).stdout
-        data = json.loads(out) if out.strip() else []
-    return [n for n in data if not n.get("is_read") and (n.get("surface_id") == key or n.get("workspace_id") == key)]
 
 
 def main():
@@ -102,16 +75,7 @@ def main():
         except (OSError, ValueError):
             last = 0.0
 
-        suppress = False
-        if now - last < WINDOW:
-            suppress = True  # (1) rolling: session is actively firing -> already crowed
-        else:
-            try:  # (2) reset-on-view: a still-unread prior alert means "not looked at yet"
-                pending = [n for n in _unread_for(key) if now - _iso_epoch(n.get("created_at", "")) > SELF_EXCLUDE]
-                if pending:
-                    suppress = True
-            except Exception:
-                pass  # query failed -> don't suppress on this basis (fail-open)
+        suppress = now - last < WINDOW
 
         if suppress:
             effects["sound"] = False
