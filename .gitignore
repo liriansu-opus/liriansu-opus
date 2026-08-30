@@ -40,6 +40,8 @@ uv.lock
 .vscode/
 .worktrees/
 codex-worktrees/
+# Names internal repos and workflows; must not land in this public repo.
+claude/skills/lki-ship/
 build/
 dist/
 docs/superpowers/
