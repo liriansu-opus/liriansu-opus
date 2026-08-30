@@ -23,13 +23,15 @@ ld_library_path_prepend () {
 alias ..="cd .."
 alias bv="uv version --bump"
 alias cbo="cmux browser open"
-alias cc="claude"
+alias cc="claude --model default"
 alias cca="claude agents"
 alias ccc="CLAUDE_CODE_USE_VERTEX=1 CLOUD_ML_REGION=global claude"
+alias ccf="claude --model fable"
 alias ccusage="npx -y ccusage@latest"
 alias conf="vim ~/.profile"
 alias cx="codex --yolo"
 alias cxusage="npx -y @ccusage/codex@latest"
+alias dsh="npx @deepseek-ai/dsh"
 alias gdate="date"
 alias gi="gemini --yolo"
 alias la="ls -ah"
@@ -191,7 +193,6 @@ gguv() { go get -u -v github.com/"${1}"; }
 
 # python/pip/pipenv aliases
 alias pf="pipenv run fab"
-alias pi="python -m pip"
 alias pii="python -m pip install"
 alias piiu="python -m pip install -U"
 alias pilo="python -m pip install -U pip black && python -m pip list --outdated"
@@ -238,7 +239,7 @@ dkiv() { MSYS_NO_PATHCONV=1 dki -v "$(pwd)":/app --workdir /app "$@"; }
 dri() { docker rmi "$(docker images -q)"; }
 drm() { docker rm "${1}"; }
 drmf() { docker stop "${1}"; docker rm "${1}"; }
-dsh() { docker exec -it "$(docker ps -aqf "name=${1}")" sh; }
+# dsh() { docker exec -it "$(docker ps -aqf "name=${1}")" sh; }
 dstop() { docker stop "$(docker ps -a -q)"; }
 
 alias ts="dki soimort/translate-shell"
