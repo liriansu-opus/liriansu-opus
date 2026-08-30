@@ -351,6 +351,10 @@ source ~/.lki/scripts/git_aliases.bash
 
 ## enable oh-my-posh
 if checkCMD oh-my-posh; then
+  # cmux exports its one-shot Bash bootstrap through PROMPT_COMMAND.  Oh My
+  # Posh preserves that export flag when converting PROMPT_COMMAND to an array,
+  # which makes cmux/Ghostty misdetect the array and prepend an invalid `;`.
+  export -n PROMPT_COMMAND 2>/dev/null || true
   eval "$(oh-my-posh init bash --config ~/.lki/.oh-my-posh.json | sed 's|\[\[ -v MC_SID \]\]|[[ -n "$MC_SID" ]]|')"
 fi
 
