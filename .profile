@@ -369,12 +369,19 @@ if checkCMD pyenv; then
 fi
 
 ## enable nvm
-if [ -d /opt/homebrew/opt/nvm ]; then
-  export NVM_DIR=/opt/homebrew/opt/nvm
-else
-  export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+# Keep NVM_DIR out of the Homebrew formula dir: it is a symlink into
+# Cellar/nvm/<version>, so `brew upgrade nvm` takes every installed node with it.
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+# An install killed mid-download leaves an ownerless lock dir under
+# $NVM_DIR/.cache/locks. nvm records no owner in it, so it cannot tell the
+# holder died; while this is 0 it never reclaims one and every later shell
+# blocks for the full 600s timeout.
+export NVM_INSTALL_LOCK_STALE=10
+if [ -s /opt/homebrew/opt/nvm/nvm.sh ]; then
+  \. /opt/homebrew/opt/nvm/nvm.sh
+elif [ -s "$NVM_DIR/nvm.sh" ]; then
+  \. "$NVM_DIR/nvm.sh"
 fi
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" || true
 
 ## auto-switch node version on cd
 _nvm_auto_use() {
@@ -384,7 +391,10 @@ _nvm_auto_use() {
     local nvmrc_node_version
     nvmrc_node_version=$(nvm version "$(cat "$nvmrc_path")")
     if [ "$nvmrc_node_version" = "N/A" ]; then
-      nvm install
+      # Never install from here. This runs on every shell start and every cd, so
+      # one slow download stalls every new terminal until it finishes.
+      printf 'nvm: %s wants node %s, which is not installed — run `nvm install`\n' \
+        "${nvmrc_path}" "$(cat "${nvmrc_path}")" >&2
     elif [ "$nvmrc_node_version" != "$(nvm version)" ]; then
       nvm use
     fi
