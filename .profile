@@ -29,7 +29,6 @@ alias ccc="CLAUDE_CODE_USE_VERTEX=1 CLOUD_ML_REGION=global claude"
 alias ccf="claude --model fable"
 alias ccusage="npx -y ccusage@latest"
 alias conf="vim ~/.profile"
-alias cx="codex --yolo"
 alias cxusage="npx -y @ccusage/codex@latest"
 alias dsh="npx @deepseek-ai/dsh"
 alias gdate="date"
@@ -56,6 +55,16 @@ if [[ "${OS}" == "Windows_NT" || -z "${OS}" ]]; then
 fi
 
 # general functions
+unalias cx 2>/dev/null
+cx() (
+  local cx_open_files_limit
+  cx_open_files_limit="$(ulimit -Sn)"
+  if [[ "${cx_open_files_limit}" != "unlimited" && "${cx_open_files_limit}" -lt 4096 ]]; then
+    ulimit -Sn 4096 || return
+  fi
+  codex --yolo "$@"
+)
+
 update () {
   checkRun scoop update -a
   checkRun scoop cleanup -a
