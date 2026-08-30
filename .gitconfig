@@ -92,3 +92,11 @@
     directory = /Users/lirian/.lki  # macOS / Unix
 [advice]
     skippedCherryPicks = false
+# Written by `gh auth setup-git`; the empty helper resets any inherited one.
+# Resolved through PATH rather than a Homebrew path, so it also works elsewhere.
+[credential "https://github.com"]
+    helper =
+    helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+    helper =
+    helper = !gh auth git-credential
