@@ -441,3 +441,6 @@ fi
 if [ -n "${CMUX_WORKSPACE_ID:-}" ] && [ -x "$HOME/.lki/cmux/ensure-cpu-monitor.sh" ]; then
   "$HOME/.lki/cmux/ensure-cpu-monitor.sh" || true
 fi
+
+# Machine-local overrides, kept out of this public repo.
+[ -f ~/.profile.local ] && source ~/.profile.local || true
