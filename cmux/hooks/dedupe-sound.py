@@ -31,13 +31,15 @@ worst case is "it still crows" — never a swallowed notification.
 Tunables (env): CMUX_SOUND_DEDUPE_WINDOW (seconds, default 20).
 """
 
+import fcntl
+import hashlib
 import json
+import math
 import os
 import sys
 import time
 
-WINDOW = float(os.environ.get("CMUX_SOUND_DEDUPE_WINDOW", "20"))
-STATE_DIR = os.path.join(os.environ.get("TMPDIR", "/tmp"), "cmux-sound-dedupe")
+STATE_DIR = os.path.join(os.path.expanduser("~"), ".cache", "lki", "cmux", "sound")
 
 
 def main():
@@ -65,27 +67,31 @@ def main():
             sys.stdout.write(raw)
             return
 
-        os.makedirs(STATE_DIR, exist_ok=True)
-        safe = "".join(c for c in str(key) if c.isalnum() or c in "-_") or "default"
-        path = os.path.join(STATE_DIR, safe)
-        now = time.time()
-        try:
-            with open(path) as f:
-                last = float(f.read().strip() or 0)
-        except (OSError, ValueError):
-            last = 0.0
-
-        suppress = now - last < WINDOW
-
+        window = float(os.environ.get("CMUX_SOUND_DEDUPE_WINDOW", "20"))
+        if not math.isfinite(window) or window < 0:
+            raise ValueError("invalid dedupe window")
+        os.makedirs(STATE_DIR, mode=0o700, exist_ok=True)
+        # Fixed lock stripes bound disk usage without unlinking a live lock inode.
+        stripe = int.from_bytes(hashlib.sha256(str(key).encode()).digest()[:2], "big") % 32
+        path = os.path.join(STATE_DIR, str(stripe))
+        with open(path, "a+") as state:
+            fcntl.flock(state, fcntl.LOCK_EX)
+            state.seek(0)
+            try:
+                anchors = json.load(state)
+            except ValueError:
+                anchors = {}
+            now = time.monotonic()
+            anchors = {k: v for k, v in anchors.items() if 0 <= now - v < window}
+            suppress = str(key) in anchors
+            anchors[str(key)] = now
+            state.seek(0)
+            state.truncate()
+            json.dump(anchors, state)
+            state.flush()
+        # Only change sound after a successful state write (fail open on IO errors).
         if suppress:
             effects["sound"] = False
-        # Roll the anchor on every sound-eligible alert so a continuously-firing
-        # session never re-crows until it has been quiet for a full WINDOW.
-        try:
-            with open(path, "w") as f:
-                f.write(str(now))
-        except OSError:
-            pass
         sys.stdout.write(json.dumps(policy))
     except Exception:
         sys.stdout.write(raw)  # fail-open: never swallow a notification

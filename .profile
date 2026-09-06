@@ -71,7 +71,7 @@ update () {
   checkRun scoop cache rm -a
   git -C ~/.vim pull --rebase
   git -C ~/.lki pull --rebase
-  checkRun python -m pip install -U pip setuptools wheel lki virtualenv pipenv pynvim
+  checkRun python -m pip install -U pip setuptools wheel virtualenv pipenv pynvim
   checkRun go install github.com/oligot/go-mod-upgrade@latest
   checkRun npm i -g npm
   checkRun brew update
@@ -181,9 +181,6 @@ gwtd() {
 # gcloud aliases
 alias gc="gcloud"
 alias gcp="gcloud projects"
-
-# lki aliases
-alias lc="lki clone"
 
 # node aliases
 alias nd="npm run dev"

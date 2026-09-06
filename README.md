@@ -1,6 +1,6 @@
 # Lirian Su's Configuration
 
-[![Build Status][badge-build]][github] [![PyPI][badge-pypi]][pypi] [![PyPI][badge-version]][pypi]
+[![Build Status][badge-build]][github]
 
 Hello, [I'm Lirian Su][me]. I work primarily on macOS these days, and frequently on Unix systems too (cloud servers or WSL). Because I set up new environments so often, I keep this project to sync my various configurations across every machine I touch.
 
@@ -11,19 +11,47 @@ This repo happens to share my GitHub username, so GitHub also renders its README
 
 I'm lazy and primarily drive everything through shortcuts and hotkeys. This project defines numerous abbreviations, but the changes are purely additive — they don't alter any existing command habits.
 
-For convenient installation, I've written the whole setup process as Python scripts. (So the first thing I do on a new computer is install a Python environment.)
+Configurations live in `~/.lki` and are linked into each application's config directory.
 
 
-## Quick Installation
+## Setup
 
-First, ensure you have Python 3.12+ in your environment, then install with `pip`:
+Clone this repository once (keep an existing `~/.lki` checkout):
 
+```bash
+git clone https://github.com/liriansu-opus/liriansu-opus.git ~/.lki
+git -C ~/.lki config core.hooksPath .githooks
 ```
-pip install lki && lki install
+
+On macOS or Linux/WSL, back up any existing destination files, then link the configurations you want. These commands deliberately refuse to overwrite existing files:
+
+```bash
+for file in .gitconfig .gitignore .inputrc .profile .tmux.conf; do
+  ln -s "$HOME/.lki/$file" "$HOME/$file"
+done
+mkdir -p ~/.claude
+for file in settings.json CLAUDE.md RTK.md; do
+  ln -s "$HOME/.lki/claude/$file" "$HOME/.claude/$file"
+done
 ```
 
-> This command supports Unix, macOS, and Windows environments.
-> If you encounter any issues, please [report them as an Issue][issue].
+The shell configuration targets Bash. Ensure your interactive Bash startup file sources `~/.profile`; put machine-specific overrides in `~/.profile.local`.
+
+For cmux on macOS:
+
+```bash
+mkdir -p ~/.config/ghostty ~/.config/cmux
+ln -s ~/.lki/ghostty/config.ghostty ~/.config/ghostty/config
+ln -s ~/.lki/cmux/cmux.json ~/.config/cmux/cmux.json
+```
+
+On native Windows, copy `.windows-terminal.json` into Windows Terminal's settings file (open it from Terminal settings). Use the Bash setup above inside WSL.
+
+Update configurations with `git -C ~/.lki pull --rebase`. Existing symlinks continue to work. The former Python CLI and PyPI release workflow have been retired; uninstall an old pip installation with `python -m pip uninstall lki`. Use `git clone` and `ln -s` directly in place of its clone/link commands.
+
+## Development
+
+Run `make lint` (requires uv) and `make test` (Python 3.12+). Python is used for the cmux helpers, with no installable package or third-party runtime dependencies. See [cmux maintenance notes](cmux/README.md) for lifecycle and diagnostic details.
 
 
 ## macOS Packages
@@ -90,11 +118,8 @@ No worries — whether it's about the project or about me personally, or if you 
 
 
 [badge-build]: https://github.com/liriansu-opus/liriansu-opus/actions/workflows/build.yml/badge.svg
-[badge-pypi]: https://img.shields.io/pypi/v/lki.svg
-[badge-version]: https://img.shields.io/pypi/pyversions/lki.svg
 [dotvim]: https://github.com/liriansu-opus/dotvim
 [github]: https://github.com/liriansu-opus/liriansu-opus
 [issue]: https://github.com/liriansu-opus/liriansu-opus/issues/new
 [license]: https://github.com/liriansu-opus/liriansu-opus/blob/HEAD/LICENSE
 [me]: https://www.liriansu.com/about
-[pypi]: https://pypi.org/project/lki/

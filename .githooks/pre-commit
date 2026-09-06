@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Single pre-commit hook (wired via `core.hooksPath=.githooks`, set by `lki install`):
+# Single pre-commit hook (wired via `core.hooksPath=.githooks`, see README setup):
 #   1. Regenerate scripts/git_aliases.bash when .gitconfig is staged.
 #   2. Lint/format staged Python files with ruff.
 set -euo pipefail

@@ -3,7 +3,7 @@
   "schemaVersion": 1,
 
   // This file is managed in ~/.lki/cmux/cmux.json and symlinked to
-  // ~/.config/cmux/cmux.json (wired into `lki install`).
+  // ~/.config/cmux/cmux.json (see README setup).
   // Terminal behavior (font / theme / transparency / keybinds) lives in the
   // Ghostty config (~/.config/ghostty/config) — cmux inherits it; don't duplicate here.
   // After editing, run `cmux reload-config` (or press Cmd+Shift+,) — no restart needed.

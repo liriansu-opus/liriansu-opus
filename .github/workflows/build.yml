@@ -2,44 +2,28 @@ name: Build
 
 on:
   push:
-    branches: [ master, dev ]
+    branches: [master, dev]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
-  build:
+  check:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        python-version: [ '3.12', '3.13', '3.14' ]
-        os: [ macos-latest, ubuntu-latest, windows-latest ]
+        os: [macos-latest, ubuntu-latest]
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
-      - name: Install uv
-        uses: astral-sh/setup-uv@v8.2.0
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v8.2.0
+      - uses: actions/setup-python@v6
         with:
-          enable-cache: true
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v6
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install package
+          python-version: '3.12'
+      - run: make lint test
+      - name: Check shell syntax
+        shell: bash
         run: |
-          uv pip install --system -e ".[dev]"
-      - name: Check code style
-        if: matrix.python-version == '3.12'
-        run: |
-          ruff check .
-          ruff format --check .
-      - name: Config Installation
-        if: matrix.os != 'windows-latest'
-        run: |
-          lki install
-          lki install
-      - name: Config Verification
-        if: matrix.os != 'windows-latest'
-        run: |
-          git yes
-          lki clone liriansu-opus/liriansu-opus
-          test -d ~/code/src/github.com/liriansu-opus/liriansu-opus || exit 1
+          bash -n .profile
+          bash -n .githooks/pre-commit
+          for file in scripts/* cmux/*.sh claude/skills/*/*.sh; do
+            bash -n "$file"
+          done

@@ -24,7 +24,7 @@ colour drains away within one window of the load stopping. The cost: a burst
 that finishes within a few seconds (a lone tsc / eslint run) no longer
 registers. Accepted — those were exactly the false alarms.
 
-Display policy: only a workspace at/above AMBER gets a *description* ("<heat>
+Display policy: only a workspace at/above RED gets a *description* ("<heat>
 <n>%"); everything quieter has its description cleared. A description is a
 full-height detail row in the native sidebar, so labelling every workspace would
 burn a line per workspace to say "fine". At rest the sidebar looks untouched; a
@@ -58,18 +58,19 @@ Only limitation: a process orphaned to launchd (its intermediate parent died)
 loses the tree link and won't be attributed — rare for a live hog.
 """
 
+import fcntl
 import json
 import os
 import re
+import signal
 import subprocess
 import time
+from pathlib import Path
 from subprocess import DEVNULL, Popen
 
 CMUX = "/Applications/cmux.app/Contents/Resources/bin/cmux"
-STATE = "/tmp/cmux-cpu-monitor.state.json"
-# Touched on every successful cmux read. The guard script uses its freshness to
-# tell a healthy monitor from a locked-out one.
-HEARTBEAT = "/tmp/cmux-cpu-monitor.alive"
+RUNTIME = Path(os.environ.get("CMUX_MONITOR_DIR", str(Path.home() / ".cache/lki/cmux")))
+HEARTBEAT = RUNTIME / "heartbeat"
 
 # Seconds between cpu-time snapshots (interval resolution).
 SAMPLE_DT = 3
@@ -77,9 +78,7 @@ SAMPLE_DT = 3
 # startup burst to below AMBER, short enough that a real hog shows AMBER in
 # ~10s and RED in ~30s.
 AVG_WINDOW = 30
-# Core-% heat thresholds. AMBER is also the "show a row at all" floor — below it
-# a workspace shows nothing. Lower AMBER to surface milder load, raise it for
-# less noise.
+# Core-% heat thresholds: AMBER adds color; RED adds a description.
 RED, AMBER = 100, 40
 # Round display to nearest N% to debounce description writes.
 BUCKET = 5
@@ -107,7 +106,7 @@ def cmux(*args):
     try:
         r = subprocess.run([CMUX, *args], capture_output=True, text=True, timeout=6)
         LAST_ERR = f"rc={r.returncode} err={r.stderr.strip()[:120]!r} out={r.stdout.strip()[:60]!r}"
-        return r.stdout
+        return r.stdout if r.returncode == 0 else ""
     except Exception as e:
         LAST_ERR = f"EXC {e!r}"
         return ""
@@ -237,15 +236,67 @@ def workspace_of_pid(procs, roots):
 
 
 def known_workspaces():
-    """{workspace_id: (description, custom_color_hex)} from cmux."""
-    out = {}
+    """Return a valid workspace snapshot, or None on RPC/schema failure."""
     try:
-        data = json.loads(cmux("rpc", "workspace.list") or "{}")
-        for w in data.get("workspaces", []):
-            out[w["id"]] = (w.get("description"), w.get("custom_color"))
-    except Exception:
-        pass
-    return out
+        data = json.loads(cmux("rpc", "workspace.list"))
+        rows = data["workspaces"]
+        if not isinstance(rows, list):
+            return None
+        result = {}
+        for row in rows:
+            if not isinstance(row["id"], str) or not row["id"]:
+                return None
+            result[row["id"]] = (row.get("description"), row.get("custom_color"))
+        return result
+    except (ValueError, KeyError, TypeError):
+        return None
+
+
+WORKSPACE_TTL = 90
+WRITE_TIMEOUT = 10
+MAX_WRITES = 8
+
+
+def refresh_seen(seen, snapshot, now):
+    """Tolerate partial snapshots but eventually forget closed workspaces."""
+    if snapshot is not None:
+        seen.update(dict.fromkeys(snapshot, now))
+    for wid in list(seen):
+        if now - seen[wid] >= WORKSPACE_TTL:
+            del seen[wid]
+
+
+class PendingWrites:
+    """Bound RPC children and serialize writes to each workspace field."""
+
+    def __init__(self):
+        self.pending = {}
+
+    def submit(self, key, writer, wid, value, cache, cached_value, now):
+        if key in self.pending or len(self.pending) >= MAX_WRITES:
+            return
+        process = writer(wid, value)
+        if process is not None:
+            self.pending[key] = (process, now, cache, cached_value)
+
+    def reap(self, now):
+        for key, (process, started, cache, value) in list(self.pending.items()):
+            status = process.poll()
+            if status is None and now - started >= WRITE_TIMEOUT:
+                process.kill()
+                # Keep the slot occupied until a later poll reaps the child.
+                continue
+            if status is not None:
+                if status == 0:
+                    cache[key[0]] = value
+                del self.pending[key]
+
+    def close(self):
+        for process, _, _, _ in self.pending.values():
+            if process.poll() is None:
+                process.kill()
+            process.wait()
+        self.pending.clear()
 
 
 def description_for(pct):
@@ -311,24 +362,31 @@ def find_roots(procs, root_cache):
 KNOWN_REFRESH = 15  # seconds between workspace-list refreshes (cheap, slow-changing)
 
 
-def main():
+def rolling_percent(history, start, end, cpu_seconds):
+    """Weight partial intervals by overlap, including samples longer than the window."""
+    history.append((start, end, cpu_seconds))
+    cutoff = end - AVG_WINDOW
+    history[:] = [(a, b, v) for a, b, v in history if b > cutoff]
+    total = sum(v * (b - max(a, cutoff)) / (b - a) for a, b, v in history if b > a)
+    return 100.0 * total / AVG_WINDOW
+
+
+def main(writes):
     prev = {pid: ct for pid, (pp, ct, comm) in snapshot_procs().items()}
+    previous_at = time.monotonic()
     root_cache = {}  # root_shell_pid -> workspace_id (stable, cached)
-    history = {}  # workspace_id -> [(monotonic_ts, cpu_seconds_that_tick)]
-    inflight = []  # detached write Popen handles, reaped opportunistically
-    known, known_at = set(), 0.0
+    history = {}  # workspace_id -> [(interval_start, interval_end, cpu_seconds)]
+    seen, known_at = {}, float("-inf")
+    reachable = False
     denied = 0  # consecutive failed cmux reads
     written_color = {}  # workspace_id -> last colour hex we believe cmux holds
-    try:
-        with open(STATE) as f:
-            written = json.load(f)  # workspace_id -> last description written
-    except Exception:
-        written = {}
+    written = {}
 
     while True:
         time.sleep(SAMPLE_DT)
-        now = time.monotonic()
         procs = snapshot_procs()
+        now = time.monotonic()
+        writes.reap(now)
         roots = find_roots(procs, root_cache)
         pid_wid = workspace_of_pid(procs, roots)
 
@@ -352,88 +410,75 @@ def main():
         # Reconcile our sent-cache against cmux's ACTUAL descriptions: if a write
         # was dropped (socket contention) or an external change landed, trust
         # reality so the next tick re-sends. Self-heals fire-and-forget failures.
-        reconciled = 0
-        if now - known_at >= KNOWN_REFRESH or not known:
+        if now - known_at >= KNOWN_REFRESH:
             ws = known_workspaces()
-            reconciled = len(ws)
-            if not ws:
+            reachable = ws is not None
+            if not reachable:
                 denied += 1
                 if denied >= MAX_DENIED:
-                    # cmux was restarted (or quit): the session we inherited no
-                    # longer has socket access. Exit — the guard in ~/.lki/.profile
-                    # starts a fresh monitor from inside the new cmux instance.
                     return
             else:
                 denied = 0
-                try:
-                    with open(HEARTBEAT, "w") as f:
-                        f.write(str(int(time.time())))
-                except Exception:
-                    pass
-            if ws:
-                # Union, never shrink: under load `workspace.list` intermittently
-                # returns a partial/empty set; replacing `known` would make
-                # workspaces flicker out of `ids`. A closed workspace lingering
-                # here just costs a harmless no-op write.
-                known |= set(ws)
+                HEARTBEAT.touch()
                 for wid, (actual_desc, actual_color) in ws.items():
                     written[wid] = actual_desc
                     written_color[wid] = actual_color
+            refresh_seen(seen, ws, now)
             known_at = now
 
-        ids = set(agg) | known
+        ids = set(seen)
         for store in (history, written, written_color):
             for k in list(store):
                 if k not in ids:
                     del store[k]
 
-        state = {}
-        fired = 0
         for wid in ids:
-            hist = history.get(wid, [])
-            hist.append((now, agg.get(wid, 0.0)))
-            hist = [(ts, v) for ts, v in hist if now - ts <= AVG_WINDOW]
-            history[wid] = hist
-            # cpu-seconds accumulated in the window / window length = average
-            # core-%. The denominator is the FULL window even while history is
-            # sparse (new workspace, fresh monitor): missing ticks read as
-            # idle, so a couple of hot samples can't masquerade as sustained
-            # load — which is exactly the launch-burst false alarm.
-            avg = 100.0 * sum(v for _, v in hist) / AVG_WINDOW
+            hist = history.setdefault(wid, [])
+            avg = rolling_percent(hist, previous_at, now, agg.get(wid, 0.0))
             pct = int(round(avg / BUCKET) * BUCKET)
             desc = description_for(pct)
             color = color_for(pct)
             want_hex = COLOR_HEX.get(color)
-            state[wid] = desc
-            if written.get(wid) != desc:
-                p = write_desc(wid, desc)  # non-blocking
-                if p is not None:
-                    inflight.append(p)
-                written[wid] = desc
-                fired += 1
-            if written_color.get(wid) != want_hex:
-                p = write_color(wid, color)  # non-blocking
-                if p is not None:
-                    inflight.append(p)
-                written_color[wid] = want_hex
-                fired += 1
+            if reachable and written.get(wid) != desc:
+                writes.submit((wid, "description"), write_desc, wid, desc, written, desc, now)
+            if reachable and written_color.get(wid) != want_hex:
+                writes.submit((wid, "color"), write_color, wid, color, written_color, want_hex, now)
 
-        inflight = [p for p in inflight if p.poll() is None]  # reap finished writes
+        previous_at = now
 
         if DEBUG:
             print(
-                f"roots={len(roots)} agg={len(agg)} known={len(known)} "
-                f"ids={len(ids)} reconciled={reconciled} writes_fired={fired} "
-                f"| HOME={os.environ.get('HOME')!r} lastcmux={LAST_ERR}",
+                f"roots={len(roots)} active={len(ids)} pending={len(writes.pending)} "
+                f"reachable={reachable} lastcmux={LAST_ERR}",
                 flush=True,
             )
 
+
+def run_monitor():
+    # The kernel releases flock on crash/exit. Never unlink the lock file:
+    # replacing its inode would let two processes both acquire a lock.
+    RUNTIME.mkdir(parents=True, exist_ok=True, mode=0o700)
+    with (RUNTIME / "monitor.lock").open("a+") as lock:
         try:
-            with open(STATE, "w") as f:
-                json.dump(state, f)
-        except Exception:
-            pass
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            return
+        lock.seek(0)
+        lock.truncate()
+        lock.write(str(os.getpid()))
+        lock.flush()
+
+        def stop(_signum, _frame):
+            raise SystemExit(0)
+
+        signal.signal(signal.SIGTERM, stop)
+        writes = PendingWrites()
+        try:
+            main(writes)
+        finally:
+            writes.close()
+            HEARTBEAT.unlink(missing_ok=True)
 
 
 if __name__ == "__main__":
-    main()
+    run_monitor()
