@@ -3,8 +3,7 @@
 *.db
 *.egg-info*
 *.exe
-*.log
-*.log.*
+*.log*
 *.pb
 *.pyc
 *.sqlite3
