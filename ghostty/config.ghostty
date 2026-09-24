@@ -3,6 +3,8 @@
 # cmux has no native terminal-font keys of its own. This is NOT config for a
 # standalone ghostty app, so don't delete it just because ghostty isn't used.
 copy-on-select = clipboard
+# Pin the palette so Stable and Nightly do not inherit build-specific defaults.
+theme = Apple System Colors
 font-family = Cascadia Code NF
 # CJK: pin ALL Han/kana/CJK-punct/fullwidth codepoints to one face. Without
 # this, libghostty resolves fallback per glyph via CoreText (non-deterministic,
