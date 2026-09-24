@@ -19,7 +19,10 @@
     "unreadPaneRing": true,
     "paneFlash": true,
     "dockBadge": true,
-    "showInMenuBar": true,
+    // No menu bar extra: the top-right status bar is crowded, and the Dock
+    // badge plus pane ring/flash already carry unread state. Turning this off
+    // also hides the computer-use section, which only renders inside this extra.
+    "showInMenuBar": false,
     // A crow = something I need to do (cmux 0.64.18+ gates agent notifications
     // per category):
     // - needs-permission: agent blocked waiting for authorization → always ring;
