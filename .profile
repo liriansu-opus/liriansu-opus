@@ -311,6 +311,7 @@ kl() {
 # set path
 export BASH_SILENCE_DEPRECATION_WARNING=1
 export EDITOR=vim
+export HOMEBREW_NO_ENV_HINTS=1
 export KUBE_EDITOR=nvim
 export KUBECONFIG="${HOME}/.kube/config"
 export LANG="en_US.UTF-8"
