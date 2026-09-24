@@ -1,15 +1,5 @@
-# RTK - Rust Token Killer
+# Shell output
 
-Token-optimized CLI proxy (60-90% savings on dev operations). A Claude Code hook
-rewrites commands transparently — `git status` runs as `rtk git status` at zero
-token overhead, so never prefix `rtk` by hand.
-
-The exceptions, which must be typed as-is:
-
-```bash
-rtk gain              # token savings analytics (--history for per-command)
-rtk discover          # scan Claude Code history for missed opportunities
-rtk proxy <cmd>       # run raw, unfiltered — for debugging or exact output
-```
-
-Setup, verification, and the full command reference live in RTK's own CLAUDE.md.
+- Run shell commands directly by default. Use RTK explicitly for routine test, build, lint, and dependency-install output when a summary is sufficient.
+- Keep source/config reads, diffs, structured data, process/CI/runtime status, and searches or listings used for counts or exhaustive coverage unfiltered. Scope queries at the source; never parse or count RTK-filtered output.
+- Use native commands or `rtk proxy <cmd>` when exact output matters. Capture raw logs on the original run when replay would repeat mutations or paid work.
