@@ -136,7 +136,22 @@ alias gcr="gf && gbr -r | grep -E 'lirian[-/]' | sed 's#origin/##' | awk '{\$1=\
 alias ghb="gh browse"
 alias ghpc="gpd && gh pr create -f && ghpr"
 alias ghpr="gh pr view -w"
-ghlgtm() { gh pr review "${1}" --approve --body "lgtm"; }
+ghlgtm() {
+  local pr method merged
+  pr=$(gh pr view ${1:+"$1"} --json url --jq .url) || return
+  gh pr review "${pr}" --approve --body "lgtm" || return
+  # 已合并的 PR 上 gh pr merge --auto 会静默退出 0，这里要自己查并提示。
+  merged=$(gh pr view "${pr}" --json mergedAt,mergedBy --jq 'select(.mergedAt) | "\(.mergedBy.login) at \(.mergedAt)"') || return
+  if [ -n "${merged}" ]; then
+    printf 'ghlgtm: already merged by %s: %s\n' "${merged}" "${pr}" >&2
+    return 0
+  fi
+  method=$(gh repo view "${pr%/pull/*}" --json viewerDefaultMergeMethod --jq '.viewerDefaultMergeMethod | ascii_downcase') || return
+  # --auto：能合就立即合，否则开 auto merge。approve 后 GitHub 的合并状态可能还没更新，失败时重试一次。
+  gh pr merge "${pr}" --auto "--${method}" && return
+  sleep 3
+  gh pr merge "${pr}" --auto "--${method}"
+}
 alias gof="git log --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --color=always | head -n 1000 | fzf --ansi --no-sort --preview 'git show {1} --color=always' --preview-window=:wrap | cut -d' ' -f1"
 alias it="git"
 alias lg="git logg"
