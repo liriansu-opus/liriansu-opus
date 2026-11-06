@@ -30,9 +30,7 @@ for file in .gitconfig .gitignore .inputrc .profile .tmux.conf; do
   ln -s "$HOME/.lki/$file" "$HOME/$file"
 done
 mkdir -p ~/.claude
-for file in settings.json CLAUDE.md; do
-  ln -s "$HOME/.lki/claude/$file" "$HOME/.claude/$file"
-done
+ln -s "$HOME/.lki/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 ```
 
 The shell configuration targets Bash. Ensure your interactive Bash startup file sources `~/.profile`; put machine-specific overrides in `~/.profile.local`.
