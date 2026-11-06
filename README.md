@@ -30,7 +30,7 @@ for file in .gitconfig .gitignore .inputrc .profile .tmux.conf; do
   ln -s "$HOME/.lki/$file" "$HOME/$file"
 done
 mkdir -p ~/.claude
-for file in settings.json CLAUDE.md RTK.md; do
+for file in settings.json CLAUDE.md; do
   ln -s "$HOME/.lki/claude/$file" "$HOME/.claude/$file"
 done
 ```

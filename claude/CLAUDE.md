@@ -1,5 +1,3 @@
-@RTK.md
-
 # Public repositories
 
 - Treat every push to a public repo, including dotfiles, as irreversible: rewritten objects may remain reachable by SHA.
