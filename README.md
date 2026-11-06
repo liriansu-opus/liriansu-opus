@@ -49,7 +49,7 @@ Update configurations with `git -C ~/.lki pull --rebase`. Existing symlinks cont
 
 ## Development
 
-Run `make lint` (requires uv) and `make test` (Python 3.12+). Python is used for the cmux helpers, with no installable package or third-party runtime dependencies. See [cmux maintenance notes](cmux/README.md) for lifecycle and diagnostic details.
+Run `make lint` (requires uv) and `make test` (Python 3.12+ and Node.js 24). Python is used for the cmux helpers, with no installable package or third-party runtime dependencies. Node.js runs the sidebar state tests; the sidebar itself runs inside cmux. See [cmux maintenance notes](cmux/README.md) for lifecycle and diagnostic details.
 
 
 ## macOS Packages
