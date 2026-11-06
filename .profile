@@ -61,7 +61,12 @@ cx() (
   if [[ "${cx_open_files_limit}" != "unlimited" && "${cx_open_files_limit}" -lt 4096 ]]; then
     ulimit -Sn 4096 || return
   fi
-  codex --yolo "$@"
+  if [ -n "${CMUX_WORKSPACE_ID:-}" ]; then
+    # Keep hook environment tied to this terminal instead of the shared daemon.
+    codex --no-daemon --yolo "$@"
+  else
+    codex --yolo "$@"
+  fi
 )
 
 update () {

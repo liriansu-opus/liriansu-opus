@@ -75,6 +75,36 @@ task inbox. Input requests still reported by cmux reappear automatically.
 includes these tests and the Python helper tests. The actual sidebar needs no
 Node.js process, polling daemon, or third-party packages.
 
+## Codex hook routing
+
+Shared Codex daemons can retain a closed terminal's `CMUX_*` environment. For
+new launches, `cx` uses `--no-daemon` inside cmux so hooks inherit their own
+terminal environment. This takes effect in newly opened or reloaded shells;
+running sessions are not restarted.
+
+`hooks/codex-route.py` repairs already-running sessions with explicitly verified
+bindings in `~/.cache/lki/cmux/codex-bindings.json`. Each entry records the session
+ID, workspace and surface UUIDs, TUI PID, and `ps -o lstart=,comm=` fingerprint.
+Only an exact session and live process match can override the target. Do not
+derive these bindings from cwd, CPU usage, the focused workspace, or title alone.
+Unbound sessions keep native routing; this helper is a migration adapter, not
+automatic discovery of new shared-daemon sessions.
+
+```bash
+python3 ~/.lki/cmux/hooks/codex-route.py --install
+# Restore the original scripts:
+python3 ~/.lki/cmux/hooks/codex-route.py --uninstall
+```
+
+The installer wraps only cmux-owned Codex commands already registered in
+`~/.codex/hooks.json`. Original scripts are saved under
+`~/.cache/lki/cmux/hook-originals/`; the hook configuration and approval settings
+are unchanged. Payload bytes, original hook output, and exit status pass through.
+No terminal input is sent. A cmux hook reinstall may replace the wrappers;
+re-run the installer afterward if the existing sessions still need routing.
+The adapter has no background process or third-party dependency. Its tests cover
+PID reuse, session isolation, malformed bindings, and preservation of hook results.
+
 ## CPU monitor and notification hooks
 
 `ensure-cpu-monitor.sh` starts the monitor from an interactive cmux shell, preserving socket access. The monitor holds a nonblocking `flock` for its lifetime; duplicate starts exit and the OS releases the lock after a crash. No process-name matching or broad `pkill` is used.
