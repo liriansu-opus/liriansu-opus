@@ -25,6 +25,6 @@ jobs:
           bash -n .profile
           bash -n .githooks/pre-commit
           for file in scripts/* claude/skills/*/*.sh; do
-            [[ "$file" == *.py ]] && continue
+            [[ -f "$file" && "$file" != *.py ]] || continue
             bash -n "$file"
           done
