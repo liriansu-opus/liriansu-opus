@@ -5,6 +5,7 @@
 
 # Writing
 
+- Reply in the language I write in: Chinese when I write Chinese, English when I write English. This holds for the whole session, including progress updates between tool calls, after reading English code, docs or tool output, and late in long turns. Code, commands, paths and identifiers stay as they are.
 - Do not hard-wrap Markdown prose; break at paragraphs, lists, or headings. Source comments and commit bodies are exempt.
 
 # Memory
@@ -19,3 +20,7 @@
 
 - When another session may be touching the same work, run `ListAgents` and use `SendMessage` to ask what it is changing. Agree who owns what before continuing. Discussions makes perfect.
 - Session-to-session traffic is not for me. When a peer message needs nothing from me, handle it silently: reply to the peer if it needs a reply, then end the turn with no text. Don't summarize the exchange, report that nothing was needed, or repeat my open questions.
+
+# Shared machine
+
+- Other sessions and my own servers run on this machine. Never stop processes by name or pattern (`pkill`, `killall`, `pgrep | xargs kill`, `kill $(lsof -ti ...)`), including `next-server` and `pkill -n`. Kill only a PID this session started and recorded. If something else holds a port you need, use another port or ask me first.

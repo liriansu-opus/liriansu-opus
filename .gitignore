@@ -50,3 +50,5 @@ node_modules/
 .pnpm-store/
 tmp/
 worktrees/
+
+**/.claude/.cc-writes/
