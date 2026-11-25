@@ -35,21 +35,13 @@ ln -s "$HOME/.lki/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 
 The shell configuration targets Bash. Ensure your interactive Bash startup file sources `~/.profile`; put machine-specific overrides in `~/.profile.local`.
 
-For cmux on macOS:
-
-```bash
-mkdir -p ~/.config/ghostty ~/.config/cmux
-ln -s ~/.lki/ghostty/config.ghostty ~/.config/ghostty/config
-ln -s ~/.lki/cmux/cmux.json ~/.config/cmux/cmux.json
-```
-
 On native Windows, copy `.windows-terminal.json` into Windows Terminal's settings file (open it from Terminal settings). Use the Bash setup above inside WSL.
 
 Update configurations with `git -C ~/.lki pull --rebase`. Existing symlinks continue to work. The former Python CLI and PyPI release workflow have been retired; uninstall an old pip installation with `python -m pip uninstall lki`. Use `git clone` and `ln -s` directly in place of its clone/link commands.
 
 ## Development
 
-Run `make lint` (requires uv) and `make test` (Python 3.12+ and Node.js 24). Python is used for the cmux helpers, with no installable package or third-party runtime dependencies. Node.js runs the sidebar state tests; the sidebar itself runs inside cmux. See [cmux maintenance notes](cmux/README.md) for lifecycle and diagnostic details.
+Run `make lint` (requires uv) and `make test` (Python 3.12+). Python is used for the Claude Code hooks and helper scripts, with no installable package or third-party runtime dependencies.
 
 
 ## macOS Packages

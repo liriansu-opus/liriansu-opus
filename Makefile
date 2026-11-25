@@ -1,4 +1,4 @@
-.PHONY: fmt lint test test-sidebar
+.PHONY: fmt lint test
 
 fmt:
 	uvx ruff check --fix .
@@ -8,8 +8,5 @@ lint:
 	uvx ruff check .
 	uvx ruff format --check .
 
-test: test-sidebar
+test:
 	python3 -m unittest discover -s tests -v
-
-test-sidebar:
-	node --test tests/test_cmux_attention.cjs

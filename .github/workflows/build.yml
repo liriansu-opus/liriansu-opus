@@ -18,15 +18,13 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
-      - uses: actions/setup-node@v6
-        with:
-          node-version: '24'
       - run: make lint test
       - name: Check shell syntax
         shell: bash
         run: |
           bash -n .profile
           bash -n .githooks/pre-commit
-          for file in scripts/* cmux/*.sh claude/skills/*/*.sh; do
+          for file in scripts/* claude/skills/*/*.sh; do
+            [[ "$file" == *.py ]] && continue
             bash -n "$file"
           done

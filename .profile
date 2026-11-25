@@ -22,7 +22,6 @@ ld_library_path_prepend () {
 # general aliases
 alias ..="cd .."
 alias bv="uv version --bump"
-alias cbo="cmux browser open"
 alias cc="claude --model default"
 alias cca="claude agents"
 alias ccc="CLAUDE_CODE_USE_VERTEX=1 CLOUD_ML_REGION=global claude"
@@ -61,12 +60,7 @@ cx() (
   if [[ "${cx_open_files_limit}" != "unlimited" && "${cx_open_files_limit}" -lt 4096 ]]; then
     ulimit -Sn 4096 || return
   fi
-  if [ -n "${CMUX_WORKSPACE_ID:-}" ]; then
-    # Keep hook environment tied to this terminal instead of the shared daemon.
-    codex --no-daemon --yolo "$@"
-  else
-    codex --yolo "$@"
-  fi
+  codex --yolo "$@"
 )
 
 update () {
@@ -375,7 +369,7 @@ case $- in
       if [ "$_lki_shell" = zsh ]; then
         eval "$(oh-my-posh init zsh --config ~/.lki/.oh-my-posh.json)"
       elif [ "${BASH_VERSINFO[0]:-0}" -gt 4 ] || { [ "${BASH_VERSINFO[0]:-0}" -eq 4 ] && [ "${BASH_VERSINFO[1]:-0}" -ge 2 ]; }; then
-        # Preserve cmux's one-shot bootstrap without exporting a Bash array.
+        # Keep PROMPT_COMMAND local to this Bash process.
         export -n PROMPT_COMMAND 2>/dev/null || true
         eval "$(oh-my-posh init bash --config ~/.lki/.oh-my-posh.json)"
       fi
@@ -388,14 +382,20 @@ esac
 
 ## enable pyenv
 if checkCMD pyenv; then
-  eval "$(pyenv init - "$_lki_shell")"
+  # Installing Python or new executables can rehash explicitly; opening a shell
+  # only needs the existing shims and shell integration.
+  eval "$(pyenv init - --no-rehash "$_lki_shell")"
 fi
 unset _lki_shell
 
 ## enable nvm
 # Keep NVM_DIR out of the Homebrew formula dir: it is a symlink into
 # Cellar/nvm/<version>, so `brew upgrade nvm` takes every installed node with it.
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+if [ -n "${XDG_CONFIG_HOME:-}" ]; then
+  export NVM_DIR="${XDG_CONFIG_HOME}/nvm"
+else
+  export NVM_DIR="${HOME}/.nvm"
+fi
 # An install killed mid-download leaves an ownerless lock dir under
 # $NVM_DIR/.cache/locks. nvm records no owner in it, so it cannot tell the
 # holder died; while this is 0 it never reclaims one and every later shell
@@ -459,12 +459,6 @@ fi
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
 [ -f ~/.config/ghnoise/ghnoise.sh ] && source ~/.config/ghnoise/ghnoise.sh  # gh notification de-noiser
-
-# cmux per-workspace CPU monitor: its control socket only accepts processes
-# started inside cmux, so each cmux shell makes sure the monitor is alive.
-if [ -n "${CMUX_WORKSPACE_ID:-}" ] && [ -x "$HOME/.lki/cmux/ensure-cpu-monitor.sh" ]; then
-  "$HOME/.lki/cmux/ensure-cpu-monitor.sh" || true
-fi
 
 # Machine-local overrides, kept out of this public repo.
 [ -f ~/.profile.local ] && source ~/.profile.local || true
