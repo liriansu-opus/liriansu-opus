@@ -4,7 +4,7 @@ set -uo pipefail
 
 hr() { printf '\n\033[1m=== %s ===\033[0m\n' "$1"; }
 
-# 追溯进程祖先链，用来区分「cmux 树下的活进程」和「launchd 收养的孤儿」
+# 追溯进程祖先链，用来区分「终端/agent 应用树下的活进程」和「launchd 收养的孤儿」
 trace() {
   local p=$1 out=""
   while [ -n "$p" ] && [ "$p" != "0" ]; do
@@ -30,7 +30,7 @@ lsof -nP -iTCP -sTCP:LISTEN 2>/dev/null | awk 'NR>1 {print $1, $2, $9}' | sort -
 
 # 常驻服务与系统组件 —— 这些 PPID=1 是正常的，不是清理目标
 NOISE='/System/|/usr/libexec/|/usr/sbin/|com\.apple|/usr/local/munki|/Library/Input Methods|/Applications/'
-NOISE="$NOISE"'|ssh-agent|gpg-agent|keyboxd|cloudphotod|colima|limactl|\.colima/|cmux'
+NOISE="$NOISE"'|ssh-agent|gpg-agent|keyboxd|cloudphotod|colima|limactl|\.colima/'
 
 none_or() { local out; out=$(cat); [ -n "$out" ] && echo "$out" || echo "  无"; }
 
@@ -50,7 +50,7 @@ ps -Ao pid,ppid,etime,command \
   | grep -iE '\-pf\.sh|dev-.*\.sh|watch.*\.sh|forever|pm2' \
   | grep -v grep | grep -vE "$NOISE" | cut -c1-150 | none_or
 
-hr "祖先链抽样（确认哪些在 cmux 下、哪些是孤儿）"
+hr "祖先链抽样（确认哪些在终端/agent 应用下、哪些是孤儿）"
 { for pid in $(ps -Ao pid,command | grep -iE 'port-forward|uv run|make dev|npm run' \
                | grep -v grep | awk '{print $1}' | head -8); do
     echo "  $pid:$(trace "$pid")"
@@ -75,6 +75,27 @@ if command -v colima >/dev/null; then
     | awk '{printf "  VM RSS: %.0f MB\n", $1/1024}'
 else
   echo "  未安装"
+fi
+
+hr "Worktree（没标 IN-USE 也可能有 session 在用，删之前要问）"
+if [ -d "$HOME/code" ]; then
+  CWDS=$(lsof -a -d cwd -u "$USER" -Fn 2>/dev/null | sed -n 's/^n//p' | sort -u)
+  find "$HOME/code" -maxdepth 10 \( -name node_modules -o -name .venv -o -name .next \) -prune \
+    -o -type d -name .git -print 2>/dev/null \
+  | while IFS= read -r gitdir; do
+      repo=${gitdir%/.git}
+      git -C "$repo" worktree list --porcelain 2>/dev/null | sed -n 's/^worktree //p' | tail -n +2 \
+      | while IFS= read -r wt; do
+          [ -d "$wt" ] || { printf '  %-7s %s\n' "GONE" "${wt#"$HOME"/}"; continue; }
+          use="-"
+          printf '%s\n' "$CWDS" | awk -v p="$wt" '$0==p || index($0, p"/")==1 {f=1} END {exit !f}' && use="IN-USE"
+          dirty=$(git --no-optional-locks -C "$wt" status --porcelain 2>/dev/null | wc -l | tr -d ' ')
+          ahead=$(git --no-optional-locks -C "$wt" log --oneline '@{u}..HEAD' 2>/dev/null | wc -l | tr -d ' ')
+          printf '  %-7s dirty=%-3s ahead=%-3s %s\n' "$use" "$dirty" "$ahead" "${wt#"$HOME"/}"
+        done
+    done | sort -u | none_or
+else
+  echo "  无 ~/code"
 fi
 
 hr "缓存大户（Top 20）"
